@@ -6,48 +6,53 @@ DeepFL is a deep-learning-based fault localization technique. It implements two 
 - Tensorflow
 
 ## DataSet ##
-The dataset can be downloaded from an online [Cloud Drive](https://mega.nz/#F!ffxXBISD!UQjggpnjw8oWrjSc0D7PdA). There are six .gz files, each of them represents one setting in our paper as follows:
+The dataset can be downloaded from an online [Cloud Drive](https://mega.nz/#F!CrhAhQwJ!mYuMHKLgWURyFX4s125Apw). There are seven .gz files, each of them represents one setting in our paper as follows:
 
-*DeepFL.tar.gz*: Dataset with all of four dimensions features above.
+* DeepFL.tar.gz: Dataset with all of four dimensions features above.
 
-*CrossDeepFL.tar.gz*: Dataset with all of four dimensions features in the cross-project scenario. 
+* CrossDeepFL.tar.gz: Dataset with all of four dimensions features in the cross-project scenario. 
 
-*DeepFL-Spectrum.tar.gz*: Dataset with three dimensions features, i.e.,mutation-based, complexity-based and textual-similarity-based information.
+* CrossValidation.tar.gz: Dataset with all of four dimensions features for implementing 10-fold cross validation evaluation.
 
-*DeepFL-Mutation.tar.gz*: Dataset with three dimensions features, i.e.,spectrum-based, complexity-based and textual-similarity-based information.
+* DeepFL-Spectrum.tar.gz: Dataset with three dimensions features, i.e.,mutation-based, complexity-based and textual-similarity-based information.
 
-*DeepFL-Metrics.tar.gz*: Dataset with three dimensions features, i.e.,spectrum-based, mutation-based and textual-similarity-based information.
+* DeepFL-Mutation.tar.gz: Dataset with three dimensions features, i.e.,spectrum-based, complexity-based and textual-similarity-based information.
 
-*DeepFL-Textual.tar.gz*: Dataset with three dimensions features, i.e.,spectrum-based, mutation-based and complexity-based information.
+* DeepFL-Metrics.tar.gz: Dataset with three dimensions features, i.e.,spectrum-based, mutation-based and textual-similarity-based information.
+
+* DeepFL-Textual.tar.gz: Dataset with three dimensions features, i.e.,spectrum-based, mutation-based and complexity-based information.
+
 
 Please uncompress .gz files and put them into a user-created folder which can be passed as a parameter for the following command.
 ## Running DeepFL ##
 The command to run DeepFL for each version is as follows:
 
 ```
-$ cd DeepFL
+$ cd DeepFaultLocalization
 ```
 
 ```
 $python main.py /absolute/path/to/ParentDirofDataset /absolute/path/to/Result $subject $version $model $tech $loss $epoch $dump_step
 ```
 Each parameter can be explained as follows:
-1. /absolute/path/to/ParentDirofDataset: The absolute path of the parent directory including all datasets, for example, if the dataset is DeepFL, its directory can be /home/DeepLearningData/DeepFL ("/home/DeepLearningData/" is created by users, and "DeepFL" is put
-     into it)
-2. /absolute/path/to/Result: The directory of the results. 
-3. $subject: The subject name, which can be *Time*, *Chart*, *Lang*, *Math*, *Mockito* or *Closure*.
-4. $version: The version number of the subject. Note that, the maximum numbers of subjects above are 27, 26, 65, 106, 38, 133, respectively.
-5. $model: The implemented model name, which can be *mlp*, *mlp2*, *rnn*, *birnn*,*dlp1*,*dlp2*, representing multi-layer perceptron with one hidden layer, multi-layer perceptron with two hidden layers, recurrent neural network, bidirectional recurrent neural network, tailored MLP1 and tailored MLP2 respectively.
-6. $tech: The different dimensions of features, corresponding to the name of dataset, can be *DeepFL*, *DeepFL-Metrics*, *DeepFL-Mutation*, *DeepFL-Spectrum*, *DeepFL-Textual*, *CrossDeepFL*.
-7. $loss: The name of loss function, which can be *softmax*, *epairwise*, *epairwiseSoftmax*.
-8. $epoch: The number of training epochs.
-9. $dupm_step: The interval number of epoch in which the result will be stored into the result file. For example, if $dump_step = 10, the results in epochs 10, 20, 30... will be written into the files.
+* /absolute/path/to/ParentDirofDataset: The absolute path of the parent directory including all datasets, for example, if the dataset is DeepFL, its directory can be /home/DeepLearningData/DeepFL ("/home/DeepLearningData/" is created by users, and "DeepFL" is put
+into it)
+* /absolute/path/to/Result: The directory of the results. 
+* $subject: The subject name, which can be *Time*, *Chart*, *Lang*, *Math*, *Mockito* or *Closure*.
+* $version: The version number of the subject. Note that, the maximum numbers of subjects above are 27, 26, 65, 106, 38, 133, respectively.
+* $model: The implemented model name, which can be *mlp*, *mlp2*, *rnn*, *birnn*, representing multi-layer perceptron with one hidden layer, multi-layer perceptron with two hidden layers, recurrent neural network and Bidirectional recurrent neural network respectively.
+* $tech: The different dimensions of features, corresponding to the name of dataset, can be *DeepFL*, *DeepFL-Metrics*, *DeepFL-Mutation*, *DeepFL-Spectrum*, *DeepFL-Textual*, *CrossDeepFL*.
+* $loss: The name of loss function, which can be *softmax*, *epairwise*, *epairwiseSoftmax*.
+* $epoch: The number of training epochs.
+* $dupm_step: The interval number of epoch in which the result will be stored into the result file. For example, if $dump_step = 10, the results in epochs 10, 20, 30... will be written into the files.
+
+Please note that *CrossValidation* is slightly different with others since the dataset of all subjects has been mixed and then splitted into 10-fold. To easily use the command above, just set the parameter $subject as "10fold", $version as 1 to 10, and $tech as "CrossValidation". Also, please only use *softmax* loss function to run on *CrossValidation* according to the research question in our paper.
 
 ## Results statistics ##
-
 After running all subject versions, run the following command to calculate the five measurements Top-1, Top-3, Top-5, MFR, MAR:
 
 ```
 python rank_parser.py /absolute/path/to/ParentDirofDataset /absolute/path/to/Result $tech $model $loss $epoch
 ```
 Please note that due to the randomly initialized parameters, the results may be slightly different from our paper.
+
