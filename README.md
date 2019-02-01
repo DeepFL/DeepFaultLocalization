@@ -40,7 +40,7 @@ into it)
 * /absolute/path/to/Result: The directory of the results. 
 * $subject: The subject name, which can be *Time*, *Chart*, *Lang*, *Math*, *Mockito* or *Closure*.
 * $version: The version number of the subject. Note that, the maximum numbers of subjects above are 27, 26, 65, 106, 38, 133, respectively.
-* $model: The implemented model name, which can be *mlp*, *mlp2*, *rnn*, *birnn*, representing multi-layer perceptron with one hidden layer, multi-layer perceptron with two hidden layers, recurrent neural network and Bidirectional recurrent neural network respectively.
+* $model: The implemented model name, which can be *mlp*, *mlp2*, *birnn*, *mlp_dfl_1*, *mlp_dfl_2*, representing multi-layer perceptron with one hidden layer, multi-layer perceptron with two hidden layers, Bidirectional recurrent neural network, two variants of tailored mlp, respectively.
 * $tech: The different dimensions of features, corresponding to the name of dataset, can be *DeepFL*, *DeepFL-Metrics*, *DeepFL-Mutation*, *DeepFL-Spectrum*, *DeepFL-Textual*, *CrossDeepFL*.
 * $loss: The name of loss function, which can be *softmax*, *epairwise*, *epairwiseSoftmax*.
 * $epoch: The number of training epochs.
