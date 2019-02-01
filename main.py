@@ -2,8 +2,8 @@ import bidirectional_rnn as birnn
 import recurrent_network as myrnn
 import multilayer_perceptron_one_hidden_layer as mlp
 import multilayer_perceptron_two_hidden_layer as mlp2
-import fc_based_1 as dfl1
-import fc_based_2 as dfl2
+import fc_based_1 as mlp_dfl_1
+import fc_based_2 as mlp_dfl_2
 import os
 import time
 import numpy as np
@@ -37,10 +37,10 @@ def main():
         mlp.run(train_path,train_label_path, test_path,test_label_path, group_path ,susp_path, l, featureNum=feature,nodeNum=feature)
     elif model == "mlp2":
         mlp2.run(train_path, train_label_path, test_path, test_label_path, group_path, susp_path, l, featureNum=feature,nodeNum=feature)
-    elif model == "dfl1":
-        dfl1.run(train_path,train_label_path, test_path,test_label_path, group_path ,susp_path, l, featureNum=feature,nodeNum=feature)
-    elif model == "dfl2":
-        dfl2.run(train_path,train_label_path, test_path,test_label_path, group_path ,susp_path, l, featureNum=feature,nodeNum=feature)
+    elif model == "mlp_dfl_1":
+        mlp_dfl_1.run(train_path,train_label_path, test_path,test_label_path, group_path ,susp_path, l, featureNum=feature,nodeNum=feature)
+    elif model == "mlp_dfl_2":
+        mlp_dfl_2.run(train_path,train_label_path, test_path,test_label_path, group_path ,susp_path, l, featureNum=feature,nodeNum=feature)
         #mlp2.run(train_path,train_label_path, test_path,test_label_path, group_path ,susp_path, l, featureNum=feature,nodeNum=feature)
     end_time = time.time()
         
