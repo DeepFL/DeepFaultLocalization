@@ -42,11 +42,11 @@ into it)
 * $version: The version number of the subject. Note that, the maximum numbers of subjects above are 27, 26, 65, 106, 38, 133, respectively.
 * $model: The implemented model name, which can be *mlp*, *mlp2*, *birnn*, *mlp_dfl_1*, *mlp_dfl_2*, representing multi-layer perceptron with one hidden layer, multi-layer perceptron with two hidden layers, Bidirectional recurrent neural network, two variants of tailored mlp, respectively.
 * $tech: The different dimensions of features, corresponding to the name of dataset, can be *DeepFL*, *DeepFL-Metrics*, *DeepFL-Mutation*, *DeepFL-Spectrum*, *DeepFL-Textual*, *CrossDeepFL*.
-* $loss: The name of loss function, which can be *softmax*, *epairwise*, *epairwiseSoftmax*.
+* $loss: The name of loss function, which can be *softmax*, *epairwise*.
 * $epoch: The number of training epochs.
 * $dupm_step: The interval number of epoch in which the result will be stored into the result file. For example, if $dump_step = 10, the results in epochs 10, 20, 30... will be written into the files.
 
-Please note that *CrossValidation* is slightly different with others since the dataset of all subjects has been mixed and then splitted into 10-fold. To easily use the command above, just set the parameter $subject as "10fold", $version as 1 to 10, and $tech as "CrossValidation". Also, please only use *softmax* loss function to run on *CrossValidation* according to the research question in our paper.
+Please note that *CrossValidation* is slightly different with others since the dataset of all subjects has been mixed and then splitted into 10-fold. To easily use the command above, just set the parameter $subject as "10fold", $version as 1 to 10, and $tech as "CrossValidation". Also, please only use *mlp_dfl_2* model and *softmax* loss function to run on *CrossValidation* according to the research question in our paper.
 
 ## Results statistics ##
 After running all subject versions, run the following command to calculate the five measurements Top-1, Top-3, Top-5, MFR, MAR:
