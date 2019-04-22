@@ -523,7 +523,7 @@ def run(trainFile, trainLabelFile, testFile,testLabelFile, groupFile, suspFile,l
     init = tf.global_variables_initializer()
 
     # Launch the graph
-    gpu_options = tf.GPUOptions(per_process_gpu_memory_fraction=0.1)
+    gpu_options = tf.GPUOptions(per_process_gpu_memory_fraction=0.05)
     with tf.Session(config=tf.ConfigProto(gpu_options=gpu_options)) as sess:
         sess.run(init)
 
@@ -561,11 +561,11 @@ def run(trainFile, trainLabelFile, testFile,testLabelFile, groupFile, suspFile,l
                 # Compute average loss
                 avg_cost += c / total_batch
             # Display logs per epoch step
-            
+            '''
             if epoch % display_step == 0:
                 print("Epoch:", '%04d' % (epoch+1), "cost=", \
                     "{:.9f}".format(avg_cost),", l2 loss= ",numpy.sum(regu_loss))
-            
+            '''
             if epoch % dump_step ==(dump_step-1):
                 #Write Result
                 

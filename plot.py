@@ -77,7 +77,11 @@ def main():
     #top1_y = np.concatenate((final_result[:,len(subs),m,0],[187,215]))
     print(np.shape(final_result[:,len(subs),m,0]))
     top1_y = final_result[:,len(subs),m,0]
+    top3_y = final_result[:,len(subs),m,1]
+    top5_y = final_result[:,len(subs),m,2]
     print("sum top1 y is",top1_y)
+    print("sum top3 y is",top3_y)
+    print("sum top5 y is",top5_y)
     max_y = max(top1_y)
     second_y = max(top1_y[:-1])
     max_x = x[np.argmax(top1_y)]
