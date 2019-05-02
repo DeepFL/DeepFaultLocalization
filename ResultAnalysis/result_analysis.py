@@ -6,29 +6,24 @@ import sys
 import decimal
 import sys
 import utils as ut
+from result_conf import *
 
-
-ResultDir=sys.argv[2]
-susp_file='softmax'
-def initializeResult(allsub,tvector):
-    # has 7 elements:6 project + 1 overall
-    resultMatrix=[] 
-    Overall=len(allsub)+1 
+def initialize_result(allsub,tvector):
+    result_matrix = [] 
+    overall = len(allsub) + 1     
+    #each element has several model: trapt...mlp,mlp2..MLP_variant
+    model_size = len(tvector) 
     
-    #each element has several model: trapt...rnn,birnn,mlp,mlp2
-    modelsize=len(tvector) 
-    
-    for i in range(Overall):
-        modelvector=[]
-        for m in range(modelsize):
-            a=[0,0,0,0.00,0.00]            #top1 top3, top5, mfr, mar ,mdfr,mdar
-            #a=[0,0,0,0.00,0.00,0.00,0.00]
-            array=np.array(a,dtype=object)           
-            modelvector.append(array)
-        resultMatrix.append(modelvector)   #initialize result matrix 
-    return resultMatrix
+    for i in range(overall):
+        model_vector = []
+        for m in range(model_size):
+            a = [0,0,0,0.00,0.00]            #top1 top3, top5, mfr, mar
+            array = np.array(a,dtype=object)           
+            model_vector.append(array)
+        result_matrix.append(model_vector)   #initialize result matrix 
+    return result_matrix
 
-def readlibsvmResult(finalresult,libsvmResultPath,allsub,techvector):
+def read_libsvm_result(finalresult,libsvmResultPath,allsub,techvector):
     techname=libsvmResultPath[libsvmResultPath.rfind("/")+1:libsvmResultPath.index('.txt')]
     techindex=techvector.index(techname)
     with open(libsvmResultPath) as f:
@@ -52,14 +47,12 @@ def readlibsvmResult(finalresult,libsvmResultPath,allsub,techvector):
             finalresult[subindex][techindex]=array
 
 
-
-
-def readDeepResult(dir,subs,tech,dnns,epoch,vers,resultBysub,techsvector,RQ2Data):
+def read_deep_result(dir,subs,tech,dnns,epoch,vers,resultBysub,techsvector):
     # subs: chart,lang,time...  
     # tech: spectrumTestJahwkByte
     # dnns: mlp mlp2 rnn... 
     
-    out_dir=ResultDir 
+    out_dir=result_dir 
     train_file='Train.csv'
     train_label_file='TrainLabel.csv'
     test_file='Test.csv'
@@ -75,10 +68,8 @@ def readDeepResult(dir,subs,tech,dnns,epoch,vers,resultBysub,techsvector,RQ2Data
     for s in range(len(subs)):
         sub=subs[s]
         ver=vers[s]
-        print(sub)
-        for d in range(len(dnns)):
-          #if dnns[d]=='rnn':   # only print birnn
-            
+        #print(sub)
+        for d in range(len(dnns)):            
             tops=np.zeros(4)
             ranks=np.zeros(2)
             ranks_min = list()  #first
@@ -88,8 +79,8 @@ def readDeepResult(dir,subs,tech,dnns,epoch,vers,resultBysub,techsvector,RQ2Data
             for v in range(ver):
                 v=str(v+1)
                 test_label_path = dir + tech + '/' + sub + '/' + v + '/' + test_label_file
-                susp_path = out_dir + '/result/' + dnns[d] + '/' + sub + '/' + v + '/' + tech + '/fc-' + susp_file + '-' + str(epoch)
-                #susp_path = out_dir + '/result/' + dnns[d] + '/' + sub + '/' + v + '/' + dnns[d] + '/fc-' + susp_file + '-' + str(epoch)
+                susp_path = out_dir + '/result/' + dnns[d] + '/' + sub + '/' + v + '/' + tech + '/fc-' + loss_function + '-' + str(epoch)
+                #susp_path = out_dir + '/result/' + dnns[d] + '/' + sub + '/' + v + '/' + dnns[d] + '/fc-' + loss_function + '-' + str(epoch)
 
                 min,avg=ut.parse(v,susp_path,test_label_path)
                 if min == -1:
@@ -126,34 +117,13 @@ def readDeepResult(dir,subs,tech,dnns,epoch,vers,resultBysub,techsvector,RQ2Data
                 
             subindex=s
             modelindex=techsvector.index(dnns[d])
-            resultBysub[subindex][modelindex]=result
-
-
-            
-            #For RQ2 trend data
-            RQ2Data[s][d]=result
-            
-                
-            
-    
+            resultBysub[subindex][modelindex]=result  
     return truevers
 
-def CalculateOverall(resultBysub,truevers,techsvector,subsize):
+def get_overall(resultBysub,truevers,techsvector,subsize):
     verssum=0
     for v in truevers:
         verssum=verssum+v
-
-    # resultBysub = np.asarray(resultBysub)
-    # top = resultBysub[:,:,0:3]
-    # average = resultBysub[:,:,3:5]
-    # media = resultBysub[:,:,5:7]
-    # truevers.append(0)
-    # truevers = np.asarray(truevers).reshape(7,1,1)
-    # value_sum = np.sum(top,axis = 0)
-    # value_avg = np.sum(average*truevers,axis = 0)/verssum
-    # value_media = np.sum(media,axis = 0)/6
-    # togeter = np.concatenate((value_sum,value_avg,value_media),axis = 1)
-    # resultBysub[len(resultBysub)-1] =  togeter
     
     for s in range(len(resultBysub)-1):                  #Loop Time,Chart,Math,Lang,Closure
         for m in range(len(techsvector)):                #loop multri,flucss, trapt, rnn....
@@ -162,16 +132,11 @@ def CalculateOverall(resultBysub,truevers,techsvector,subsize):
             resultBysub[len(resultBysub)-1][m][2]=resultBysub[len(resultBysub)-1][m][2]+resultBysub[s][m][2]
             resultBysub[len(resultBysub)-1][m][3]=resultBysub[len(resultBysub)-1][m][3]+resultBysub[s][m][3]*truevers[s]
             resultBysub[len(resultBysub)-1][m][4]=resultBysub[len(resultBysub)-1][m][4]+resultBysub[s][m][4]*truevers[s]
-            #resultBysub[len(resultBysub)-1][m][3]=resultBysub[len(resultBysub)-1][m][3]+resultBysub[s][m][3]
-            #resultBysub[len(resultBysub)-1][m][4]=resultBysub[len(resultBysub)-1][m][4]+resultBysub[s][m][4]
     
     for m in range(len(techsvector)):
         resultBysub[len(resultBysub)-1][m][3]=round(resultBysub[len(resultBysub)-1][m][3]/verssum,2)
         resultBysub[len(resultBysub)-1][m][4]=round(resultBysub[len(resultBysub)-1][m][4]/verssum,2) 
 
-        #resultBysub[len(resultBysub)-1][m][3]=round(resultBysub[len(resultBysub)-1][m][3]/subsize,2)
-        #resultBysub[len(resultBysub)-1][m][4]=round(resultBysub[len(resultBysub)-1][m][4]/subsize,2) 
-    return resultBysub
 def writetoLatexRQ1(finalresult,LatextechsName,overallsubs):
     overallsubs.append('Overall')
     
@@ -217,7 +182,7 @@ def initRQ2TrendData(subs,dnns):
 
 def writeForRfile(RQ2TrendData,subs,dnns):
     subs.append("Overall")
-    print(len(RQ2TrendData[0]))
+    #print(len(RQ2TrendData[0]))
     for s in range(len(subs)):
 
         for d in range(len(dnns)):
@@ -233,18 +198,20 @@ def writeForRfile(RQ2TrendData,subs,dnns):
                 myfile.write('\n')        
 
 
-def RQ1(epoch_number,result_dir,deep_data_dir,loss_function,techsvector):
-    resultBysub = initializeResult(subs,techsvector)
-     #read current libsvm('Multric','Trapt','Fluccs') to resultmatrix
-    for i in range(0,len(libsvm_results)):   #Multric,Fluccs,Trapt
-        libsvmResultPath = ResultDir + '/libsvmresult/' + techsvector[i]+'.txt'
-        readlibsvmResult(resultBysub,libsvmResultPath,subs,techsvector)
-    truevers = readDeepResult(DeepDataDir,subs,tech,dnns,epochnumber,vers,resultBysub,techsvector,RQ2TrendData)
+def RQ1(epoch_number,deep_data_dir,loss_function,techs_vector,subs,dnns):
+    result_matrix = initialize_result(subs,techs_vector)
+    
+    #read libsvm
+    for i in range(0,len(libsvm_models)):   
+        libsvm_result_path = result_dir + '/libsvmresult/' + techs_vector[i]+'.txt'
+        read_libsvm_result(result_matrix,libsvm_result_path,subs,techs_vector)
+    
+    true_vers = read_deep_result(deep_data_dir,subs,tech,dnns,epoch_number,vers,result_matrix,techs_vector)
     # #Calculate overallresult
-    newResultbySub = CalculateOverall(resultBysub,truevers,techsvector,len(subs))
+    get_overall(result_matrix,true_vers,techs_vector,len(subs))
     # #write to Latex for RQ1
     LatextechsName=['Ochiai','Me-Ochiai','\multric','\Fluccs','\mupt','\MLPVariant']
-    writetoLatexRQ1(newResultbySub,LatextechsName,subs)
+    writetoLatexRQ1(result_matrix,LatextechsName,subs)
 
 '''
 def main():
