@@ -233,17 +233,27 @@ def writeForRfile(RQ2TrendData,subs,dnns):
                 myfile.write('\n')        
 
 
+def RQ1(epoch_number,result_dir,deep_data_dir,loss_function,techsvector):
+    resultBysub = initializeResult(subs,techsvector)
+     #read current libsvm('Multric','Trapt','Fluccs') to resultmatrix
+    for i in range(0,len(libsvm_results)):   #Multric,Fluccs,Trapt
+        libsvmResultPath = ResultDir + '/libsvmresult/' + techsvector[i]+'.txt'
+        readlibsvmResult(resultBysub,libsvmResultPath,subs,techsvector)
+    truevers = readDeepResult(DeepDataDir,subs,tech,dnns,epochnumber,vers,resultBysub,techsvector,RQ2TrendData)
+    # #Calculate overallresult
+    newResultbySub = CalculateOverall(resultBysub,truevers,techsvector,len(subs))
+    # #write to Latex for RQ1
+    LatextechsName=['Ochiai','Me-Ochiai','\multric','\Fluccs','\mupt','\MLPVariant']
+    writetoLatexRQ1(newResultbySub,LatextechsName,subs)
 
-
-
-
+'''
 def main():
     tech = sys.argv[1]   # SpectrumTestJhawkByte
     
     DeepDataDir = sys.argv[3]
 
     for epochnumber in range(55,56,1):
-    	print(epochnumber)
+        print(epochnumber)
         subs = ['Chart','Lang','Math','Time','Mockito','Closure']
         vers = [26, 65, 106, 27, 38, 133]
         # subs=['Chart']
@@ -319,12 +329,12 @@ def main():
         # for m in range(0,len(newResultbySub[0])):    #multric,fluccs,trapt,mlp...   
         #       for sub in range(6,7):   # chart,time...overall
         #           for metric in range(0,4):   # top1 top2...mar
-                  		
-        #               	sys.stdout.write(str(newResultbySub[sub][m][metric])+" ")
+                        
+        #                   sys.stdout.write(str(newResultbySub[sub][m][metric])+" ")
         #           print('')
         #for i in range(0,7):
-        #	print(resultBysub[6][5][0:5])
+        #   print(resultBysub[6][5][0:5])
 main()
-
+'''
 
 
