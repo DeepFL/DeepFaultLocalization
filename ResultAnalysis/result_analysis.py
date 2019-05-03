@@ -137,34 +137,37 @@ def get_overall(resultBysub,truevers,techsvector,subsize):
         resultBysub[len(resultBysub)-1][m][3]=round(resultBysub[len(resultBysub)-1][m][3]/verssum,2)
         resultBysub[len(resultBysub)-1][m][4]=round(resultBysub[len(resultBysub)-1][m][4]/verssum,2) 
 
-def write_to_csv(finalresult,LatextechsName,overallsubs):
+def write_to_csv_RQ(final_result,LatextechsName,overallsubs,RQ_number,first_row):
     overallsubs.append('Overall')
-    with open("RQ1.csv","a") as RQ1:
-	    RQ1.write("Subjects,Techniques,Top-1,Top-3,Top-5,MFR,MAR")
-	    '''
-	    for s in range(len(overallsubs)):   # each subject and overall
-	        sys.stdout.write('\\multirow{7}{*}[-0.5ex]{\\rotatebox[origin=c]{90}{'+overallsubs[s]+'}}')
-	        techs=finalresult[s]
-	        for i in range(len(techs)):     # each model: multric, fluccs,trapt,rnn brnn...
-	            sys.stdout.write('&'+LatextechsName[i]+'&')
-	            lenth=len(techs[i])    # 5: top1,top3,top5,MFR,MAR
-
-	            for m in range(lenth-1):  #each value :top1,top3,top5,MFR
-	                if m<3:                      #top1,top3,top5
-	                    sys.stdout.write(str(techs[i][m])+'&')
-	                else:
-	                    value="%.2f" % techs[i][m]
-	                    sys.stdout.write(value+'&')
-	            sys.stdout.write("%.2f" % techs[i][lenth-1])  # MAR
-	            sys.stdout.write('\\\\')
-	            sys.stdout.write('\n')
-	            if i==4:
-	                sys.stdout.write('\cline{2-7}')
-
-	        sys.stdout.write('\\hline')
-	        sys.stdout.write('\\hline')
-	        sys.stdout.write('\n')
-		'''
+    with open(RQ_number + ".csv","a") as RQ:
+        RQ.write(first_row)
+        RQ.write("\n")
+        for s in range(len(overallsubs)):   # each subject and overall
+            if RQ_number == "RQ2" and s < len(overallsubs) - 1:
+                continue
+            
+            techs = final_result[s]
+            
+            for i in range(len(techs)):     # each model: multric, fluccs,trapt,rnn brnn...
+                lenth = len(techs[i])    # 5: top1,top3,top5,MFR,MAR
+                
+                if RQ_number == "RQ1":
+                    if i == 3:
+                        RQ.write(overallsubs[s] + ',' + LatextechsName[i] + ',')
+                    else:
+                        RQ.write(',' + LatextechsName[i] + ',')
+                else:
+                     RQ.write(LatextechsName[i] + ',')
+                for m in range(lenth - 1):  #each value :top1,top3,top5,MFR
+                    if m < 3:                      #top1,top3,top5
+                        RQ.write(str(techs[i][m])+',')
+                    else:
+                        value = "%.2f" % techs[i][m]
+                        RQ.write(value + ',')
+                RQ.write("%.2f" % techs[i][lenth-1])  # MAR
+                RQ.write('\n')
+            RQ.write('\n')
+        
 
 
 def writeForRfile(RQ2TrendData,subs,dnns):
@@ -185,7 +188,7 @@ def writeForRfile(RQ2TrendData,subs,dnns):
                 myfile.write('\n')        
 
 
-def RQ1(epoch_number,deep_data_dir,loss_function,techs_vector,subs,dnns):
+def RQ(epoch_number,deep_data_dir,loss_function,techs_vector,subs,dnns,libsvm_models,model_name,RQ,first_row):
     result_matrix = initialize_result(subs,techs_vector)
     
     #read libsvm
@@ -195,10 +198,8 @@ def RQ1(epoch_number,deep_data_dir,loss_function,techs_vector,subs,dnns):
     
     true_vers = read_deep_result(deep_data_dir,subs,tech,dnns,epoch_number,vers,result_matrix,techs_vector)
     # #Calculate overallresult
-    get_overall(result_matrix,true_vers,techs_vector,len(subs))
-    
-    LatextechsName=['Ochiai','Me-Ochiai','MULTRIC','FLUCCS','TraPT','MLP_DFL(2)']
-    write_to_csv(result_matrix,LatextechsName,subs)
+    get_overall(result_matrix,true_vers,techs_vector,len(subs))    
+    write_to_csv_RQ(result_matrix,model_name,subs,RQ,first_row)
 
 '''
 def main():
