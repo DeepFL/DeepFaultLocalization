@@ -12,8 +12,12 @@ def main():
 		libsvm_models = ['TraptJhawkByteIR']
 		model_name = ['LIBSVM','MLP','MLP2','BiRNN','MLP_DFL(1)','MLP_DFL(2)']
 		first_row = "Techniques,Top-1,Top-3,Top-5,MFR,MAR"
-	if RQ_number == "RQ3":
-		result.RQ3()
+	if RQ_number == "RQ2_2":
+		dnns = ['7-feature','7-selection-spec','4-selection-mut','7-selection-complex','7-selection-similar']
+		libsvm_models = []
+		model_name = ['MLP_DFL(1)','MLP_DFL(1)-SpectrumInfor','MLP_DFL(1)-MutationInfor','MLP_DFL(1)-MetricsInfor',
+						'MLP_DFL(1)-TextualInfo']
+		first_row = "Techniques,Top-1,Top-3,Top-5,MFR,MAR" 
 	if RQ_number == "RQ4":
 		result.RQ4()
 

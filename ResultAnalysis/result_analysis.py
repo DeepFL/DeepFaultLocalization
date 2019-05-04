@@ -143,7 +143,7 @@ def write_to_csv_RQ(final_result,LatextechsName,overallsubs,RQ_number,first_row)
         RQ.write(first_row)
         RQ.write("\n")
         for s in range(len(overallsubs)):   # each subject and overall
-            if RQ_number == "RQ2" and s < len(overallsubs) - 1:
+            if RQ_number == "RQ2" or RQ_number == "RQ2_2" and s < len(overallsubs) - 1:
                 continue
             
             techs = final_result[s]
