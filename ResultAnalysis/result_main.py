@@ -43,9 +43,11 @@ def main():
 		model_name = ['MLP_DFL(2)']
 		first_row = "Techniques,Top-1,Top-3,Top-5,MFR,MAR"
 		models =  libsvm_models + dnns
-		for e in epoch_number:
+		for e in range(int(epoch_number)):
+			e = e + 1
 			for loss in loss_funcs:
-				result.RQ(e,deep_data_dir,loss,models,subs,dnns,libsvm_models,model_name,RQ_number,first_row,tech)
+				new_subs = ['Chart','Lang','Math','Time','Mockito','Closure']
+				result.RQ(e,deep_data_dir,loss,models,new_subs,dnns,libsvm_models,model_name,RQ_number,first_row,tech)
 
 	
 
