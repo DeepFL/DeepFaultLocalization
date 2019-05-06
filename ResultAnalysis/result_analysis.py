@@ -79,7 +79,7 @@ def read_deep_result(dir,subs,tech,dnns,epoch,vers,resultBysub,techsvector):
             for v in range(ver):
                 v=str(v+1)
                 test_label_path = dir + tech + '/' + sub + '/' + v + '/' + test_label_file
-                susp_path = out_dir + '/result/' + dnns[d] + '/' + sub + '/' + v + '/' + tech + '/fc-' + loss_function + '-' + str(epoch)
+                susp_path = os.path.join(out_dir,sub,v,tech,dnns[d]+'-'+loss_function+'-'+str(epoch))
                 #susp_path = out_dir + '/result/' + dnns[d] + '/' + sub + '/' + v + '/' + dnns[d] + '/fc-' + loss_function + '-' + str(epoch)
 
                 min,avg=ut.parse(v,susp_path,test_label_path)
