@@ -5,19 +5,12 @@ library(cowplot)
 figWidth<-25
 figHeight<-4
 textFont<-10
-
-# Xia only needs to change here to make it work
-
-Basedir="C:\\Users\\Administrator\\Desktop\\ISSTA\\RQ5CrossTrend\\"
-#Subs<-c("Lang","Chart","Time","Math","Closure","Mockito","Overall")
+Basedir="/home/xia/DeepFL/Artifact/DeepFaultLocalization/ResultAnalysis/Rdata/"
 Subs<-c("Overall")
-#losses<-c("epairwise","epairwiseSoftmax","softmax")
-#losses<-c("epairwise","softmax")
-losses<-c("within-project","cross-project","CrossValidation")
-#Models<-c("birnn","rnn","mlp2","mlp")
-#model<-"rnn"
-model<-"bestV_MLP"
-epochs=seq(from = 2, to = 60, by = 2)   # X axis
+losses<-c("epairwise","softmax")
+model<-"dfl2"
+#epochs=seq(from = 2, to = 60, by = 2)   # X axis
+epochs=seq(from = 1, to = 2, by = 1)   # X axis
 Metrics<-c("Top1","Top3","Top5","MFR","MAR")
 
 for(sub in Subs){
@@ -29,21 +22,18 @@ for(sub in Subs){
 				
 			combinemet=cbind(epochs)
 			for(loss in losses){
-				datafile=paste(Basedir,loss,"\\",sub,"\\",model,".txt",sep="")
+				datafile=paste(Basedir,loss,"/",sub,"_",model,".txt",sep="")
 				datamodel<-read.table(datafile,sep = ",")
-				#lines<-seq(5,100,by=5)
-				#datamodel<-datamodel[lines,]
 				colnames(datamodel) <- c("Top1","Top3","Top5","MFR","MAR")
 				combinemet=cbind(combinemet,datamodel[,me])
 			}
 			combinemet=data.frame(combinemet)
-			#colnames(combinemet) <- c("epochs","pairwise","pairwise+softmax","softmax")
-			#colnames(combinemet) <- c("epochs","pairwise","softmax")
-			colnames(combinemet) <- c("epochs","within-project","cross-project","CrossValidation")
+			colnames(combinemet) <- c("epochs","pairwise","softmax")
 			combinemet <- melt(combinemet, id.vars='epochs')
 			colnames(combinemet) <- c("epochs","model","value")
 			p<-ggplot(combinemet, aes(x=epochs, y=value, group=model, colour=model,shape=model)) +
-				geom_line()+geom_point(size=2)+ ylab(me)+scale_x_continuous(breaks=seq(5,61,by=5), limits=c(2,60))
+				#geom_line()+geom_point(size=2)+ ylab(me)+scale_x_continuous(breaks=seq(5,61,by=5), limits=c(2,60))
+				geom_line()+geom_point(size=2)+ ylab(me)+scale_x_continuous(breaks=seq(1,2,by=1), limits=c(0,2))
 			plot_list[[count]] = p
 			count=count+1
 				
