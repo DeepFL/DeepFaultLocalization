@@ -5,7 +5,7 @@ from collections import OrderedDict
 import sys
 import decimal
 import sys
-import utils as ut
+import result_utils as ut
 from result_conf import *
 
 def initialize_result(allsub,tvector):
