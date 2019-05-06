@@ -184,17 +184,17 @@ def write_to_R(result_matrix,subs,loss_or_tech,dnns):
                              str(result_matrix[s][d][4])) 
                 myfile.write('\n')        
 
-
-def RQ(epoch_number,deep_data_dir,loss,techs_vector,subs,dnns,libsvm_models,model_name,RQ,first_row,tech):
-    result_matrix = initialize_result(subs,techs_vector)
-    
+def read_libsvm(subs,techs_vector,libsvm_models):
+    result_matrix = initialize_result(subs,techs_vector)    
     #read libsvm
     for i in range(0,len(libsvm_models)):   
         libsvm_result_path = 'libsvmresult/' + techs_vector[i] + '.txt'
         read_libsvm_result(result_matrix,libsvm_result_path,subs,techs_vector)
-    
+    return result_matrix
+
+def RQ(epoch_number,deep_data_dir,loss,techs_vector,subs,dnns,model_name,RQ,first_row,tech,result_matrix):   
     true_vers = read_deep_result(deep_data_dir,subs,tech,dnns,epoch_number,vers,result_matrix,techs_vector,loss)
-    # #Calculate overallresult
+    #Calculate overallresult
     get_overall(result_matrix,true_vers,techs_vector,len(subs))
     if RQ == "RQ1" or RQ == "RQ2" or RQ == "RQ2_2":
     	write_to_csv_RQ(result_matrix,model_name,subs,RQ,first_row)
