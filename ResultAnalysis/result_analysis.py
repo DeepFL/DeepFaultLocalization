@@ -174,11 +174,8 @@ def write_to_R(result_matrix,subs,dnns):
     subs.append("Overall")
     #print(len(RQ2TrendData[0]))
     for s in range(len(subs)):
-
         for d in range(len(dnns)):
-            writefileBasedir='Rdata/' + dnns[d] +'/'+subs[s]+'/'  
-            writefile=writefileBasedir + 'bestV_MLP.txt'
-
+            writefile = 'Rdata/' + loss +'/' + subs[s] + '_dfl2.txt'
             with open(writefile, "a") as myfile:
                 myfile.write(str(result_matrix[s][d][0])+','+
                              str(result_matrix[s][d][1])+','+
@@ -202,7 +199,7 @@ def RQ(epoch_number,deep_data_dir,loss,techs_vector,subs,dnns,libsvm_models,mode
     if RQ == "RQ1" or RQ == "RQ2" or RQ == "RQ2_2":
     	write_to_csv_RQ(result_matrix,model_name,subs,RQ,first_row)
     elif RQ == "RQ3":
-    	write_to_R(result_matrix,subs,dnns)
+    	write_to_R(result_matrix,subs,loss)
 
 '''
 def main():
