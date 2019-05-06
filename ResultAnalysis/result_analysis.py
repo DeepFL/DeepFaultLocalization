@@ -47,7 +47,7 @@ def read_libsvm_result(finalresult,libsvmResultPath,allsub,techvector):
             finalresult[subindex][techindex]=array
 
 
-def read_deep_result(dir,subs,tech,dnns,epoch,vers,resultBysub,techsvector):
+def read_deep_result(dir,subs,tech,dnns,epoch,vers,resultBysub,techsvector,loss):
     # subs: chart,lang,time...  
     # tech: spectrumTestJahwkByte
     # dnns: mlp mlp2 rnn... 
@@ -170,25 +170,25 @@ def write_to_csv_RQ(final_result,LatextechsName,overallsubs,RQ_number,first_row)
         
 
 
-def writeForRfile(RQ2TrendData,subs,dnns):
+def write_to_R(result_matrix,subs,dnns):
     subs.append("Overall")
     #print(len(RQ2TrendData[0]))
     for s in range(len(subs)):
 
         for d in range(len(dnns)):
-            writefileBasedir='/home/lab604/liwei/XiaAnalysis/Scripts/deepfaultlocalization/Statistic/Rdata/' + dnns[d] +'/'+subs[s]+'/'  
+            writefileBasedir='Rdata/' + dnns[d] +'/'+subs[s]+'/'  
             writefile=writefileBasedir + 'bestV_MLP.txt'
 
             with open(writefile, "a") as myfile:
-                myfile.write(str(RQ2TrendData[s][d][0])+','+
-                             str(RQ2TrendData[s][d][1])+','+
-                             str(RQ2TrendData[s][d][2])+','+
-                             str(RQ2TrendData[s][d][3])+','+
-                             str(RQ2TrendData[s][d][4])) 
+                myfile.write(str(result_matrix[s][d][0])+','+
+                             str(result_matrix[s][d][1])+','+
+                             str(result_matrix[s][d][2])+','+
+                             str(result_matrix[s][d][3])+','+
+                             str(result_matrix[s][d][4])) 
                 myfile.write('\n')        
 
 
-def RQ(epoch_number,deep_data_dir,loss_function,techs_vector,subs,dnns,libsvm_models,model_name,RQ,first_row,tech):
+def RQ(epoch_number,deep_data_dir,loss,techs_vector,subs,dnns,libsvm_models,model_name,RQ,first_row,tech):
     result_matrix = initialize_result(subs,techs_vector)
     
     #read libsvm
@@ -196,10 +196,13 @@ def RQ(epoch_number,deep_data_dir,loss_function,techs_vector,subs,dnns,libsvm_mo
         libsvm_result_path = 'libsvmresult/' + techs_vector[i] + '.txt'
         read_libsvm_result(result_matrix,libsvm_result_path,subs,techs_vector)
     
-    true_vers = read_deep_result(deep_data_dir,subs,tech,dnns,epoch_number,vers,result_matrix,techs_vector)
+    true_vers = read_deep_result(deep_data_dir,subs,tech,dnns,epoch_number,vers,result_matrix,techs_vector,loss)
     # #Calculate overallresult
     get_overall(result_matrix,true_vers,techs_vector,len(subs))
-    write_to_csv_RQ(result_matrix,model_name,subs,RQ,first_row)
+    if RQ == "RQ1" or RQ == "RQ2" or RQ == "RQ2_2":
+    	write_to_csv_RQ(result_matrix,model_name,subs,RQ,first_row)
+    elif RQ == "RQ3":
+    	write_to_R()
 
 '''
 def main():
