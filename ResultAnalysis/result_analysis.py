@@ -170,12 +170,12 @@ def write_to_csv_RQ(final_result,LatextechsName,overallsubs,RQ_number,first_row)
         
 
 
-def write_to_R(result_matrix,subs,loss,dnns):
+def write_to_R(result_matrix,subs,loss_or_tech,dnns):
     subs.append("Overall")
     #print(len(RQ2TrendData[0]))
     for s in range(len(subs)):
         for d in range(len(dnns)):
-            writefile = 'Rdata/' + loss +'/' + subs[s] + '_dfl2.txt'
+            writefile = 'Rdata/' + loss_or_tech +'/' + subs[s] + '_dfl2.txt'
             with open(writefile, "a") as myfile:
                 myfile.write(str(result_matrix[s][d][0])+','+
                              str(result_matrix[s][d][1])+','+
@@ -200,6 +200,8 @@ def RQ(epoch_number,deep_data_dir,loss,techs_vector,subs,dnns,libsvm_models,mode
     	write_to_csv_RQ(result_matrix,model_name,subs,RQ,first_row)
     elif RQ == "RQ3":
     	write_to_R(result_matrix,subs,loss,dnns)
+    elif RQ == "RQ4":
+        write_to_R(result_matrix,subs,tech,dnns)
 
 '''
 def main():

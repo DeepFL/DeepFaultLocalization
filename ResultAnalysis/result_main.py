@@ -53,16 +53,18 @@ def main():
   		r_source('RforRQ3.r') 
   	if RQ_number == "RQ4":
 		loss_function = 'softmax'
-		techs = ['DeepFL','CrossDeepFL','CrossValidation']
-		model_name = ['MLP_DFL(2)'] #not important
+		#techs = ['DeepFL','CrossDeepFL','CrossValidation']
+		techs = ['DeepFL','CrossDeepFL']
+		model_name = ['MLP_DFL(2)']   #not important
 		dnns = ['dfl2']            
 		first_row = "Techniques,Top-1,Top-3,Top-5,MFR,MAR"   #not important
 		libsvm_models = []
 		models =  libsvm_models + dnns
 		for e in range(int(epoch_number)):
 			e = e + 1
-			new_subs = ['Chart','Lang','Math','Time','Mockito','Closure']
-			result.RQ(e,deep_data_dir,loss_function,models,new_subs,dnns,libsvm_models,model_name,RQ_number,first_row,tech)
+			for tech in techs:
+				new_subs = ['Chart','Lang','Math','Time','Mockito','Closure']
+				result.RQ(e,deep_data_dir,loss_function,models,new_subs,dnns,libsvm_models,model_name,RQ_number,first_row,tech)
   		
 	
 
