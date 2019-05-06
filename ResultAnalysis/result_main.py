@@ -1,5 +1,6 @@
 import result_analysis as result
 from result_conf import *
+import rpy2.robjects as robjects
 
 def main():
 	if RQ_number == "RQ1":
@@ -48,7 +49,9 @@ def main():
 			for loss in loss_funcs:
 				new_subs = ['Chart','Lang','Math','Time','Mockito','Closure']
 				result.RQ(e,deep_data_dir,loss,models,new_subs,dnns,libsvm_models,model_name,RQ_number,first_row,tech)
-
+		r_source = robjects.r['source']
+  		r_source('RforRQ3.r') 
+  		
 	
 
 #main function execution
