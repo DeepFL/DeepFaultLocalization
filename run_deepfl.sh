@@ -16,3 +16,16 @@ do
 		done
 	done
 done
+
+for idx in {0..5}
+do
+	sub=${subs[$idx]}
+	ver_for_sub=${vers[$idx]}
+	for v in `seq 1 $ver_for_sub`
+		do
+			echo $sub
+			echo $v
+			python main.py /home/xia/DeepFL/Data/ /home/xia/DeepFL/result $sub $v dfl2 DeepFL epairwise 2 1 1;
+		done
+
+done
