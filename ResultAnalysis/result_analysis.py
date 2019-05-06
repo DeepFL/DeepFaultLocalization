@@ -143,11 +143,11 @@ def write_to_csv_RQ(final_result,LatextechsName,overallsubs,RQ_number,first_row)
         RQ.write(first_row)
         RQ.write("\n")
         for s in range(len(overallsubs)):   # each subject and overall
-            if RQ_number == "RQ2" or RQ_number == "RQ2_2" and s < len(overallsubs) - 1:
+            if (RQ_number == "RQ2" or RQ_number == "RQ2_2") and s < len(overallsubs) - 1:
                 continue
             
             techs = final_result[s]
-            
+
             for i in range(len(techs)):     # each model: multric, fluccs,trapt,rnn brnn...
                 lenth = len(techs[i])    # 5: top1,top3,top5,MFR,MAR
                 
@@ -198,7 +198,7 @@ def RQ(epoch_number,deep_data_dir,loss_function,techs_vector,subs,dnns,libsvm_mo
     
     true_vers = read_deep_result(deep_data_dir,subs,tech,dnns,epoch_number,vers,result_matrix,techs_vector)
     # #Calculate overallresult
-    get_overall(result_matrix,true_vers,techs_vector,len(subs))    
+    get_overall(result_matrix,true_vers,techs_vector,len(subs))
     write_to_csv_RQ(result_matrix,model_name,subs,RQ,first_row)
 
 '''
