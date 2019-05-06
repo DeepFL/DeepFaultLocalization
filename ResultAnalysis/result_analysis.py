@@ -193,7 +193,7 @@ def RQ(epoch_number,deep_data_dir,loss_function,techs_vector,subs,dnns,libsvm_mo
     
     #read libsvm
     for i in range(0,len(libsvm_models)):   
-        libsvm_result_path = result_dir + '/libsvmresult/' + techs_vector[i]+'.txt'
+        libsvm_result_path = 'libsvmresult/' + techs_vector[i] + '.txt'
         read_libsvm_result(result_matrix,libsvm_result_path,subs,techs_vector)
     
     true_vers = read_deep_result(deep_data_dir,subs,tech,dnns,epoch_number,vers,result_matrix,techs_vector)
