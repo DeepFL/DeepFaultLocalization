@@ -3,6 +3,7 @@ from result_conf import *
 
 def main():
 	if RQ_number == "RQ1":
+		loss_function = 'softmax'
 		tech = "DeepFL"
 		dnns = ['dfl2']
 		libsvm_models = ['Ochiai','MeOchiai','Multric','Fluccs','Trapt']		 
@@ -11,6 +12,7 @@ def main():
 		models =  libsvm_models + dnns
 		result.RQ(epoch_number,deep_data_dir,loss_function,models,subs,dnns,libsvm_models,model_name,RQ_number,first_row,tech)
 	if RQ_number == "RQ2":
+		loss_function = 'softmax'
 		tech = "DeepFL"
 		dnns = ['mlp','mlp2','birnn','dfl1','dfl2']
 		libsvm_models = ['TraptJhawkByteIR']
@@ -19,6 +21,7 @@ def main():
 		models =  libsvm_models + dnns
 		result.RQ(epoch_number,deep_data_dir,loss_function,models,subs,dnns,libsvm_models,model_name,RQ_number,first_row,tech)
 	if RQ_number == "RQ2_2":
+		loss_function = 'softmax'
 		techs = ['DeepFL','DeepFL-Spectrum','DeepFL-Mutation','DeepFL-Metrics','DeepFL-Textual']
 		m_names = ['MLP_DFL(1)','MLP_DFL(1)-SpectrumInfor','MLP_DFL(1)-MutationInfor','MLP_DFL(1)-MetricsInfor',
 						'MLP_DFL(1)-TextualInfo']
@@ -32,8 +35,17 @@ def main():
 			model_name = [m_names[idx]]
 			new_subs = ['Chart','Lang','Math','Time','Mockito','Closure']								
 			result.RQ(epoch_number,deep_data_dir,loss_function,models,new_subs,dnns,libsvm_models,model_name,RQ_number,first_row,tech)		
-	if RQ_number == "RQ4":
-		result.RQ4()
+	if RQ_number == "RQ3":
+		loss_funcs = ['softmax','epairwise']
+		tech = "DeepFL"
+		dnns = ['dfl2']
+		libsvm_models = []
+		model_name = ['MLP_DFL(2)']
+		first_row = "Techniques,Top-1,Top-3,Top-5,MFR,MAR"
+		models =  libsvm_models + dnns
+		for e in epoch_number:
+			for loss in loss_funcs:
+				result.RQ(e,deep_data_dir,loss,models,subs,dnns,libsvm_models,model_name,RQ_number,first_row,tech)
 
 	
 
