@@ -143,8 +143,8 @@ def write_to_csv_RQ(final_result,LatextechsName,overallsubs,RQ_number,first_row)
         RQ.write(first_row)
         RQ.write("\n")
         for s in range(len(overallsubs)):   # each subject and overall
-            if (RQ_number == "RQ2" or RQ_number == "RQ2_2") and s < len(overallsubs) - 1:
-                continue
+            #if (RQ_number == "RQ2" or RQ_number == "RQ2_2") and s < len(overallsubs) - 1:
+            #    continue
             
             techs = final_result[s]
 
@@ -188,7 +188,7 @@ def writeForRfile(RQ2TrendData,subs,dnns):
                 myfile.write('\n')        
 
 
-def RQ(epoch_number,deep_data_dir,loss_function,techs_vector,subs,dnns,libsvm_models,model_name,RQ,first_row):
+def RQ(epoch_number,deep_data_dir,loss_function,techs_vector,subs,dnns,libsvm_models,model_name,RQ,first_row,tech):
     result_matrix = initialize_result(subs,techs_vector)
     
     #read libsvm

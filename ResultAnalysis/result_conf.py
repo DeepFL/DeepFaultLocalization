@@ -9,4 +9,3 @@ loss_function = 'softmax'
 subs = ['Chart','Lang','Math','Time','Mockito','Closure']
 vers = [26, 65, 106, 27, 38, 133]
 
-tech = "DeepFL"
