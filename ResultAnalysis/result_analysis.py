@@ -170,7 +170,7 @@ def write_to_csv_RQ(final_result,LatextechsName,overallsubs,RQ_number,first_row)
         
 
 
-def write_to_R(result_matrix,subs,dnns):
+def write_to_R(result_matrix,subs,loss,dnns):
     subs.append("Overall")
     #print(len(RQ2TrendData[0]))
     for s in range(len(subs)):
@@ -199,7 +199,7 @@ def RQ(epoch_number,deep_data_dir,loss,techs_vector,subs,dnns,libsvm_models,mode
     if RQ == "RQ1" or RQ == "RQ2" or RQ == "RQ2_2":
     	write_to_csv_RQ(result_matrix,model_name,subs,RQ,first_row)
     elif RQ == "RQ3":
-    	write_to_R(result_matrix,subs,loss)
+    	write_to_R(result_matrix,subs,loss,dnns)
 
 '''
 def main():
