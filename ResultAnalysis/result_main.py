@@ -24,18 +24,12 @@ def main():
 		result_matrix = result.read_libsvm(subs,models,libsvm_models)
 		result.RQ(epoch_number,deep_data_dir,loss_function,models,subs,dnns,model_name,RQ_number,first_row,tech,result_matrix)
 	if RQ_number == "RQ2_2":		
-		techs = ['DeepFL','DeepFL-Spectrum','DeepFL-Mutation','DeepFL-Metrics','DeepFL-Textual']
+		dnns = ['dfl1','dfl1-Spectrum','dfl1-Mutation','dfl1-Metrics','dfl1-Textual']
 		m_names = ['MLP_DFL(1)','MLP_DFL(1)-SpectrumInfor','MLP_DFL(1)-MutationInfor','MLP_DFL(1)-MetricsInfor',
 						'MLP_DFL(1)-TextualInfo']
-		dnns = ['dfl1'] 
-		
-		n = len(techs)
-		for idx in range(n):
-			tech = techs[idx]
-			model_name = [m_names[idx]]
-			new_subs = ['Chart','Lang','Math','Time','Mockito','Closure']
-			result_matrix = result.initialize_result(subs,dnns) 								
-			result.RQ(epoch_number,deep_data_dir,loss_function,models,new_subs,dnns,libsvm_models,model_name,RQ_number,first_row,tech)		
+		models = dnns	
+		result_matrix = result.initialize_result(subs,dnns) 								
+		result.RQ(epoch_number,deep_data_dir,loss_function,models,subs,dnns,m_names,RQ_number,first_row,tech,result_matrix)		
 	
 	if RQ_number == "RQ3":
 		loss_funcs = ['softmax','epairwise']		
