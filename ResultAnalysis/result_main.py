@@ -51,7 +51,8 @@ def main():
 		subprocess.call(['Rscript', 'RforRQ3.r', "loss_eval"])
   	
   	if RQ_number == "RQ4":
-  		result.cross_vali_result()	 			
+  		result.cross_vali_result()	
+  			
 		techs = ['DeepFL','CrossDeepFL','CrossValidation']
 		model_name = ['MLP_DFL(2)']   #not important
 		dnns = ['dfl2']     

@@ -14,7 +14,6 @@ losses<-c("epairwise","softmax")
 if (args[1] == "Cross"){
 	losses<-c("DeepFL","CrossDeepFL","CrossValidation")
 }
-cat(losses)
 
 model<-"dfl2"
 #epochs=seq(from = 2, to = 60, by = 2)   # X axis
