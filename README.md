@@ -1,6 +1,26 @@
 # DeepFL
 DeepFL is a deep-learning-based fault localization technique. It implements two multi-layer perceptron variants and two recurrent neural networks variants by [Tensorflow](https://www.tensorflow.org/). The benchmark subject is from [Defects4j](https://github.com/rjust/defects4j), which is an open source repository, providing  some buggy versions and corresponding fixed versions of different projects. Features of the dataset include different dimensions, e.g., spectrum-based, mutation-based, complexity-based (code metrics) and textual-similarity-based information.  
 
+## Docker
+
+For easy test of our project, we provide a docker version and you can download the docker container via link TODO:, then load the container as a new image through the following command:
+
+ ```
+docker import deepfl.tar -tmp/deepfl 
+ ```
+
+Then run the image using:
+
+```
+docker run -t -i tmp/deepfl 
+```
+
+Then go to the destination directory:
+
+```
+cd home/DeepFaultLocalization
+```
+
 ## Requirements ##
 - Python 2/3 with Pandas and Numpy
 - Tensorflow
