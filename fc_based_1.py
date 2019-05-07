@@ -211,13 +211,13 @@ def run(trainFile, trainLabelFile, testFile,testLabelFile, groupFile, suspFile,l
     # Construct model
     if model_type == "dfl1":
         pred = fc_2_layers(spec, mutation1,mutation2,mutation3,mutation4,complexity,similarity, keep_prob,is_training) 
-    elif model_type == "DeepFL-Spectrum":
+    elif model_type == "dfl1-Spectrum":
         pred = fc_2_layers_spec(spec, mutation1,mutation2,mutation3,mutation4,complexity,similarity, keep_prob,is_training) 
-    elif model_type == "DeepFL-Mutation":
+    elif model_type == "dfl1-Mutation":
         pred = fc_2_layers_mut(spec, mutation1,mutation2,mutation3,mutation4,complexity,similarity, keep_prob,is_training) 
-    elif model_type == "DeepFL-Metrics":
+    elif model_type == "dfl1-Metrics":
         pred = fc_2_layers_complex(spec, mutation1,mutation2,mutation3,mutation4,complexity,similarity, keep_prob,is_training) 
-    elif model_type == "DeepFL-Textual":
+    elif model_type == "dfl1-Textual":
         pred = fc_2_layers_similar(spec, mutation1,mutation2,mutation3,mutation4,complexity,similarity, keep_prob,is_training) 
     datasets = input.read_data_sets(trainFile, trainLabelFile, testFile, testLabelFile, groupFile)
     # Define loss and optimizer                          
