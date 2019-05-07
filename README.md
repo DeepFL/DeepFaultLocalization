@@ -42,7 +42,7 @@ Each parameter can be explained as follows:
 6. $tech: The different dimensions of features, corresponding to the name of dataset, can be *DeepFL*, *DeepFL-Metrics*, *DeepFL-Mutation*, *DeepFL-Spectrum*, *DeepFL-Textual*, *CrossDeepFL*.
 7. $loss: The name of loss function, which can be *softmax*, *epairwise*, *epairwiseSoftmax*.
 8. $epoch: The number of training epochs.
-9. \$dump_step: The interval number of epoch in which the result will be stored into the result file. For example, if ​$dump_step = 10, the results in epochs 10, 20, 30... will be written into the files.
+9. \$dump_step: The interval number of epoch in which the result will be stored into the result file. For example, if $dump_step = 10, the results in epochs 10, 20, 30... will be written into the files.
 10. $gpu_count: the gpu you want to use to run DeepFL.
 
 ## Script
@@ -76,11 +76,10 @@ Please note that due to the randomly initialized parameters, the results may be 
 
 ## Plot results
 
-We also provide a script for results plot
+After running all subject versions, we also provide a script for results plot
 
 ```
 python rank_parser.py /absolute/path/to/ParentDirofDataset /absolute/path/to/Result $tech $model $loss $epoch $dump_step $figure_name
 ```
-
 \$figure_name: output figure name.
 

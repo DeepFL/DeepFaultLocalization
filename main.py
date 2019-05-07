@@ -38,8 +38,8 @@ def main():
         mlp.run(train_path,train_label_path, test_path,test_label_path, group_path ,susp_path, l, featureNum=feature,nodeNum=feature)
     elif model == "mlp2":
         mlp2.run(train_path, train_label_path, test_path, test_label_path, group_path, susp_path, l, featureNum=feature,nodeNum=feature)
-    elif model == "dfl1":
-        dfl1.run(train_path,train_label_path, test_path,test_label_path, group_path ,susp_path, l, featureNum=feature,nodeNum=feature)
+    elif model == "dfl1" or model == "DeepFL-Spectrum" or model == "DeepFL-Mutation" or model == "DeepFL-Metrics" or model == "DeepFL-Textual":
+        dfl1.run(train_path,train_label_path, test_path,test_label_path, group_path ,susp_path, l, model,featureNum=feature,nodeNum=feature)
     elif model == "dfl2":
         dfl2.run(train_path,train_label_path, test_path,test_label_path, group_path ,susp_path, l, featureNum=feature,nodeNum=feature)
         #mlp2.run(train_path,train_label_path, test_path,test_label_path, group_path ,susp_path, l, featureNum=feature,nodeNum=feature)

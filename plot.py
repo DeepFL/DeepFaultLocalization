@@ -15,7 +15,7 @@ def main():
     model = sys.argv[4]    # model name, such as "mlp" "mlp2" "rnn" "birnn"  
     loss = sys.argv[5]     # loss function   
     epochnumber = int(sys.argv[6])   # epoch number (notice that this is a maximal number)
-    sub = sys.argv[7]
+    sub = 'all'
     dump_step = int(sys.argv[8]) 
     figure_name = sys.argv[9]
     ResultDir = sys.argv[2] + '/'+figure_name   #directory of results
@@ -24,26 +24,17 @@ def main():
     if(sub == 'all'):
         subs=['Chart','Lang','Math','Time','Closure','Mockito']
         vers=[26, 65, 106, 27, 133, 38]
-    elif(sub=='noClosure'):
-        subs=['Chart','Lang','Math','Time','Mockito']
-        vers=[26, 65, 106, 27, 38] 
-    elif(sub=='Chart'):
-        subs=['Chart']   
-        vers=[26]
-    elif(sub=='Mockito'):
-        subs=['Mockito']
-        vers=[38]
-    elif(sub=='10fold'):
-        subs=['10fold']
-        vers=[10]
+    # elif(sub=='10fold'):
+    #     subs=['10fold']
+    #     vers=[10]
     else:
         print('WRONG!'+sub)
         exit()
 
     
-    #dnns=['mlp','mlp2','rnn','birnn','fc']
+    dnns=['mlp','mlp2','rnn','df1','df2']
     #techsvector=[dnns[0],dnns[1],dnns[2],dnns[3],dnns[4]]
-    dnns=['fc']
+    #dnns=['fc']
     techsvector=[dnns[0]]
     final_result = []
     for i in range(epochnumber/dump_step):

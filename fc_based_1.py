@@ -61,8 +61,130 @@ def fc_2_layers(spec, m1,m2,m3,m4,complexity,similarity, keep_prob,is_training):
     final_bias = tf.get_variable("final_bias", shape=[2], initializer=tf.zeros_initializer())
     out_layer = tf.add(tf.matmul(fc_2, final_weight), final_bias)
     return out_layer
-    
-def run(trainFile, trainLabelFile, testFile,testLabelFile, groupFile, suspFile,loss, featureNum, nodeNum):
+
+def fc_2_layers_spec(spec, m1,m2,m3,m4,complexity,similarity, keep_prob,is_training):
+    model_size_times = 2
+    with tf.variable_scope('seperate1',reuse=False):
+        with tf.variable_scope('mut1',reuse=False):
+            #mutation = tf.layers.batch_normalization(mutation, training=is_training)
+            mut_1 = single_fc_layer(m1,35,64, keep_prob,is_training)
+        with tf.variable_scope('mut2',reuse=False):
+            #mutation = tf.layers.batch_normalization(mutation, training=is_training)
+            mut_2 = single_fc_layer(m2,35,64, keep_prob,is_training)
+        with tf.variable_scope('mut3',reuse=False):
+            #mutation = tf.layers.batch_normalization(mutation, training=is_training)
+            mut_3 = single_fc_layer(m3,35,64, keep_prob,is_training)
+        with tf.variable_scope('mut4',reuse=False):
+            #mutation = tf.layers.batch_normalization(mutation, training=is_training)
+            mut_4 = single_fc_layer(m4,35,64, keep_prob,is_training)
+        with tf.variable_scope('complex',reuse=False):
+            #complexity = tf.layers.batch_normalization(complexity, training=is_training)
+            complex_1 = single_fc_layer(complexity,37,64, keep_prob,is_training)
+        with tf.variable_scope('similar',reuse=False):
+            #similarity = tf.layers.batch_normalization(similarity, training=is_training)
+            similar_1 = single_fc_layer(similarity,15,32, keep_prob,is_training)
+    with tf.variable_scope('fc',reuse=False):
+        fc_1 = tf.concat([mut_1,mut_2,mut_3,mut_4,complex_1,similar_1],1)
+        fc_1 = tf.nn.dropout(fc_1, keep_prob)
+        
+        with tf.variable_scope('fc2',reuse=False):
+            fc_2 = single_fc_layer(fc_1,352,128, keep_prob,is_training)
+        
+    final_weight = create_variables("final_weight",[128, 2])
+    final_bias = tf.get_variable("final_bias", shape=[2], initializer=tf.zeros_initializer())
+    out_layer = tf.add(tf.matmul(fc_2, final_weight), final_bias)
+    return out_layer
+
+def fc_2_layers_mut(spec, m1,m2,m3,m4,complexity,similarity, keep_prob,is_training):
+    model_size_times = 2
+    with tf.variable_scope('seperate1',reuse=False):
+        with tf.variable_scope('spec',reuse=False):
+            #spec = tf.layers.batch_normalization(spec, training=is_training)
+            spec_1 = single_fc_layer(spec,34,64, keep_prob,is_training)
+        with tf.variable_scope('complex',reuse=False):
+            #complexity = tf.layers.batch_normalization(complexity, training=is_training)
+            complex_1 = single_fc_layer(complexity,37,64, keep_prob,is_training)
+        with tf.variable_scope('similar',reuse=False):
+            #similarity = tf.layers.batch_normalization(similarity, training=is_training)
+            similar_1 = single_fc_layer(similarity,15,32, keep_prob,is_training)
+    with tf.variable_scope('fc',reuse=False):
+        fc_1 = tf.concat([spec_1,complex_1,similar_1],1)
+        fc_1 = tf.nn.dropout(fc_1, keep_prob)
+        with tf.variable_scope('fc2',reuse=False):
+            fc_2 = single_fc_layer(fc_1,160,128, keep_prob,is_training)
+        
+    final_weight = create_variables("final_weight",[128, 2])
+    final_bias = tf.get_variable("final_bias", shape=[2], initializer=tf.zeros_initializer())
+    out_layer = tf.add(tf.matmul(fc_2, final_weight), final_bias)
+    return out_layer
+
+def fc_2_layers_complex(spec, m1,m2,m3,m4,complexity,similarity, keep_prob,is_training):
+    model_size_times = 2
+    with tf.variable_scope('seperate1',reuse=False):
+        with tf.variable_scope('spec',reuse=False):
+            #spec = tf.layers.batch_normalization(spec, training=is_training)
+            spec_1 = single_fc_layer(spec,34,64, keep_prob,is_training)
+        with tf.variable_scope('mut1',reuse=False):
+            #mutation = tf.layers.batch_normalization(mutation, training=is_training)
+            mut_1 = single_fc_layer(m1,35,64, keep_prob,is_training)
+        with tf.variable_scope('mut2',reuse=False):
+            #mutation = tf.layers.batch_normalization(mutation, training=is_training)
+            mut_2 = single_fc_layer(m2,35,64, keep_prob,is_training)
+        with tf.variable_scope('mut3',reuse=False):
+            #mutation = tf.layers.batch_normalization(mutation, training=is_training)
+            mut_3 = single_fc_layer(m3,35,64, keep_prob,is_training)
+        with tf.variable_scope('mut4',reuse=False):
+            #mutation = tf.layers.batch_normalization(mutation, training=is_training)
+            mut_4 = single_fc_layer(m4,35,64, keep_prob,is_training)
+        with tf.variable_scope('similar',reuse=False):
+            #similarity = tf.layers.batch_normalization(similarity, training=is_training)
+            similar_1 = single_fc_layer(similarity,15,32, keep_prob,is_training)
+    with tf.variable_scope('fc',reuse=False):
+        fc_1 = tf.concat([spec_1,mut_1,mut_2,mut_3,mut_4,similar_1],1)
+        fc_1 = tf.nn.dropout(fc_1, keep_prob)
+        
+        with tf.variable_scope('fc2',reuse=False):
+            fc_2 = single_fc_layer(fc_1,352,128, keep_prob,is_training)
+        
+    final_weight = create_variables("final_weight",[128, 2])
+    final_bias = tf.get_variable("final_bias", shape=[2], initializer=tf.zeros_initializer())
+    out_layer = tf.add(tf.matmul(fc_2, final_weight), final_bias)
+    return out_layer
+
+def fc_2_layers_similar(spec, m1,m2,m3,m4,complexity,similarity, keep_prob,is_training):
+    model_size_times = 2
+    with tf.variable_scope('seperate1',reuse=False):
+        with tf.variable_scope('spec',reuse=False):
+            #spec = tf.layers.batch_normalization(spec, training=is_training)
+            spec_1 = single_fc_layer(spec,34,64, keep_prob,is_training)
+        with tf.variable_scope('mut1',reuse=False):
+            #mutation = tf.layers.batch_normalization(mutation, training=is_training)
+            mut_1 = single_fc_layer(m1,35,64, keep_prob,is_training)
+        with tf.variable_scope('mut2',reuse=False):
+            #mutation = tf.layers.batch_normalization(mutation, training=is_training)
+            mut_2 = single_fc_layer(m2,35,64, keep_prob,is_training)
+        with tf.variable_scope('mut3',reuse=False):
+            #mutation = tf.layers.batch_normalization(mutation, training=is_training)
+            mut_3 = single_fc_layer(m3,35,64, keep_prob,is_training)
+        with tf.variable_scope('mut4',reuse=False):
+            #mutation = tf.layers.batch_normalization(mutation, training=is_training)
+            mut_4 = single_fc_layer(m4,35,64, keep_prob,is_training)
+        with tf.variable_scope('complex',reuse=False):
+            #complexity = tf.layers.batch_normalization(complexity, training=is_training)
+            complex_1 = single_fc_layer(complexity,37,64, keep_prob,is_training)
+    with tf.variable_scope('fc',reuse=False):
+        fc_1 = tf.concat([spec_1,mut_1,mut_2,mut_3,mut_4,complex_1],1)
+        fc_1 = tf.nn.dropout(fc_1, keep_prob)
+        
+        with tf.variable_scope('fc2',reuse=False):
+            fc_2 = single_fc_layer(fc_1,352,128, keep_prob,is_training)
+        
+    final_weight = create_variables("final_weight",[128, 2])
+    final_bias = tf.get_variable("final_bias", shape=[2], initializer=tf.zeros_initializer())
+    out_layer = tf.add(tf.matmul(fc_2, final_weight), final_bias)
+    return out_layer
+
+def run(trainFile, trainLabelFile, testFile,testLabelFile, groupFile, suspFile,loss, model_type,featureNum, nodeNum):
     tf.reset_default_graph()
     # Network Parameters
     n_classes = 2 #  total output classes (0 or 1)
@@ -87,10 +209,17 @@ def run(trainFile, trainLabelFile, testFile,testLabelFile, groupFile, suspFile,l
     keep_prob = tf.placeholder(tf.float32)
 
     # Construct model
-    pred = fc_2_layers(spec, mutation1,mutation2,mutation3,mutation4,complexity,similarity, keep_prob,is_training) 
+    if model_type == "dfl1":
+        pred = fc_2_layers(spec, mutation1,mutation2,mutation3,mutation4,complexity,similarity, keep_prob,is_training) 
+    elif model_type == "DeepFL-Spectrum":
+        pred = fc_2_layers_spec(spec, mutation1,mutation2,mutation3,mutation4,complexity,similarity, keep_prob,is_training) 
+    elif model_type == "DeepFL-Mutation":
+        pred = fc_2_layers_mut(spec, mutation1,mutation2,mutation3,mutation4,complexity,similarity, keep_prob,is_training) 
+    elif model_type == "DeepFL-Metrics":
+        pred = fc_2_layers_complex(spec, mutation1,mutation2,mutation3,mutation4,complexity,similarity, keep_prob,is_training) 
+    elif model_type == "DeepFL-Textual":
+        pred = fc_2_layers_similar(spec, mutation1,mutation2,mutation3,mutation4,complexity,similarity, keep_prob,is_training) 
     datasets = input.read_data_sets(trainFile, trainLabelFile, testFile, testLabelFile, groupFile)
-
-
     # Define loss and optimizer                          
     regu_losses = tf.get_collection(tf.GraphKeys.REGULARIZATION_LOSSES)
     y = tf.stop_gradient(y)
