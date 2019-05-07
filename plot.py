@@ -16,8 +16,8 @@ def main():
     loss = sys.argv[5]     # loss function   
     epochnumber = int(sys.argv[6])   # epoch number (notice that this is a maximal number)
     sub = 'all'
-    dump_step = int(sys.argv[8]) 
-    figure_name = sys.argv[9]
+    dump_step = int(sys.argv[7]) 
+    figure_name = sys.argv[8]
     ResultDir = sys.argv[2] + '/'+figure_name   #directory of results
     subs=[]
     vers= []
