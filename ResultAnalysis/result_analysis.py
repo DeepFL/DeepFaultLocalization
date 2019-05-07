@@ -7,6 +7,7 @@ import decimal
 import sys
 import result_utils as ut
 from result_conf import *
+import shutil
 
 def initialize_result(allsub,tvector):
     result_matrix = [] 
@@ -202,13 +203,23 @@ def RQ(epoch_number,deep_data_dir,loss,techs_vector,subs,dnns,model_name,RQ,firs
     	write_to_R(result_matrix,subs,loss,dnns)
     elif RQ == "RQ4":
         write_to_R(result_matrix,subs,tech,dnns)
+def delete_exsisting():
+    for (root,dirs,files) in os.walk(result_dir): 
+        if "CrossValForAnalysis" in root:
+            shutil.rmtree(root)
+    for p in subs:
+        full_path = deep_data_dir + "CrossValidation/" + p
+        if os.path.isdir(full_path):
+            shutil.rmtree(full_path)
 
 def cross_vali_result():
     resultRoot = result_dir + '/10fold/'
-    labelpath = deep_data_dir + '/CrossValidation/10fold/'
+    labelpath = deep_data_dir + 'CrossValidation/10fold/'
+    delete_exsisting()
+    
     vers = 10
     for v in range(1,vers + 1):
-        for ep in range(1, RQ_number + 1, 1):
+        for ep in range(1, int(epoch_number) + 1, 1):
             rank_file = os.path.join(resultRoot,str(v),'CrossValidation','dfl2-softmax-' + str(ep))
             test_label_file = os.path.join(labelpath, str(v),'TestLabel.csv')
             PV_file = os.path.join(labelpath,str(v),'PandV.txt')
@@ -222,17 +233,25 @@ def cross_vali_result():
             for l in range(0, DataLength):
                 project = PV_list[l].split('-')[0]
                 version = PV_list[l].split('-')[1].strip()
-                newRespath = os.path.join(result_dir,project,version,'CrossValForAnalysis')
-                newLabel = os.path.join(result_dir,'LabelData',project,version)
+                newRespath = os.path.join(result_dir,project,version,'CrossValidation')
+                newLabel = os.path.join(deep_data_dir,'CrossValidation',project,version)
                 if not os.path.exists(newRespath):
                     os.makedirs(newRespath)
+
                 if not os.path.exists(newLabel):
                     os.makedirs(newLabel)
 
-                with open(newRespath + '/dfl2-softmax-' + str(ep),'a') as wd:
+                result_file = newRespath + '/dfl2-softmax-' + str(ep)
+                with open(result_file,'a') as wd:
                     wd.write(rank_list[l])
                     wd.write('\n')
-
+                
+                if ep == 1:
+                    lable_file = newLabel + '/TestLabel.csv'
+                    with open(lable_file,'a') as wd:
+                        wd.write(label_list[l])
+                        wd.write('\n')
+    
 
 
 

@@ -52,7 +52,8 @@ def main():
   		r_source('RforRQ3.r') 
   	
   	if RQ_number == "RQ4":
-  		result.cross_vali_result()		
+  		result.cross_vali_result()	
+  			
 		techs = ['DeepFL','CrossDeepFL','CrossValidation']
 		model_name = ['MLP_DFL(2)']   #not important
 		dnns = ['dfl2']     
@@ -65,7 +66,7 @@ def main():
 				result.RQ(e,deep_data_dir,loss_function,models,new_subs,dnns,model_name,RQ_number,first_row,tech,result_matrix)
   		r_source = robjects.r['source']
   		r_source('RforRQ3.r') 
-	
+		
 
 #main function execution
 if __name__=='__main__':
