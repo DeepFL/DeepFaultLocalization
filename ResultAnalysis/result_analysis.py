@@ -203,6 +203,39 @@ def RQ(epoch_number,deep_data_dir,loss,techs_vector,subs,dnns,model_name,RQ,firs
     elif RQ == "RQ4":
         write_to_R(result_matrix,subs,tech,dnns)
 
+def cross_vali_result():
+    resultRoot = result_dir + '/10fold/'
+    labelpath = deep_data_dir + '/CrossValidation/10fold/'
+    vers = 10
+    for v in range(1,vers + 1):
+        for ep in range(1, RQ_number + 1, 1):
+            rank_file = os.path.join(resultRoot,str(v),'CrossValidation','dfl2-softmax-' + str(ep))
+            test_label_file = os.path.join(labelpath, str(v),'TestLabel.csv')
+            PV_file = os.path.join(labelpath,str(v),'PandV.txt')
+            with open(rank_file) as r:
+                rank_list=[line.rstrip('\n') for line in r]
+            with open(test_label_file) as l:
+                label_list=[line.rstrip('\n') for line in l]
+            with open(PV_file) as r:
+                PV_list=[line.rstrip('\n') for line in r]
+            DataLength = len(rank_list)
+            for l in range(0, DataLength):
+                project = PV_list[l].split('-')[0]
+                version = PV_list[l].split('-')[1].strip()
+                newRespath = os.path.join(result_dir,project,version,'CrossValForAnalysis')
+                newLabel = os.path.join(result_dir,'LabelData',project,version)
+                if not os.path.exists(newRespath):
+                    os.makedirs(newRespath)
+                if not os.path.exists(newLabel):
+                    os.makedirs(newLabel)
+
+                with open(newRespath + '/dfl2-softmax-' + str(ep),'a') as wd:
+                    wd.write(rank_list[l])
+                    wd.write('\n')
+
+
+
+
 '''
 def main():
     tech = sys.argv[1]   # SpectrumTestJhawkByte

@@ -5,6 +5,7 @@ import rpy2.robjects as robjects
 def main():
 	loss_function = 'softmax'
 	tech = "DeepFL"
+	first_row = "Techniques,Top-1,Top-3,Top-5,MFR,MAR"
 	
 	if RQ_number == "RQ1":		
 		dnns = ['dfl2']
@@ -19,7 +20,6 @@ def main():
 		dnns = ['mlp','mlp2','birnn','dfl1','dfl2']
 		libsvm_models = ['TraptJhawkByteIR']
 		model_name = ['LIBSVM','MLP','MLP2','BiRNN','MLP_DFL(1)','MLP_DFL(2)']
-		first_row = "Techniques,Top-1,Top-3,Top-5,MFR,MAR"
 		models =  libsvm_models + dnns
 		result_matrix = result.read_libsvm(subs,models,libsvm_models)
 		result.RQ(epoch_number,deep_data_dir,loss_function,models,subs,dnns,model_name,RQ_number,first_row,tech,result_matrix)
@@ -28,8 +28,7 @@ def main():
 		techs = ['DeepFL','DeepFL-Spectrum','DeepFL-Mutation','DeepFL-Metrics','DeepFL-Textual']
 		m_names = ['MLP_DFL(1)','MLP_DFL(1)-SpectrumInfor','MLP_DFL(1)-MutationInfor','MLP_DFL(1)-MetricsInfor',
 						'MLP_DFL(1)-TextualInfo']
-		dnns = ['dfl1']
-		first_row = "Techniques,Top-1,Top-3,Top-5,MFR,MAR" 
+		dnns = ['dfl1'] 
 		result_matrix = result.initialize_result(subs,dnns) 
 		n = len(techs)
 		for idx in range(n):
@@ -43,7 +42,6 @@ def main():
 		dnns = ['dfl2']
 		models = dnns
 		model_name = ['MLP_DFL(2)']
-		first_row = "Techniques,Top-1,Top-3,Top-5,MFR,MAR"
 		result_matrix = result.initialize_result(subs,dnns) 
 		for e in range(int(epoch_number)):
 			e = e + 1
@@ -53,19 +51,18 @@ def main():
 		r_source = robjects.r['source']
   		r_source('RforRQ3.r') 
   	
-  	if RQ_number == "RQ4":		
+  	if RQ_number == "RQ4":
+  		result.cross_vali_result()		
 		techs = ['DeepFL','CrossDeepFL','CrossValidation']
 		model_name = ['MLP_DFL(2)']   #not important
 		dnns = ['dfl2']     
-		models = dnns       
-		first_row = "Techniques,Top-1,Top-3,Top-5,MFR,MAR"   #not important
-		libsvm_models = []
-		models =  libsvm_models + dnns
+		models = dnns
+		result_matrix = result.initialize_result(subs,dnns)
 		for e in range(int(epoch_number)):
 			e = e + 1
 			for tech in techs:
 				new_subs = ['Chart','Lang','Math','Time','Mockito','Closure']
-				result.RQ(e,deep_data_dir,loss_function,models,new_subs,dnns,libsvm_models,model_name,RQ_number,first_row,tech)
+				result.RQ(e,deep_data_dir,loss_function,models,new_subs,dnns,model_name,RQ_number,first_row,tech,result_matrix)
   		r_source = robjects.r['source']
   		r_source('RforRQ3.r') 
 	
