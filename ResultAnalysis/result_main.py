@@ -30,8 +30,7 @@ def main():
 						'MLP_DFL(1)-TextualInfo']
 		dnns = ['dfl1']
 		first_row = "Techniques,Top-1,Top-3,Top-5,MFR,MAR" 
-		libsvm_models = []
-		models =  libsvm_models + dnns
+		result_matrix = result.initialize_result(subs,dnns) 
 		n = len(techs)
 		for idx in range(n):
 			tech = techs[idx]
@@ -42,23 +41,23 @@ def main():
 	if RQ_number == "RQ3":
 		loss_funcs = ['softmax','epairwise']		
 		dnns = ['dfl2']
-		libsvm_models = []
+		models = dnns
 		model_name = ['MLP_DFL(2)']
 		first_row = "Techniques,Top-1,Top-3,Top-5,MFR,MAR"
-		models =  libsvm_models + dnns
+		result_matrix = result.initialize_result(subs,dnns) 
 		for e in range(int(epoch_number)):
 			e = e + 1
 			for loss in loss_funcs:
 				new_subs = ['Chart','Lang','Math','Time','Mockito','Closure']
-				result.RQ(e,deep_data_dir,loss,models,new_subs,dnns,libsvm_models,model_name,RQ_number,first_row,tech)
+				result.RQ(e,deep_data_dir,loss,models,new_subs,dnns,model_name,RQ_number,first_row,tech,result_matrix)
 		r_source = robjects.r['source']
   		r_source('RforRQ3.r') 
   	
   	if RQ_number == "RQ4":		
-		#techs = ['DeepFL','CrossDeepFL','CrossValidation']
-		techs = ['DeepFL','CrossDeepFL']
+		techs = ['DeepFL','CrossDeepFL','CrossValidation']
 		model_name = ['MLP_DFL(2)']   #not important
-		dnns = ['dfl2']            
+		dnns = ['dfl2']     
+		models = dnns       
 		first_row = "Techniques,Top-1,Top-3,Top-5,MFR,MAR"   #not important
 		libsvm_models = []
 		models =  libsvm_models + dnns
