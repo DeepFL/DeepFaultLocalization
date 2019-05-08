@@ -6,7 +6,10 @@ Since collecting the feature data is complicated and time consuming, we just pro
 
 Next, we focus on introducing the process of deep learning and result analysis.
 
-## Docker
+
+
+
+## Running DeepFL
 
 To easy test our project, we provide a docker container which can be downloaded from an online [Cloud Drive](http..).
 The commands to load the container as a new image are as followings.
@@ -26,9 +29,6 @@ Then go to the destination directory:
 ```
 cd home/DeepFaultLocalization
 ```
-
-
-## Running DeepFL
 
 The command to run DeepFL for each version is as follows:
 
@@ -55,6 +55,8 @@ Each parameter can be explained as follows:
 
 Please note that *CrossValidation* is slightly different with others since the dataset of all subjects has been mixed and then splitted into 10-fold. To easily use the command above, just set the parameter $subject as "10fold", $version as 1 to 10, and $tech as "CrossValidation". Also, please only use *mlp_dfl_2* model and *softmax* loss function to run on *CrossValidation* according to the research question in our paper.
 
+
+<!---
 ## Script
 
 Cause there are kinds of subjects and many versions, we therefore write some scripts for you to train and evaluate the whole project quickly. It should be noted that some arguments such as \$loss and \$model are pre-defined in sub-script file `one_click.sh`. 
@@ -92,7 +94,7 @@ After running all subject versions, we also provide a script for results plot
 python rank_parser.py /absolute/path/to/ParentDirofDataset /absolute/path/to/Result $tech $model $loss $epoch $dump_step $figure_name
 ```
 \$figure_name: output figure name.
-
+-->
 <!---
 ## Requirements ##
 - Python 2/3 with Pandas and Numpy
