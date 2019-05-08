@@ -53,6 +53,8 @@ Each parameter can be explained as follows:
 9. \$dump_step: The interval number of epoch in which the result will be stored into the result file. For example, if $dump_step = 10, the results in epochs 10, 20, 30... will be written into the files.
 10. $gpu_count: the gpu you want to use to run DeepFL.
 
+Please note that *CrossValidation* is slightly different with others since the dataset of all subjects has been mixed and then splitted into 10-fold. To easily use the command above, just set the parameter $subject as "10fold", $version as 1 to 10, and $tech as "CrossValidation". Also, please only use *mlp_dfl_2* model and *softmax* loss function to run on *CrossValidation* according to the research question in our paper.
+
 ## Script
 
 Cause there are kinds of subjects and many versions, we therefore write some scripts for you to train and evaluate the whole project quickly. It should be noted that some arguments such as \$loss and \$model are pre-defined in sub-script file `one_click.sh`. 
