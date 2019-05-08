@@ -177,7 +177,7 @@ def fc_2_layers_similar(spec, m1,m2,m3,m4,complexity,similarity, keep_prob,is_tr
         fc_1 = tf.nn.dropout(fc_1, keep_prob)
         
         with tf.variable_scope('fc2',reuse=False):
-            fc_2 = single_fc_layer(fc_1,352,128, keep_prob,is_training)
+            fc_2 = single_fc_layer(fc_1,384,128, keep_prob,is_training)
         
     final_weight = create_variables("final_weight",[128, 2])
     final_bias = tf.get_variable("final_bias", shape=[2], initializer=tf.zeros_initializer())
