@@ -4,7 +4,7 @@ DeepFL is a deep-learning-based fault localization technique. It implements two 
 ## Data Collection
 Since collecting the feature data is complicated and time consuming, we just provide the cleaned dataset used for learning process. Please refer to Section 4.1 in our paper for implementation details.
 
-Next, we focus on introducing the processing of deep learning and result analysis.
+Next, we focus on introducing the process of deep learning and result analysis.
 
 ## Docker
 
