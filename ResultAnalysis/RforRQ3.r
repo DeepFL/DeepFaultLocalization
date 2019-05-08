@@ -16,8 +16,8 @@ if (args[1] == "Cross"){
 }
 
 model<-"dfl2"
-#epochs=seq(from = 2, to = 60, by = 2)   # X axis
-epochs=seq(from = 1, to = 2, by = 1)   # X axis
+epochs=seq(from = 2, to = 60, by = 2)   # X axis
+#epochs=seq(from = 1, to = 2, by = 1)   # X axis
 Metrics<-c("Top1","Top3","Top5","MFR","MAR")
 
 for(sub in Subs){
@@ -42,8 +42,8 @@ for(sub in Subs){
 			combinemet <- melt(combinemet, id.vars='epochs')
 			colnames(combinemet) <- c("epochs","model","value")
 			p<-ggplot(combinemet, aes(x=epochs, y=value, group=model, colour=model,shape=model)) +
-				#geom_line()+geom_point(size=2)+ ylab(me)+scale_x_continuous(breaks=seq(5,61,by=5), limits=c(2,60))
-				geom_line()+geom_point(size=2)+ ylab(me)+scale_x_continuous(breaks=seq(1,2,by=1), limits=c(0,2))
+				geom_line()+geom_point(size=2)+ ylab(me)+scale_x_continuous(breaks=seq(5,61,by=5), limits=c(2,60))
+				#geom_line()+geom_point(size=2)+ ylab(me)+scale_x_continuous(breaks=seq(1,2,by=1), limits=c(0,2))
 			plot_list[[count]] = p
 			count=count+1
 				
