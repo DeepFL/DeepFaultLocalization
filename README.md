@@ -32,8 +32,9 @@ cd home/DeepFaultLocalization
 
 The command to run DeepFL for each version is as follows:
 
+
 ```
-$ cd DeepFL
+$ git pull
 ```
 
 ```
