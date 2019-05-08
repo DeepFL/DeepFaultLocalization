@@ -2,8 +2,7 @@
 DeepFL is a deep-learning-based fault localization technique. It implements two multi-layer perceptron variants (MLP and MLP2), one recurrent neural networks variant (BiRNN) and two tailored MLP variants by [Tensorflow](https://www.tensorflow.org/). The benchmark subject is from [Defects4j](https://github.com/rjust/defects4j), which is an open source repository, providing some buggy versions and corresponding fixed versions of different projects. Features of the dataset include different dimensions, e.g., spectrum-based, mutation-based, complexity-based (code metrics) and textual-similarity-based information. 
 
 ## Data Collection
-Since collecting the feature dataset is complicated and time consuming, we just provide the cleaned dataset for learning process. Please refer to Section 4.1 in our paper for implementation details.
-
+Since collecting the feature data is complicated and time consuming, we just provide the cleaned dataset used for learning process. Please refer to Section 4.1 in our paper for implementation details.
 
 ## Docker
 
@@ -25,26 +24,7 @@ Then go to the destination directory:
 cd home/DeepFaultLocalization
 ```
 
-## Requirements ##
-- Python 2/3 with Pandas and Numpy
-- Tensorflow
 
-## DataSet ##
-The dataset can be downloaded from an online [Cloud Drive](https://mega.nz/#F!ffxXBISD!UQjggpnjw8oWrjSc0D7PdA). There are six .gz files, each of them represents one setting in our paper as follows:
-
-*DeepFL.tar.gz*: Dataset with all of four dimensions features above.
-
-*CrossDeepFL.tar.gz*: Dataset with all of four dimensions features in the cross-project scenario. 
-
-*DeepFL-Spectrum.tar.gz*: Dataset with three dimensions features, i.e.,mutation-based, complexity-based and textual-similarity-based information.
-
-*DeepFL-Mutation.tar.gz*: Dataset with three dimensions features, i.e.,spectrum-based, complexity-based and textual-similarity-based information.
-
-*DeepFL-Metrics.tar.gz*: Dataset with three dimensions features, i.e.,spectrum-based, mutation-based and textual-similarity-based information.
-
-*DeepFL-Textual.tar.gz*: Dataset with three dimensions features, i.e.,spectrum-based, mutation-based and complexity-based information.
-
-Please uncompress .gz files and put them into a user-created folder which can be passed as a parameter for the following command.
 ## Running DeepFL
 
 The command to run DeepFL for each version is as follows:
@@ -106,4 +86,30 @@ After running all subject versions, we also provide a script for results plot
 python rank_parser.py /absolute/path/to/ParentDirofDataset /absolute/path/to/Result $tech $model $loss $epoch $dump_step $figure_name
 ```
 \$figure_name: output figure name.
+
+<!---
+## Requirements ##
+- Python 2/3 with Pandas and Numpy
+- Tensorflow
+-->
+<!---
+## DataSet ##
+The dataset can be downloaded from an online [Cloud Drive](https://mega.nz/#F!ffxXBISD!UQjggpnjw8oWrjSc0D7PdA). There are six .gz files, each of them represents one setting in our paper as follows:
+
+*DeepFL.tar.gz*: Dataset with all of four dimensions features above.
+
+*CrossDeepFL.tar.gz*: Dataset with all of four dimensions features in the cross-project scenario. 
+
+*DeepFL-Spectrum.tar.gz*: Dataset with three dimensions features, i.e.,mutation-based, complexity-based and textual-similarity-based information.
+
+*DeepFL-Mutation.tar.gz*: Dataset with three dimensions features, i.e.,spectrum-based, complexity-based and textual-similarity-based information.
+
+*DeepFL-Metrics.tar.gz*: Dataset with three dimensions features, i.e.,spectrum-based, mutation-based and textual-similarity-based information.
+
+*DeepFL-Textual.tar.gz*: Dataset with three dimensions features, i.e.,spectrum-based, mutation-based and complexity-based information.
+
+Please uncompress .gz files and put them into a user-created folder which can be passed as a parameter for the following command.
+-->
+
+
 
