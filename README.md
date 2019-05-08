@@ -12,7 +12,7 @@ To easy test our project, we provide a docker container which can be downloaded 
 The commands to load the container as a new image are as followings.
 
  ```
-docker import deepfl.tar -tmp/deepfl 
+docker import deepfl.tar tmp/deepfl 
  ```
 
 Then run the image using:
