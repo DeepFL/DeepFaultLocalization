@@ -46,7 +46,7 @@ Each parameter can be explained as follows:
 2. /absolute/path/to/Result: The directory of the results. 
 3. $subject: The subject name, which can be *Time*, *Chart*, *Lang*, *Math*, *Mockito* or *Closure*.
 4. $version: The version number of the subject. Note that, the maximum numbers of subjects above are 27, 26, 65, 106, 38, 133, respectively.
-5. $model: The implemented model name, which can be *mlp*, *mlp2*, *rnn*, *birnn*,*dfl1*,*dfl2*,*dfl1-Metrics*, *dfl1-Mutation*, *dfl1-Spectrum*, *dfl1-Textual* representing multi-layer perceptron with one hidden layer, multi-layer perceptron with two hidden layers, recurrent neural network, bidirectional recurrent neural network, tailored MLP1, tailored MLP2, and tailored MLP1 without Metrics, Mutation, Spectrum, Textual respectively.
+5. $model: The implemented model name, which can be *mlp*, *mlp2*, *rnn*, *birnn*, *dfl1*, *dfl2*, *dfl1-Metrics*, *dfl1-Mutation*, *dfl1-Spectrum*, *dfl1-Textual* representing multi-layer perceptron with one hidden layer, multi-layer perceptron with two hidden layers, recurrent neural network, bidirectional recurrent neural network, tailored MLP1, tailored MLP2, and tailored MLP1 without Metrics, Mutation, Spectrum, Textual respectively.
 6. $tech: The different dimensions of features, corresponding to the name of dataset, can be *DeepFL*, *CrossDeepFL*.
 7. $loss: The name of loss function, which can be *softmax*, *epairwise*, *epairwiseSoftmax*.
 8. $epoch: The number of training epochs.
