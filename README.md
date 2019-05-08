@@ -4,9 +4,12 @@ DeepFL is a deep-learning-based fault localization technique. It implements two 
 ## Data Collection
 Since collecting the feature data is complicated and time consuming, we just provide the cleaned dataset used for learning process. Please refer to Section 4.1 in our paper for implementation details.
 
+Next, we focus on introducing the processing of deep learning and result analysis.
+
 ## Docker
 
-For easy test of our project, we provide a docker version and you can download the docker container via link TODO:, then load the container as a new image through the following command:
+To easy test our project, we provide a docker container which can be downloaded from an online [Cloud Drive](http..).
+The commands to load the container as a new image are as followings.
 
  ```
 docker import deepfl.tar -tmp/deepfl 
