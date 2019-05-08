@@ -2,6 +2,8 @@ library(ggplot2)
 library(reshape2)
 library(cowplot)
 
+args <- commandArgs(trailingOnly = TRUE)
+
 figWidth<-25
 figHeight<-4
 textFont<-10
@@ -9,6 +11,10 @@ textFont<-10
 Basedir="/home/xia/DeepFL/Artifact/DeepFaultLocalization/ResultAnalysis/Rdata/"
 Subs<-c("Overall")
 losses<-c("epairwise","softmax")
+if (args[1] == "Cross"){
+	losses<-c("DeepFL","CrossDeepFL","CrossValidation")
+}
+
 model<-"dfl2"
 #epochs=seq(from = 2, to = 60, by = 2)   # X axis
 epochs=seq(from = 1, to = 2, by = 1)   # X axis
@@ -30,6 +36,9 @@ for(sub in Subs){
 			}
 			combinemet=data.frame(combinemet)
 			colnames(combinemet) <- c("epochs","pairwise","softmax")
+			if (args[1] == "Cross"){
+				colnames(combinemet) <- c("epochs","within-project","cross-project","cross-validation")
+			}
 			combinemet <- melt(combinemet, id.vars='epochs')
 			colnames(combinemet) <- c("epochs","model","value")
 			p<-ggplot(combinemet, aes(x=epochs, y=value, group=model, colour=model,shape=model)) +

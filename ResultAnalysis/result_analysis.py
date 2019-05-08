@@ -82,7 +82,6 @@ def read_deep_result(dir,subs,tech,dnns,epoch,vers,resultBysub,techsvector,loss)
                 test_label_path = dir + tech + '/' + sub + '/' + v + '/' + test_label_file
                 susp_path = os.path.join(out_dir,sub,v,tech,dnns[d]+'-'+loss+'-'+str(epoch))
                 #susp_path = out_dir + '/result/' + dnns[d] + '/' + sub + '/' + v + '/' + dnns[d] + '/fc-' + loss_function + '-' + str(epoch)
-
                 min,avg=ut.parse(v,susp_path,test_label_path)
                 if min == -1:
                     continue
@@ -205,7 +204,7 @@ def RQ(epoch_number,deep_data_dir,loss,techs_vector,subs,dnns,model_name,RQ,firs
         write_to_R(result_matrix,subs,tech,dnns)
 def delete_exsisting():
     for (root,dirs,files) in os.walk(result_dir): 
-        if "CrossValForAnalysis" in root:
+        if "CrossValidation" in root and "10fold" not in root:
             shutil.rmtree(root)
     for p in subs:
         full_path = deep_data_dir + "CrossValidation/" + p
@@ -251,7 +250,7 @@ def cross_vali_result():
                     with open(lable_file,'a') as wd:
                         wd.write(label_list[l])
                         wd.write('\n')
-    
+        
 
 
 
