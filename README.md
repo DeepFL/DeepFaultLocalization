@@ -51,7 +51,7 @@ Each parameter can be explained as follows:
 8. $epoch: The number of training epochs.
 9. \$dump_step: The interval number of epoch in which the result will be stored into the result file. For example, if $dump_step = 10, the results in epochs 10, 20, 30... will be written into the files.
 
-Please note that *CrossValidation* is slightly different with others since the dataset of all subjects has been mixed and then splitted into 10-fold. To easily use the command above, just set the parameter $subject as "10fold", $version as 1 to 10, and $tech as "CrossValidation". Also, please only use *mlp_dfl_2* model and *softmax* loss function to run on *CrossValidation* according to the research question in our paper.
+Please note that *CrossValidation* is slightly different with others since the dataset of all subjects has been mixed and then splitted into 10-fold. To easily use the command above, just set the parameter subject as "10fold", \$version as 1 to 10, and $tech as "CrossValidation". Also, please only use *mlp_dfl_2* model and *softmax* loss function to run on *CrossValidation* according to the research question in our paper.
 
 ## Script
 
@@ -93,4 +93,3 @@ Each parameter can be explained as follows:
 2. iteration, which should be 55 in our paper
 3. result directory, we use prepared results here
 4. The absolute path of the parent directory including all datasets
-
