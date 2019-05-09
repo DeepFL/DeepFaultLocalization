@@ -175,6 +175,8 @@ def write_to_R(result_matrix,subs,loss_or_tech,dnns):
     #print(len(RQ2TrendData[0]))
     for s in range(len(subs)):
         for d in range(len(dnns)):
+            if not os.path.exists('Rdata/' + loss_or_tech +'/'):
+                os.makedirs('Rdata/' + loss_or_tech +'/')
             writefile = 'Rdata/' + loss_or_tech +'/' + subs[s] + '_dfl2.txt'
             with open(writefile, "a") as myfile:
                 myfile.write(str(result_matrix[s][d][0])+','+
