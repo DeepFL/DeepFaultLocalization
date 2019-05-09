@@ -45,9 +45,10 @@ def main():
 		subprocess.call('Rscript RforRQ3.r loss_eval',shell=True)
   	
   	if RQ_number == "RQ4":
-  		#if "paper" not in result_dir:
-  		result.cross_vali_result()	
-  			
+  		if "paper" not in result_dir:
+  			result.cross_vali_result()	
+  		else:
+			result.cross_vali_result_with_result()
 		techs = ['DeepFL','CrossDeepFL','CrossValidation']
 		model_name = ['MLP_DFL(2)']   #not important
 		dnns = ['dfl2']     

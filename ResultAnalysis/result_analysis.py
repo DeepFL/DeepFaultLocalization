@@ -255,6 +255,45 @@ def cross_vali_result():
         
 
 
+def cross_vali_result_with_result():
+    #resultRoot = result_dir + '/10fold/'
+    labelpath = deep_data_dir + 'CrossValidation/10fold/'
+    #delete_exsisting()
+    
+    vers = 10
+    for v in range(1,vers + 1):
+        for ep in range(1, int(epoch_number) + 1, 1):
+            #rank_file = os.path.join(resultRoot,str(v),'CrossValidation','dfl2-softmax-' + str(ep))
+            test_label_file = os.path.join(labelpath, str(v),'TestLabel.csv')
+            PV_file = os.path.join(labelpath,str(v),'PandV.txt')
+            #with open(rank_file) as r:
+                #rank_list=[line.rstrip('\n') for line in r]
+            with open(test_label_file) as l:
+                label_list=[line.rstrip('\n') for line in l]
+            with open(PV_file) as r:
+                PV_list=[line.rstrip('\n') for line in r]
+            DataLength = len(PV_list)
+            for l in range(0, DataLength):
+                project = PV_list[l].split('-')[0]
+                version = PV_list[l].split('-')[1].strip()
+                #newRespath = os.path.join(result_dir,project,version,'CrossValidation')
+                newLabel = os.path.join(deep_data_dir,'CrossValidation',project,version)
+                #if not os.path.exists(newRespath):
+                    #os.makedirs(newRespath)
+
+                if not os.path.exists(newLabel):
+                    os.makedirs(newLabel)
+
+                #result_file = newRespath + '/dfl2-softmax-' + str(ep)
+                #with open(result_file,'a') as wd:
+                    #wd.write(rank_list[l])
+                    #wd.write('\n')
+                
+                if ep == 1:
+                    lable_file = newLabel + '/TestLabel.csv'
+                    with open(lable_file,'a') as wd:
+                        wd.write(label_list[l])
+                        wd.write('\n')
 
 '''
 def main():
