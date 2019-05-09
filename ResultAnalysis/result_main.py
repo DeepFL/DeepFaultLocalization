@@ -42,7 +42,7 @@ def main():
 				new_subs = ['Chart','Lang','Math','Time','Mockito','Closure']
 				result_matrix = result.initialize_result(subs,dnns) 
 				result.RQ(e,deep_data_dir,loss,models,new_subs,dnns,model_name,RQ_number,first_row,tech,result_matrix)
-		subprocess.call(['Rscript', 'RforRQ3.r', "loss_eval"])
+		subprocess.call(['Rscript', 'RforRQ3.r', "loss_eval"],shell=True)
   	
   	if RQ_number == "RQ4":
   		if "paper" not in result_dir:
@@ -58,7 +58,7 @@ def main():
 				new_subs = ['Chart','Lang','Math','Time','Mockito','Closure']
 				result_matrix = result.initialize_result(subs,dnns)
 				result.RQ(e,deep_data_dir,loss_function,models,new_subs,dnns,model_name,RQ_number,first_row,tech,result_matrix)
-  		subprocess.call(['Rscript', 'RforRQ3.r', "Cross"])
+  		subprocess.call(['Rscript', 'RforRQ3.r', "Cross"],shell=True)
 		
 
 #main function execution
