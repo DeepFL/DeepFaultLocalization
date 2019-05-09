@@ -12,7 +12,7 @@ do
 		do
 			echo $sub
 			echo $v
-			python main.py /home/xia/DeepFL/Data/ /home/xia/DeepFL/result $sub $v $model DeepFL softmax 2 1 1;
+			python main.py /home/xia/DeepFL/Data/ /home/xia/DeepFL/result $sub $v $model DeepFL softmax 2 1;
 		done
 	done
 done
@@ -25,7 +25,7 @@ do
 		do
 			echo $sub
 			echo $v
-			python main.py /home/xia/DeepFL/Data/ /home/xia/DeepFL/result $sub $v dfl2 DeepFL epairwise 2 1 1;
+			python main.py /home/xia/DeepFL/Data/ /home/xia/DeepFL/result $sub $v dfl2 DeepFL epairwise 2 1;
 		done
 
 done
