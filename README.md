@@ -25,21 +25,23 @@ docker run -t -i tmp/deepfl
 Then go to the destination directory:
 
 ```
-cd home/DeepFaultLocalization
+cd DeepFaultLocalization
 ```
+
+In the directory, we provide a prepared result directory `./paperResult` to avoid time-consuming training.
 
 The command to run DeepFL for each version is as follows:
 
 
 ```
-$ git pull
+$git pull
 ```
 
 ```
 $python main.py . /result $subject $version $model $tech $loss $epoch $dump_step
 ```
 Each parameter can be explained as follows:
-1. First argument: `. ` : The absolute path of the parent directory including all datasets, for example, if the dataset is DeepFL, its directory can be /home/DeepLearningData/DeepFL ("/home/DeepLearningData/" is created by users, and "DeepFL" is put into it)
+1. First argument: `. ` : The absolute path of the parent directory including all datasets,
 2. Second argument: `/result` :  The directory of the results. It should be noted that this argument cannot be changed to `/prepared_result`, which will overwrite our prepared result. 
 3. $subject: The subject name, which can be *Time*, *Chart*, *Lang*, *Math*, *Mockito* or *Closure*.
 4. $version: The version number of the subject. Note that, the maximum numbers of subjects above are 27, 26, 65, 106, 38, 133, respectively.
@@ -55,14 +57,13 @@ Please note that *CrossValidation* is slightly different with others since the d
 
 Cause there are kinds of subjects and many versions, we therefore write some scripts for you to train and evaluate the whole project quickly. It should be noted that many arguments such as dataset directory and output directory are predefined in corresponding script.
 
-```
-./test.sh $subject $epoch
-```
+It should be noted that the script we prepared predefines the iteration as 2 for quicker running, if you want to get a comparable results with paper, the `$iter` parameter should be modified to 55. 
 
-Each parameter can be explained as follows:
+The first script `run_deepfl.sh` will run almost all of the cases in our paper except  *CrossValidation*  tech:
 
-1. $subject: The subject name, which can be *all* (train all of subjects above) *Time*, *Chart*, *Lang*, *Math*, *Mockito* or *Closure*.
-2. $epoch: The number of training epochs.
+```
+./run_deepfl.sh
+```
 
 Also, for *CrossValidation*  tech, another script should be used:
 
@@ -72,18 +73,24 @@ Also, for *CrossValidation*  tech, another script should be used:
 
 ## Result Analysis
 
+We provide result analysis scripts to generate corresponding table/figures in papers.
 
+Firstly go to `ResultAnalysis` directory:
 
-<!---
+```cmd
+cd ResultAnalysis
+```
 
-## Results statistics ##
-
-After running all subject versions, run the following command to calculate the five measurements Top-1, Top-3, Top-5, MFR, MAR:
+The command to analyze results for each RQ in paper is as follows:
 
 ```
-python rank_parser.py /absolute/path/to/ParentDirofDataset /absolute/path/to/Result $tech $model $loss $epoch
+python result_main.py $RQ 55 ../paperResult/ ../
 ```
-Please note that due to the randomly initialized parameters, the results may be slightly different from our paper.
 
--->
+Each parameter can be explained as follows:
+
+1. $RQ: corresponding RQ in papers, there are 4 RQs  totally, which should be *RQ1, RQ2, RQ3 and RQ4.*
+2. iteration, which should be 55 in our paper
+3. result directory, we use prepared results here
+4. The absolute path of the parent directory including all datasets
 

@@ -8,7 +8,7 @@ figWidth<-25
 figHeight<-4
 textFont<-10
 #Basedir="D:\\Study\\Research Project\\ISSTA19\\RQ3\\"
-Basedir="/home/xia/DeepFL/Artifact/DeepFaultLocalization/ResultAnalysis/Rdata/"
+Basedir="/DeepFaultLocalization/ResultAnalysis/Rdata/"
 Subs<-c("Overall")
 losses<-c("epairwise","softmax")
 if (args[1] == "Cross"){
