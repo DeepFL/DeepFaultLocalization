@@ -13,7 +13,6 @@ from config import *
   
 # main run driver
 def main():
-    os.environ["CUDA_VISIBLE_DEVICES"] = str(sys.argv[10])
     os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2' 
     train_path = os.path.join(dir,tech,sub,v,train_file)
     train_label_path = os.path.join(dir,tech,sub,v,train_label_file)

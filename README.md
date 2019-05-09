@@ -7,8 +7,6 @@ Since collecting the feature data is complicated and time consuming, we just pro
 Next, we focus on introducing the process of deep learning and result analysis.
 
 
-
-
 ## Running DeepFL
 
 To easy test our project, we provide a docker container which can be downloaded from an online [Cloud Drive](http..).
@@ -38,45 +36,45 @@ $ git pull
 ```
 
 ```
-$python main.py /absolute/path/to/ParentDirofDataset /absolute/path/to/Result $subject $version $model $tech $loss $epoch $dump_step $gpu_count
+$python main.py /absolute/path/to/ParentDirofDataset /absolute/path/to/Result $subject $version $model $tech $loss $epoch $dump_step
 ```
 Each parameter can be explained as follows:
-1. /absolute/path/to/ParentDirofDataset: The absolute path of the parent directory including all datasets, for example, if the dataset is DeepFL, its directory can be /home/DeepLearningData/DeepFL ("/home/DeepLearningData/" is created by users, and "DeepFL" is put
-     into it)
+1. /absolute/path/to/ParentDirofDataset: The absolute path of the parent directory including all datasets, for example, if the dataset is DeepFL, its directory can be /home/DeepLearningData/DeepFL ("/home/DeepLearningData/" is created by users, and "DeepFL" is put into it)
 2. /absolute/path/to/Result: The directory of the results. 
 3. $subject: The subject name, which can be *Time*, *Chart*, *Lang*, *Math*, *Mockito* or *Closure*.
 4. $version: The version number of the subject. Note that, the maximum numbers of subjects above are 27, 26, 65, 106, 38, 133, respectively.
 5. $model: The implemented model name, which can be *mlp*, *mlp2*, *rnn*, *birnn*, *dfl1*, *dfl2*, *dfl1-Metrics*, *dfl1-Mutation*, *dfl1-Spectrum*, *dfl1-Textual* representing multi-layer perceptron with one hidden layer, multi-layer perceptron with two hidden layers, recurrent neural network, bidirectional recurrent neural network, tailored MLP1, tailored MLP2, and tailored MLP1 without information of metrics, mutation, spectrum, textual similarity respectively.
-6. $tech: The different dimensions of features, corresponding to the name of dataset, can be *DeepFL*, *CrossDeepFL*.
+6. $tech: The different dimensions of features, corresponding to the name of dataset, can be *DeepFL*, *CrossDeepFL* , *CrossValidation*.
 7. $loss: The name of loss function, which can be *softmax*, *epairwise*.
 8. $epoch: The number of training epochs.
 9. \$dump_step: The interval number of epoch in which the result will be stored into the result file. For example, if $dump_step = 10, the results in epochs 10, 20, 30... will be written into the files.
-10. $gpu_count: the gpu you want to use to run DeepFL.
 
 Please note that *CrossValidation* is slightly different with others since the dataset of all subjects has been mixed and then splitted into 10-fold. To easily use the command above, just set the parameter $subject as "10fold", $version as 1 to 10, and $tech as "CrossValidation". Also, please only use *mlp_dfl_2* model and *softmax* loss function to run on *CrossValidation* according to the research question in our paper.
 
-## Result Analysis
-
-<!---
 ## Script
 
-Cause there are kinds of subjects and many versions, we therefore write some scripts for you to train and evaluate the whole project quickly. It should be noted that some arguments such as \$loss and \$model are pre-defined in sub-script file `one_click.sh`. 
+Cause there are kinds of subjects and many versions, we therefore write some scripts for you to train and evaluate the whole project quickly. It should be noted that many arguments such as dataset directory and output directory are predefined in corresponding script.
 
 ```
-./quick_script.sh $gpu_num $subject $work_per_gpu $version_num $iter $result
-
+./test.sh $subject $epoch
 ```
 
 Each parameter can be explained as follows:
 
-1. $gpu_num: The number of gpu in your server. (The script will make full use of of your GPUs at the same time)
-2. $subject: The subject name, which can be *Time*, *Chart*, *Lang*, *Math*, *Mockito* or *Closure*.
-3. $work_per_gpu: The number of works in each GPU. (One time of command python main.py is regarded as one work)
-4. $version_num: The total version number of corresponding subject.
-5. $iter: The training iteration you defined.
-6. $result: The result subfolder name in /absolute/path/to/Result (To run multiple cases)
+1. $subject: The subject name, which can be *all* (train all of subjects above) *Time*, *Chart*, *Lang*, *Math*, *Mockito* or *Closure*.
+2. $epoch: The number of training epochs.
 
-Another script `multiple_run.sh` is a example for using the script above to run all of the subjects.
+Also, for *CrossValidation*  tech, another script should be used:
+
+```
+./10fold.sh
+```
+
+## Result Analysis
+
+
+
+<!---
 
 ## Results statistics ##
 
@@ -87,38 +85,5 @@ python rank_parser.py /absolute/path/to/ParentDirofDataset /absolute/path/to/Res
 ```
 Please note that due to the randomly initialized parameters, the results may be slightly different from our paper.
 
-## Plot results
-
-After running all subject versions, we also provide a script for results plot
-
-```
-python rank_parser.py /absolute/path/to/ParentDirofDataset /absolute/path/to/Result $tech $model $loss $epoch $dump_step $figure_name
-```
-\$figure_name: output figure name.
 -->
-<!---
-## Requirements ##
-- Python 2/3 with Pandas and Numpy
-- Tensorflow
--->
-<!---
-## DataSet ##
-The dataset can be downloaded from an online [Cloud Drive](https://mega.nz/#F!ffxXBISD!UQjggpnjw8oWrjSc0D7PdA). There are six .gz files, each of them represents one setting in our paper as follows:
-
-*DeepFL.tar.gz*: Dataset with all of four dimensions features above.
-
-*CrossDeepFL.tar.gz*: Dataset with all of four dimensions features in the cross-project scenario. 
-
-*DeepFL-Spectrum.tar.gz*: Dataset with three dimensions features, i.e.,mutation-based, complexity-based and textual-similarity-based information.
-
-*DeepFL-Mutation.tar.gz*: Dataset with three dimensions features, i.e.,spectrum-based, complexity-based and textual-similarity-based information.
-
-*DeepFL-Metrics.tar.gz*: Dataset with three dimensions features, i.e.,spectrum-based, mutation-based and textual-similarity-based information.
-
-*DeepFL-Textual.tar.gz*: Dataset with three dimensions features, i.e.,spectrum-based, mutation-based and complexity-based information.
-
-Please uncompress .gz files and put them into a user-created folder which can be passed as a parameter for the following command.
--->
-
-
 
