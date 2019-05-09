@@ -59,10 +59,10 @@ def main():
 				result_matrix = result.initialize_result(subs,dnns)
 				result.RQ(e,deep_data_dir,loss_function,models,new_subs,dnns,model_name,RQ_number,first_row,tech,result_matrix)
 		tech = 'CrossValidation'
-		subs = ['10fold']
+		new_subs = ['10fold']
 		for e in range(int(epoch_number)):
 			e = e + 1
-			result_matrix = result.initialize_result(subs,dnns)
+			result_matrix = result.initialize_result(new_subs,dnns)
 			result.RQ(e,deep_data_dir,loss_function,models,new_subs,dnns,model_name,RQ_number,first_row,tech,result_matrix)
 
   		subprocess.call('Rscript RforRQ3.r Cross',shell=True)
