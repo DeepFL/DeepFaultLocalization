@@ -36,11 +36,11 @@ $ git pull
 ```
 
 ```
-$python main.py /absolute/path/to/ParentDirofDataset /absolute/path/to/Result $subject $version $model $tech $loss $epoch $dump_step
+$python main.py . /result $subject $version $model $tech $loss $epoch $dump_step
 ```
 Each parameter can be explained as follows:
-1. /absolute/path/to/ParentDirofDataset: The absolute path of the parent directory including all datasets, for example, if the dataset is DeepFL, its directory can be /home/DeepLearningData/DeepFL ("/home/DeepLearningData/" is created by users, and "DeepFL" is put into it)
-2. /absolute/path/to/Result: The directory of the results. 
+1. First argument: `. ` : The absolute path of the parent directory including all datasets, for example, if the dataset is DeepFL, its directory can be /home/DeepLearningData/DeepFL ("/home/DeepLearningData/" is created by users, and "DeepFL" is put into it)
+2. Second argument: `/result` :  The directory of the results. It should be noted that this argument cannot be changed to `/prepared_result`, which will overwrite our prepared result. 
 3. $subject: The subject name, which can be *Time*, *Chart*, *Lang*, *Math*, *Mockito* or *Closure*.
 4. $version: The version number of the subject. Note that, the maximum numbers of subjects above are 27, 26, 65, 106, 38, 133, respectively.
 5. $model: The implemented model name, which can be *mlp*, *mlp2*, *rnn*, *birnn*, *dfl1*, *dfl2*, *dfl1-Metrics*, *dfl1-Mutation*, *dfl1-Spectrum*, *dfl1-Textual* representing multi-layer perceptron with one hidden layer, multi-layer perceptron with two hidden layers, recurrent neural network, bidirectional recurrent neural network, tailored MLP1, tailored MLP2, and tailored MLP1 without information of metrics, mutation, spectrum, textual similarity respectively.
