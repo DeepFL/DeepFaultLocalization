@@ -92,7 +92,7 @@ Each parameter can be explained as follows:
 3. result directory (we use the prepared results here)
 4. The absolute path of the parent directory including all the datasets
 
-RQ1 and RQ2 output the corresponding tables in csv format in current directory `/ResultAnalysis`while RQ3 and RQ4 output a corresponding pdf file, which is located in sub-directory `/Rdata`. 
+RQ1 and RQ2 output the corresponding tables in csv format in current directory `/ResultAnalysis`while RQ3 and RQ4 output a corresponding pdf file, which is located in sub-directory `/ResultAnalysis/Rdata`. 
 
 
 
