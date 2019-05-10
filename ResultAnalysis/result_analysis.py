@@ -216,7 +216,7 @@ def delete_exsisting():
 def cross_vali_result():
     resultRoot = result_dir + '/10fold/'
     labelpath = deep_data_dir + 'CrossValidation/10fold/'
-    delete_exsisting()
+    #delete_exsisting()
     
     vers = 10
     for v in range(1,vers + 1):
