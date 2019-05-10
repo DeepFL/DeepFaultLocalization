@@ -87,7 +87,7 @@ python result_main.py $RQ 55 ../CachedResults/ ../
 
 Each parameter can be explained as follows:
 
-1. $RQ: the corresponding RQ in the paper. There are 4 RQs in total, i.e., *RQ1, RQ2, RQ3 and RQ4.*
+1. $RQ: the corresponding RQ in the paper. There are 4 RQs but 5 kinds of results in total, i.e., *RQ1, RQ2, RQ2_2, RQ3 and RQ4.*
 2. iteration, which should be 55 in our paper
 3. result directory (we use the prepared results here)
 4. The absolute path of the parent directory including all the datasets
