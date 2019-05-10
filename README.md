@@ -6,7 +6,7 @@ To simplify the testing process of DeepFL, we provide a docker container which c
 
 If you are not familiar with docker or downloading the docker image is time-consuming in your network, you can also run DeepFL on your local machine: [Github](https://github.com/DeepFL/DeepFaultLocalization).
 
-We have tested all commands below on Windows10 with docker version 2.0.0.3.
+We have tested all commands below on Windows10, MacOS and Linux with docker version 2.0.0.3. Specially, Linux may require sudo permission for some commands.
 
 We firstly un-compress the downloaded zip file to an available docker container:
 
@@ -87,7 +87,7 @@ python result_main.py $RQ 55 ../CachedResults/ ../
 
 Each parameter can be explained as follows:
 
-1. $RQ: the corresponding RQ in the paper. There are 4 RQs but 5 kinds of results in total, i.e., *RQ1, RQ2, RQ2_2, RQ3 and RQ4.*
+1. $RQ: the corresponding RQ in the paper. There are 4 RQs but 5 kinds of results in total, i.e., *RQ1(Table 4), RQ2(Table 5), RQ2_2(Table 6), RQ3(Figure 8) and RQ4(Figure 9).*
 2. iteration, which should be 55 in our paper
 3. result directory (we use the prepared results here)
 4. The absolute path of the parent directory including all the datasets
