@@ -1,79 +1,77 @@
-# DeepFL
-DeepFL is a deep-learning-based fault localization technique. It implements two multi-layer perceptron variants (MLP and MLP2), one recurrent neural networks variant (BiRNN) and two tailored MLP variants by [Tensorflow](https://www.tensorflow.org/). The benchmark subject is from [Defects4j](https://github.com/rjust/defects4j), which is an open source repository, providing some buggy versions and corresponding fixed versions of different projects. Features of the dataset include different dimensions, e.g., spectrum-based, mutation-based, complexity-based (code metrics) and textual-similarity-based information. 
+﻿# DeepFL
+DeepFL is a deep learning approach to automatically learn the most effective existing/latent features for precise fault localization. It exploits multi-dimensional features, i.e., spectrum-based, mutation-based, complexity-based (code metrics) and textual-similarity-based information and implements two multi-layer perceptron variants (MLP and MLP2), one recurrent neural networks variant (BiRNN) and two tailored MLP variants by [Tensorflow](https://www.tensorflow.org/). For evaluating its performance, DeepFl adopts the benchmark subjects from [Defects4j](https://github.com/rjust/defects4j), an open source repository which provides buggy versions and the corresponding fixed versions of multiple projects.
 
-## Data Collection
-Since collecting the feature data is complicated and time consuming, we just provide the cleaned dataset used for learning process. Please refer to Section 4.1 in our paper for implementation details.
+## Data Preparation 
+To simplify the testing process of DeepFL, we provide a docker container which can be downloaded from an online [Cloud Drive](https://mega.nz/#!HDwHEKbR!rv4BLiuzYnMsGUIn_W8YftGSy1AfuwHDez6h5IO0T1k). Please note that the size of our docker container including the dataset is larger than 30GB, so please prepare sufficient disk space.
 
-Next, we focus on introducing the process of deep learning and result analysis.
+If you are not familiar with docker or downloading the docker image is time-consuming in your network, you can also run DeepFL on your local machine: [Github](https://github.com/DeepFL/DeepFaultLocalization).
 
+We have tested all commands below on Windows10 with docker version 2.0.0.3.
 
-## Running DeepFL
+We firstly un-compress the downloaded zip file to an available docker container:
 
-To easy test our project, we provide a docker container which can be downloaded from an online [Cloud Drive](http..).
+```
+unzip -o deepfl.zip
+```
+
 The commands to load the container as a new image are as followings.
 
  ```
-docker import deepfl.tar tmp/deepfl 
+docker import deepfl.tar tmp/deepfl
  ```
 
-Then run the image using:
+Next run the image and go to the bash terminal of docker container using:
 
 ```
-docker run -t -i tmp/deepfl 
+docker run -t -i tmp/deepfl bash
 ```
 
-Then go to the destination directory:
+Then go to the destination directory in docker container:
 
 ```
-cd DeepFaultLocalization
+$cd DeepFaultLocalization
 ```
 
-In the directory, we provide a prepared result directory `./paperResult` to avoid time-consuming training.
+Then, pull some updates:
+
+
+```
+$ git pull
+```
+
+## Running DeepFL
 
 The command to run DeepFL for each version is as follows:
 
+A simple example, which trains the *dfl1* model using softmax as loss function for version 1 of Time subject, can be:
 
 ```
-$git pull
+$python main.py . /result Time 1 dfl1 DeepFL softmax 2 1
 ```
+
+A complete command to run DeepFL should be:
 
 ```
 $python main.py . /result $subject $version $model $tech $loss $epoch $dump_step
 ```
+
 Each parameter can be explained as follows:
-1. First argument: `. ` : The absolute path of the parent directory including all datasets,
-2. Second argument: `/result` :  The directory of the results. It should be noted that this argument cannot be changed to `/prepared_result`, which will overwrite our prepared result. 
-3. $subject: The subject name, which can be *Time*, *Chart*, *Lang*, *Math*, *Mockito* or *Closure*.
-4. $version: The version number of the subject. Note that, the maximum numbers of subjects above are 27, 26, 65, 106, 38, 133, respectively.
-5. $model: The implemented model name, which can be *mlp*, *mlp2*, *rnn*, *birnn*, *dfl1*, *dfl2*, *dfl1-Metrics*, *dfl1-Mutation*, *dfl1-Spectrum*, *dfl1-Textual* representing multi-layer perceptron with one hidden layer, multi-layer perceptron with two hidden layers, recurrent neural network, bidirectional recurrent neural network, tailored MLP1, tailored MLP2, and tailored MLP1 without information of metrics, mutation, spectrum, textual similarity respectively.
-6. $tech: The different dimensions of features, corresponding to the name of dataset, can be *DeepFL*, *CrossDeepFL* , *CrossValidation*.
-7. $loss: The name of loss function, which can be *softmax*, *epairwise*.
-8. $epoch: The number of training epochs.
-9. \$dump_step: The interval number of epoch in which the result will be stored into the result file. For example, if $dump_step = 10, the results in epochs 10, 20, 30... will be written into the files.
 
-Please note that *CrossValidation* is slightly different with others since the dataset of all subjects has been mixed and then splitted into 10-fold. To easily use the command above, just set the parameter subject as "10fold", \$version as 1 to 10, and $tech as "CrossValidation". Also, please only use *mlp_dfl_2* model and *softmax* loss function to run on *CrossValidation* according to the research question in our paper.
+1. First argument: `. ` : the absolute path of the parent directory including all datasets,
+2. Second argument: `/result` :  the directory of the results. It should be noted that this argument cannot be changed to `/prepared_result`, which will overwrite our prepared result. 
+3. $subject: the subject name, i.e. *Time*, *Chart*, *Lang*, *Math*, *Mockito* or *Closure*.
+4. $version: the version number of the subject. Note that, the maximum numbers of the subjects above are 27, 26, 65, 106, 38, 133, respectively.
+5. $model: the implemented model name, i.e., *mlp*, *mlp2*, *rnn*, *birnn*, *dfl1*, *dfl2*, *dfl1-Metrics*, *dfl1-Mutation*, *dfl1-Spectrum*, *dfl1-Textual* representing multi-layer perceptron with one hidden layer, multi-layer perceptron with two hidden layers, recurrent neural network, bidirectional recurrent neural network, tailored MLP1, tailored MLP2, and tailored MLP1 without the information of metrics, mutation, spectrum, textual similarity respectively.
+6. $tech: the different dimensions of features corresponding to the dataset name, i.e., *DeepFL*, *CrossDeepFL* , *CrossValidation*, specially, both *CrossDeepFL* and *CrossValidation* can only use *softmax* as loss function.
+7. $loss: the loss function name, i.e., *softmax*, *epairwise*.
+8. $epoch: the number of training epochs.
+9. $dump_step: the interval number of the epoch in which the results are stored into the result file. For example, if \$dump_step = 10, the results in epochs 10, 20, 30... are written into the files.
 
-## Script
-
-Cause there are kinds of subjects and many versions, we therefore write some scripts for you to train and evaluate the whole project quickly. It should be noted that many arguments such as dataset directory and output directory are predefined in corresponding script.
-
-It should be noted that the script we prepared predefines the iteration as 2 for quicker running, if you want to get a comparable results with paper, the `$iter` parameter should be modified to 55. 
-
-The first script `run_deepfl.sh` will run almost all of the cases in our paper except  *CrossValidation*  tech:
-
-```
-./run_deepfl.sh
-```
-
-Also, for *CrossValidation*  tech, another script should be used:
-
-```
-./10fold.sh
-```
+Please note that *CrossValidation* is slightly different from the others since the dataset of all the subjects has been mixed and then splitted into 10-fold. To efficiently use the command above, just set the parameter \$subject as "10fold", ​\$version as 1 to 10, and $tech as *CrossValidation*. Also, please only use *dfl_2* model and *softmax* loss function to run on *CrossValidation* according to our paper.
 
 ## Result Analysis
 
-We provide result analysis scripts to generate corresponding table/figures in papers.
+Since running DeepFL can be very time-consuming, we also provide result analysis scripts to generate the corresponding table/figures in the paper directly by analyzing the cached results from our prior runs. Specially, we prepared a cached result directory ./CachedResults to avoid time-consuming DeepFL reexecution.
 
 Firstly go to `ResultAnalysis` directory:
 
@@ -81,15 +79,22 @@ Firstly go to `ResultAnalysis` directory:
 cd ResultAnalysis
 ```
 
-The command to analyze results for each RQ in paper is as follows:
+The command to analyze the results for each RQ in the paper is as follows:
 
 ```
-python result_main.py $RQ 55 ../paperResult/ ../
+python result_main.py $RQ 55 ../CachedResults/ ../
 ```
 
 Each parameter can be explained as follows:
 
-1. $RQ: corresponding RQ in papers, there are 4 RQs  totally, which should be *RQ1, RQ2, RQ3 and RQ4.*
+1. $RQ: the corresponding RQ in the paper. There are 4 RQs in total, i.e., *RQ1, RQ2, RQ3 and RQ4.*
 2. iteration, which should be 55 in our paper
-3. result directory, we use prepared results here
-4. The absolute path of the parent directory including all datasets
+3. result directory (we use the prepared results here)
+4. The absolute path of the parent directory including all the datasets
+
+RQ1 and RQ2 output the corresponding tables in csv format in current directory `/ResultAnalysis`while RQ3 and RQ4 output a corresponding pdf file, which is located in sub-directory `/Rdata`. 
+
+
+
+
+

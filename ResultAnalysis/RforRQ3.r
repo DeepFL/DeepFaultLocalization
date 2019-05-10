@@ -9,7 +9,7 @@ figHeight<-4
 textFont<-10
 #Basedir="D:\\Study\\Research Project\\ISSTA19\\RQ3\\"
 Basedir="/DeepFaultLocalization/ResultAnalysis/Rdata/"
-Subs<-c("Overall")
+Subs<-c("RQ3")
 losses<-c("epairwise","softmax")
 if (args[1] == "Cross"){
 	losses<-c("DeepFL","CrossDeepFL","CrossValidation")
