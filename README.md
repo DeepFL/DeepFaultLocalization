@@ -82,7 +82,7 @@ cd ResultAnalysis
 The command to analyze the results for each RQ in the paper is as follows:
 
 ```
-python result_main.py $RQ 55 ../CachedResults/ ../
+python result_main.py $RQ 55 ../CachedResults ../
 ```
 
 Each parameter can be explained as follows:
