@@ -9,7 +9,7 @@ figHeight<-4
 textFont<-10
 #Basedir="D:\\Study\\Research Project\\ISSTA19\\RQ3\\"
 Basedir="/DeepFaultLocalization/ResultAnalysis/Rdata/"
-Subs<-c("RQ3")
+Subs<-c("Overall")
 losses<-c("epairwise","softmax")
 if (args[1] == "Cross"){
 	losses<-c("DeepFL","CrossDeepFL","CrossValidation")
@@ -23,7 +23,7 @@ Metrics<-c("Top1","Top3","Top5","MFR","MAR")
 for(sub in Subs){
 	plot_list = list()
 	count=1
-	pdf(paste(c(Basedir,sub,".pdf"),collapse=""), width=figWidth, height=figHeight)
+	pdf(paste(c(Basedir,"RQ3",".pdf"),collapse=""), width=figWidth, height=figHeight)
 
 		for(me in Metrics){
 				
