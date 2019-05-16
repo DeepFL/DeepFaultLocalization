@@ -39,7 +39,7 @@ def main():
 		models = dnns
 		model_name = ['MLP_DFL(2)']		
 		new_epoch_number = 60		
-		for e in range(2,int(new_epoch_number) + 1,2)
+		for e in range(2,int(new_epoch_number) + 1,2):
 			for loss in loss_funcs:
 				new_subs = ['Chart','Lang','Math','Time','Mockito','Closure']
 				result_matrix = result.initialize_result(subs,dnns) 
@@ -55,7 +55,7 @@ def main():
 		dnns = ['dfl2']     
 		models = dnns		
 		new_epoch_number = 60		
-		for e in range(2,int(new_epoch_number) + 1,2)
+		for e in range(2,int(new_epoch_number) + 1,2):
 			for tech in techs:
 				new_subs = ['Chart','Lang','Math','Time','Mockito','Closure']
 				result_matrix = result.initialize_result(subs,dnns)
