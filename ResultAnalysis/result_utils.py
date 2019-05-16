@@ -1,5 +1,6 @@
 import numpy as np
 import sys
+import os
 def parse(v,rank_file,test_label_file):
     with open(rank_file) as r:
         rank_list=[line.rstrip('\n') for line in r]
@@ -46,3 +47,9 @@ def writetoLatexRQ(finalresult,LatextechsName,overallsubs):
         sys.stdout.write('\\hline')
         
         sys.stdout.write('\n')
+
+def delete_current_results():
+    rootDir = './Rdata'
+    for dirName, subdirList, fileList in os.walk(rootDir):
+        for fname in fileList:
+            os.remove(dirName + "/" + fname)

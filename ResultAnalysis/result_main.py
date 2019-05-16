@@ -1,11 +1,13 @@
 import result_analysis as result
 from result_conf import *
 import subprocess
+import result_utils as util
 
 def main():
 	loss_function = 'softmax'
 	tech = "DeepFL"
 	first_row = "Techniques,Top-1,Top-3,Top-5,MFR,MAR"
+	util.delete_current_results()
 	
 	if RQ_number == "RQ1":		
 		dnns = ['dfl2']
