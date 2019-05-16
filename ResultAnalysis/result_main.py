@@ -41,7 +41,7 @@ def main():
 		models = dnns
 		model_name = ['MLP_DFL(2)']		
 		new_epoch_number = 60		
-		for e in range(2,int(new_epoch_number) + 1,2)
+		for e in range(2,int(new_epoch_number) + 1,2):
 			for loss in loss_funcs:
 				new_subs = ['Chart','Lang','Math','Time','Mockito','Closure']
 				result_matrix = result.initialize_result(subs,dnns) 
@@ -50,14 +50,14 @@ def main():
 		print("RQ3.pdf DONE: you can find it in ./Rdata/RQ3.pdf")
   	
   	if RQ_number == "RQ4":
-  		if "Cached" not in result_dir:
+  		if ("Cached"  not in result_dir) and ("paper" not in result_dir):
   			result.cross_vali_result()	
 		techs = ['DeepFL','CrossDeepFL','CrossValidation']
 		model_name = ['MLP_DFL(2)']   #not important
 		dnns = ['dfl2']     
 		models = dnns		
 		new_epoch_number = 60		
-		for e in range(2,int(new_epoch_number) + 1,2)
+		for e in range(2,int(new_epoch_number) + 1,2):
 			for tech in techs:
 				new_subs = ['Chart','Lang','Math','Time','Mockito','Closure']
 				result_matrix = result.initialize_result(subs,dnns)
