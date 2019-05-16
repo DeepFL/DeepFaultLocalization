@@ -48,7 +48,7 @@ def main():
 		print("RQ3.pdf DONE: you can find it in ./Rdata/RQ3.pdf")
   	
   	if RQ_number == "RQ4":
-  		if "Cached" not in result_dir:
+  		if ("Cached"  not in result_dir) and ("paper" not in result_dir):
   			result.cross_vali_result()	
 		techs = ['DeepFL','CrossDeepFL','CrossValidation']
 		model_name = ['MLP_DFL(2)']   #not important
