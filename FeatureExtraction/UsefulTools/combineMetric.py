@@ -16,7 +16,7 @@ with open(source_result) as sr:
 with open(byte_result) as br:
 	for line in br:
 		method_name = line.split(" ")[0]
-		vs = line.split(" ")[1].strip()
+		vs = line.split("method_name ")[1].strip().replace(" ",",")
 		if method_name in comb_result_map:
 			comb_result_map[method_name] = source_result_map[method_name] + vs
 
