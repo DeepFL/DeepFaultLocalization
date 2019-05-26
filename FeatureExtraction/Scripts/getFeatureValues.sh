@@ -18,6 +18,11 @@ java Main.RunMain MetricData 1 Chart $rootPath
 # just copy byte code complexity values from RawFeatures
 cp $rootPath/RawFeatures/Complexity/Chart/1byte.txt $rootPath/FeatureValues/Complexity/Chart/
 
+# combine complexity values
+cd $rootPath/UsefulTools
+python combineMetric.py $rootPath 
+
+
 #get Textual features values
 echo "Extracting textual features......"
 cd $rootPath/UsefulTools/Textual

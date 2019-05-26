@@ -20,3 +20,8 @@ with open(byte_result) as br:
 			comb_result_map[method_name] = comb_result_map[method_name] + vs
 
 comb_result_path = root_path + "/FeatureValues/Complexity/Chart/1.txt"
+with open(comb_result_path,'a') as cr:
+	for m in comb_result_map:
+		cr.write(m + " ")
+		cr.write(comb_result_map[m])
+		cr.write("\n")
