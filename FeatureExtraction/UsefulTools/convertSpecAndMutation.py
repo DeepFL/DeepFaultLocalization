@@ -21,7 +21,7 @@ def write_result(path,tech_list):
 			wf.write("\n")
 
 
-spec_techs = ["Tarantula","Ochiai","Jaccard","Ample","RussellRao","Hamann","SφrensenDice","Dice",
+spec_techs = ["Tarantula","Ochiai","Jaccard","Ample","RussellRao","Hamann","S?rensenDice","Dice",
 			   "Kulczynski1","Kulczynski2","SimpleMatching","Sokal","M1","M2","RogersTanimoto","Goodman",
 				"Hamming","Euclid","Overlap","Anderberg","Ochiai2","Zoltar","Wong1","Wong2","Wong3","ER1a","ER1b",
 				"ER5c","GP02","GP03","GP13","GP19","SBI","DStar"]
