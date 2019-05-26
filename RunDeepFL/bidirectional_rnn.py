@@ -19,13 +19,26 @@ def fillMatrix(x,featureDistribution):
             filled[:,j]=x[:,index]
             index+=1
     return filled
-
+'''
+Add histogram summary and scalar summary of the sparsity of the tensor for tensor analysis
+@param x: A tensor
+@return N/A
+'''
 def activation_summary(x):
     tensor_name = x.op.name
     tf.summary.histogram(tensor_name + '/activations', x)
     tf.summary.scalar(tensor_name + '/sparsity', tf.nn.zero_fraction(x))
 
-
+'''
+Define BiRNN model
+@param x: input tensor of model
+@param weights: weights of model in a dictionary format
+@param n_hidden: number of hidden nodes in model
+@param n_steps: number of steps in model
+@param biases: biases of model in a dictionary format
+@param keep_prob: keep probability in drop-out layer, which is defined in config.py
+@return tensor of prediction result
+'''
 def BiRNN(x, weights, biases, n_hidden, n_steps, keep_prob):
 
     # Unstack to get a list of 'n_steps' tensors of shape (batch_size, n_input)
@@ -50,6 +63,9 @@ def BiRNN(x, weights, biases, n_hidden, n_steps, keep_prob):
     # Linear activation, using rnn inner loop last output
     return tf.matmul(outputs[-1], weights['out']) + biases['out']
 
+'''
+TODO: BY XIA
+'''
 def run(trainFile, trainLabelFile, testFile, testLabelFile, groupFile, suspFile, featureDistribution, loss):
     # reset graph                                                                                                                                            
     tf.reset_default_graph()    
