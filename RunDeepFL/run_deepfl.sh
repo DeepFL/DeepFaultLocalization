@@ -4,6 +4,7 @@ vers=(26 65 27 106 38 133)
 
 #First iteration for executing all kinds of models with different dimensions of features
 #Related result in paper: Table 4, Table 5, Table 6
+
 for idx in {0..5}
 do
 	sub=${subs[$idx]}
@@ -53,5 +54,5 @@ done
 for idx in {1..10}
 do
 	echo $idx
-	python main.py .. ../result 10fold $v dfl2 CrossDeepFL softmax 60 1;
+	python main.py .. ../result 10fold $idx dfl2 CrossValidation softmax 60 1;
 done
