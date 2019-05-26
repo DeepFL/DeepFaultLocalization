@@ -43,16 +43,22 @@ $ git pull
 
 The command to run DeepFL for each version is as follows:
 
+Firstly, go to `RunDeepFL` sub-directory:
+
+```
+cd RunDeepFL
+```
+
 A simple example, which trains the *dfl1* model using softmax as loss function for version 1 of Time subject, can be:
 
 ```
-$python main.py . /result Time 1 dfl1 DeepFL softmax 2 1
+$python main.py .. ../result Time 1 dfl1 DeepFL softmax 2 1
 ```
 
 A complete command to run DeepFL should be:
 
 ```
-$python main.py . /result $subject $version $model $tech $loss $epoch $dump_step
+$python main.py .. ../result $subject $version $model $tech $loss $epoch $dump_step
 ```
 
 Each parameter can be explained as follows:
@@ -67,16 +73,16 @@ Each parameter can be explained as follows:
 8. $epoch: the number of training epochs.
 9. $dump_step: the interval number of the epoch in which the results are stored into the result file. For example, if \$dump_step = 10, the results in epochs 10, 20, 30... are written into the files.
 
-Please note that *CrossValidation* is slightly different from the others since the dataset of all the subjects has been mixed and then splitted into 10-fold. To efficiently use the command above, just set the parameter \$subject as "10fold", ​\$version as 1 to 10, and $tech as *CrossValidation*. Also, please only use *dfl_2* model and *softmax* loss function to run on *CrossValidation* according to our paper.
+Please note that *CrossValidation* is slightly different from the others since the dataset of all the subjects has been mixed and then splitted into 10-fold. To efficiently use the command above, just set the parameter \$subject as "10fold", ​\$version as 1 to 10, and $tech as *CrossValidation*. Also, please only use *dfl2* model and *softmax* loss function to run on *CrossValidation* according to our paper.
 
 ## Result Analysis
 
 Since running DeepFL can be very time-consuming, we also provide result analysis scripts to generate the corresponding table/figures in the paper directly by analyzing the cached results from our prior runs. Specially, we prepared a cached result directory ./CachedResults to avoid time-consuming DeepFL reexecution.
 
-Firstly go to `ResultAnalysis` directory:
+Firstly go to `ResultAnalysis` sub-directory:
 
 ```cmd
-cd ResultAnalysis
+cd ../ResultAnalysis
 ```
 
 The command to analyze the results for each RQ in the paper is as follows:
