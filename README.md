@@ -56,3 +56,28 @@ python rank_parser.py /absolute/path/to/ParentDirofDataset /absolute/path/to/Res
 ```
 Please note that due to the randomly initialized parameters, the results may be slightly different from our paper.
 
+
+```bash
+├── ResultAnalysis
+│   ├── 1.py
+│   ├── 2.py
+│   ├── 3.py
+│   ├── one folder
+│   │   ├── 1.txt
+│   │   ├── 2.txt
+├── FeatureExtraction
+│   ├── 1
+│   ├── 2
+│   ├── 3
+│   ├── 4
+├── DeepFL
+├── CrossDeepFL
+├── CrossValidation
+├── birnn.py
+├── main.py
+├── 
+├── 
+└── 
+```
+
+
