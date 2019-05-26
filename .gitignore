@@ -1,0 +1,8 @@
+/CrossDeepFL
+/result
+/CrossValidation
+/DeepFL
+*.pyc
+/paperResult
+/log
+/.vs
