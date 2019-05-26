@@ -9,7 +9,14 @@ from config import *
 import utils as ut
 
 
-# Create model
+'''
+Define MLP model
+@param x: input tensor of model
+@param weights: weights of model in a dictionary format
+@param biases: biases of model in a dictionary format
+@param keep_prob: keep probability in drop-out layer, which is defined in config.py
+@return tensor of prediction result
+'''
 def multilayer_perceptron(x, weights, biases, keep_prob):
     # Hidden layer with sigmoid activation
     layer_1 = tf.add(tf.matmul(x, weights['h1']), biases['b1'])
@@ -17,52 +24,20 @@ def multilayer_perceptron(x, weights, biases, keep_prob):
     drop_out = tf.nn.dropout(layer_1, keep_prob)
     out_layer = tf.matmul(drop_out, weights['out']) + biases['out']
     return out_layer
-
-def mutation_spec_similar_first(spec, m1,m2,m3,m4,complexity,similarity, keep_prob,is_training):
-    model_size_times = 2
-    with tf.variable_scope('seperate_mut',reuse=False):
-        with tf.variable_scope('mut1',reuse=False):
-            #mutation = tf.layers.batch_normalization(mutation, training=is_training)
-            mut_1 = single_fc_layer(m1,35,35*model_size_times, keep_prob,is_training)
-        with tf.variable_scope('mut2',reuse=False):
-            #mutation = tf.layers.batch_normalization(mutation, training=is_training)
-            mut_2 = single_fc_layer(m2,35,35*model_size_times, keep_prob,is_training)
-        with tf.variable_scope('mut3',reuse=False):
-            #mutation = tf.layers.batch_normalization(mutation, training=is_training)
-            mut_3 = single_fc_layer(m3,35,35*model_size_times, keep_prob,is_training)
-        with tf.variable_scope('mut4',reuse=False):
-            #mutation = tf.layers.batch_normalization(mutation, training=is_training)
-            mut_4 = single_fc_layer(m4,35,35*model_size_times, keep_prob,is_training)
-        mut_concat = tf.concat([mut_1,mut_2,mut_3,mut_4],1)
-        with tf.variable_scope('mut_concat',reuse=False):
-            mut_concat = single_fc_layer(mut_concat,35*4*model_size_times,35*model_size_times, keep_prob,is_training)
-
-    with tf.variable_scope('seperate_spec',reuse=False):
-        with tf.variable_scope('spec',reuse=False):
-            #spec = tf.layers.batch_normalization(spec, training=is_training)
-            spec_1 = single_fc_layer(spec,34,34*model_size_times, keep_prob,is_training)
-        spec_concat = tf.concat([spec_1,mut_concat],1)
-        with tf.variable_scope('fc1',reuse=False):
-            spec_concat = single_fc_layer(spec_concat,69*model_size_times,32*model_size_times, keep_prob,is_training)
-    with tf.variable_scope('similar_spec',reuse=False):
-        with tf.variable_scope('similar',reuse=False):
-            #similarity = tf.layers.batch_normalization(similarity, training=is_training)
-            similar_1 = single_fc_layer(similarity,15,15*model_size_times, keep_prob,is_training)
-        similar_concat = tf.concat([similar_1,spec_concat],1)
-        with tf.variable_scope('fc1',reuse=False):
-            spec_concat = single_fc_layer(spec_concat,47*model_size_times,32*model_size_times, keep_prob,is_training)
-    with tf.variable_scope('fc',reuse=False):
-        with tf.variable_scope('complex',reuse=False):
-            #complexity = tf.layers.batch_normalization(complexity, training=is_training)
-            complex_1 = single_fc_layer(complexity,37,37*model_size_times, keep_prob,is_training)
-
-        fc_1 = tf.concat([complex_1,similar_concat],1)
-        with tf.variable_scope('fc1',reuse=False):
-            fc_2 = single_fc_layer(fc_1,69*model_size_times,64, keep_prob,is_training)
-    final_weight = create_variables("final_weight",[64, 2])
-    final_bias = tf.get_variable("final_bias", shape=[2], initializer=tf.zeros_initializer())
-    out_layer = tf.add(tf.matmul(fc_2, final_weight), final_bias)
-    return out_layer
+    
+'''
+Main function for executing the model
+@param trainFile: .csv filename of training features
+@param trainLabelFile: .csv filename of training labels
+@param testFile: .csv filename of test features
+@param testLabelFile: .csv filename of test labels
+@param groupFile: group filename
+@param suspFile: output file name storing the prediction results of model, typically the results name will be suspFile+epoch_num
+@param loss: the loss function configurations controlled in command
+@param featureNum: number of input features
+@param nodeNum: hidden node number per layer 
+@return N/A
+'''
 def run(trainFile, trainLabelFile, testFile,testLabelFile, groupFile, suspFile,loss, featureNum, nodeNum):
     tf.reset_default_graph()
     # Network Parameters

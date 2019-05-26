@@ -4,20 +4,37 @@ import tensorflow as tf
 import time
 from config import *
 import utils as ut
+'''
+Add histogram summary and scalar summary of the sparsity of the tensor for tensor analysis
+@param x: A tensor
+@return N/A
+'''
 def activation_summary(x):
-    '''
-    :param x: A Tensor
-    :return: Add histogram summary and scalar summary of the sparsity of the tensor
-    '''
     tensor_name = x.op.name
     tf.summary.histogram(tensor_name + '/activations', x)
     tf.summary.scalar(tensor_name + '/sparsity', tf.nn.zero_fraction(x))
+'''
+Create tensor variables
+@param name: tensor name
+@param shape: tensor shape
+@param initializer: tensor initializer
+@return the created tensor
+'''
 def create_variables(name, shape, initializer=tf.contrib.layers.xavier_initializer()):
     regularizer = tf.contrib.layers.l2_regularizer(scale=L2_value)
     new_variables = tf.get_variable(name, shape=shape, initializer=initializer,regularizer=regularizer)
     activation_summary(new_variables)
     return new_variables
 
+'''
+Define one single fully connected layer
+@param input_layer: tensor of input feature map
+@param input_dimension: input shape/dimensions
+@param output_dimension: output shape/dimensions
+@param keep_prob: keep probability in drop-out layer, which is defined in config.py
+@param is_training: boolean variable to indicate training or inference
+@return tensor of output feature map through the defined fully connected layer
+'''
 def single_fc_layer(input_layer,input_dimension,output_dimension,keep_prob,is_training):
     weight = create_variables("weight",[input_dimension, output_dimension])
     bias = tf.Variable(tf.random_normal([output_dimension]))
@@ -26,6 +43,19 @@ def single_fc_layer(input_layer,input_dimension,output_dimension,keep_prob,is_tr
     output_layer = tf.nn.relu(output_layer)
     return output_layer
 
+'''
+Define MLP_DFL_1 model
+@param spec: tensor of spectrum-based features 
+@param m1: tensor of first mutation-based features
+@param m2: tensor of second mutation-based features
+@param m3: tensor of third mutation-based features
+@param m4: tensor of fourth mutation-based features
+@param complexity: tensor of complexity-based features
+@param similarity: tensor of textual similarity features
+@param keep_prob: keep probability in drop-out layer, which is defined in config.py
+@param is_training: boolean variable to indicate training or inference
+@return tensor of prediction results
+'''
 def fc_2_layers(spec, m1,m2,m3,m4,complexity,similarity, keep_prob,is_training):
     model_size_times = 2
     with tf.variable_scope('seperate1',reuse=False):
@@ -62,6 +92,19 @@ def fc_2_layers(spec, m1,m2,m3,m4,complexity,similarity, keep_prob,is_training):
     out_layer = tf.add(tf.matmul(fc_2, final_weight), final_bias)
     return out_layer
 
+'''
+Define MLP_DFL_1 without spectrum-based feature model
+@param spec: tensor of spectrum-based features 
+@param m1: tensor of first mutation-based features
+@param m2: tensor of second mutation-based features
+@param m3: tensor of third mutation-based features
+@param m4: tensor of fourth mutation-based features
+@param complexity: tensor of complexity-based features
+@param similarity: tensor of textual similarity features
+@param keep_prob: keep probability in drop-out layer, which is defined in config.py
+@param is_training: boolean variable to indicate training or inference
+@return tensor of prediction results
+'''
 def fc_2_layers_spec(spec, m1,m2,m3,m4,complexity,similarity, keep_prob,is_training):
     model_size_times = 2
     with tf.variable_scope('seperate1',reuse=False):
@@ -95,6 +138,19 @@ def fc_2_layers_spec(spec, m1,m2,m3,m4,complexity,similarity, keep_prob,is_train
     out_layer = tf.add(tf.matmul(fc_2, final_weight), final_bias)
     return out_layer
 
+'''
+Define MLP_DFL_1 without mutation-based feature model
+@param spec: tensor of spectrum-based features 
+@param m1: tensor of first mutation-based features
+@param m2: tensor of second mutation-based features
+@param m3: tensor of third mutation-based features
+@param m4: tensor of fourth mutation-based features
+@param complexity: tensor of complexity-based features
+@param similarity: tensor of textual similarity features
+@param keep_prob: keep probability in drop-out layer, which is defined in config.py
+@param is_training: boolean variable to indicate training or inference
+@return tensor of prediction results
+'''
 def fc_2_layers_mut(spec, m1,m2,m3,m4,complexity,similarity, keep_prob,is_training):
     model_size_times = 2
     with tf.variable_scope('seperate1',reuse=False):
@@ -118,6 +174,19 @@ def fc_2_layers_mut(spec, m1,m2,m3,m4,complexity,similarity, keep_prob,is_traini
     out_layer = tf.add(tf.matmul(fc_2, final_weight), final_bias)
     return out_layer
 
+'''
+Define MLP_DFL_1 without complex-based feature model
+@param spec: tensor of spectrum-based features 
+@param m1: tensor of first mutation-based features
+@param m2: tensor of second mutation-based features
+@param m3: tensor of third mutation-based features
+@param m4: tensor of fourth mutation-based features
+@param complexity: tensor of complexity-based features
+@param similarity: tensor of textual similarity features
+@param keep_prob: keep probability in drop-out layer, which is defined in config.py
+@param is_training: boolean variable to indicate training or inference
+@return tensor of prediction results
+'''
 def fc_2_layers_complex(spec, m1,m2,m3,m4,complexity,similarity, keep_prob,is_training):
     model_size_times = 2
     with tf.variable_scope('seperate1',reuse=False):
@@ -151,6 +220,19 @@ def fc_2_layers_complex(spec, m1,m2,m3,m4,complexity,similarity, keep_prob,is_tr
     out_layer = tf.add(tf.matmul(fc_2, final_weight), final_bias)
     return out_layer
 
+'''
+Define MLP_DFL_1 without textual similarity feature model
+@param spec: tensor of spectrum-based features 
+@param m1: tensor of first mutation-based features
+@param m2: tensor of second mutation-based features
+@param m3: tensor of third mutation-based features
+@param m4: tensor of fourth mutation-based features
+@param complexity: tensor of complexity-based features
+@param similarity: tensor of textual similarity features
+@param keep_prob: keep probability in drop-out layer, which is defined in config.py
+@param is_training: boolean variable to indicate training or inference
+@return tensor of prediction results
+'''
 def fc_2_layers_similar(spec, m1,m2,m3,m4,complexity,similarity, keep_prob,is_training):
     model_size_times = 2
     with tf.variable_scope('seperate1',reuse=False):
@@ -184,6 +266,20 @@ def fc_2_layers_similar(spec, m1,m2,m3,m4,complexity,similarity, keep_prob,is_tr
     out_layer = tf.add(tf.matmul(fc_2, final_weight), final_bias)
     return out_layer
 
+'''
+Main function for executing the model
+@param trainFile: .csv filename of training features
+@param trainLabelFile: .csv filename of training labels
+@param testFile: .csv filename of test features
+@param testLabelFile: .csv filename of test labels
+@param groupFile: group filename
+@param suspFile: output file name storing the prediction results of model, typically the results name will be suspFile+epoch_num
+@param loss: the loss function configurations controlled in command
+@param model_type: model configurations controlled in command
+@param featureNum: number of input features
+@param nodeNum: hidden node number per layer 
+@return N/A
+'''
 def run(trainFile, trainLabelFile, testFile,testLabelFile, groupFile, suspFile,loss, model_type,featureNum, nodeNum):
     tf.reset_default_graph()
     # Network Parameters

@@ -7,7 +7,9 @@ import input
 import time
 from config import *
 import utils as ut 
-
+'''
+TODO: BY XIA
+'''
 def fillMatrix(x,featureDistribution):
     maxGroup=numpy.array(featureDistribution).max()
     filled=numpy.zeros(shape=(x.shape[0],maxGroup*len(featureDistribution)))
@@ -19,10 +21,6 @@ def fillMatrix(x,featureDistribution):
     return filled
 
 def activation_summary(x):
-    '''
-    :param x: A Tensor
-    :return: Add histogram summary and scalar summary of the sparsity of the tensor
-    '''
     tensor_name = x.op.name
     tf.summary.histogram(tensor_name + '/activations', x)
     tf.summary.scalar(tensor_name + '/sparsity', tf.nn.zero_fraction(x))

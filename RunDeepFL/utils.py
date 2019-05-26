@@ -1,6 +1,21 @@
 import tensorflow as tf
 
-
+'''
+loss function for different losses.
+@param pred: prediction results of dnn models (before softmax)
+@param y: corresponding labels of instances
+@param loss: the loss function configurations controlled in command
+    0 = weighted softmax
+    1 = softmax
+    2 = group-based exponential pairwise 
+    3 = softmax + group-based exponential pairwise 
+    4 = group-based hinge pairwise 
+    5 = softmax + group-based hinge pairwise 
+    else = optimized pairwise exponential function without grouping
+@param datasets: DataSet object 
+@param groups: groups introduced in paper
+@return loss cost calculated by corresponding loss function
+'''
 def loss_func(pred, y, loss, datasets, groups=[]):
     if loss == 0: # weighted softmax
         ratio=datasets.train.pos_instance_ratio()
@@ -69,5 +84,4 @@ def loss_func(pred, y, loss, datasets, groups=[]):
         diff=tf.subtract(pred_x,pred_y)
         diff_exp=tf.exp(-diff)
         cost=tf.reduce_sum(diff_exp) 
-    
     return cost

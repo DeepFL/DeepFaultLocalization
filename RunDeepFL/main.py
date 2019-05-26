@@ -8,7 +8,11 @@ import time
 import numpy as np
 from config import *
 
-  
+'''
+The main function to train and evaluate DeepFL
+@param N/A
+@return N/A
+'''
 # main run driver
 def main():
     os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2' 

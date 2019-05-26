@@ -1,8 +1,11 @@
 import os
 import numpy
 import csv
-
-# read data from file
+'''
+read data from file
+@param filename: name of the .csv file
+@return corresponding numpy matrix of csv file
+'''
 def readFile(filename):
 	with open(filename) as f:
 		lines=csv.reader(f,delimiter=',')
@@ -18,8 +21,11 @@ def readFile(filename):
 	#values=numpy.ones((instances.shape[0],1))-matrix[:,0:1]
 	#one_hot_labels=numpy.c_[matrix[:,0:1],values]
 	return matrix 
-
-# read group information, for pairwise loss function
+'''
+read group information, for pairwise loss function
+@param filename(string): name of the .csv file
+@return corresponding numpy matrix of csv file
+'''
 def readGroup(filename):
         groups=readFile(filename)
         groups=numpy.asarray(groups,dtype=numpy.int32)
