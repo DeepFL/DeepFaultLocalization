@@ -1,5 +1,7 @@
 #! /bin/bash
 rootPath=$1
+cd $rootPath/UsefulTools/PIT-Mutation/
+mvn clean install -Dmaven.test.skip=true
 cd $rootPath/SubjectExample/Chart/1
 mvn org.pitest:pitest-maven:mutationCoverage -f pomMutation.xml
 cd mutation-test
