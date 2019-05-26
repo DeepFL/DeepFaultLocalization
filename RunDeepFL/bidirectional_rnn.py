@@ -7,7 +7,16 @@ import input
 import time
 from config import *
 import utils as ut 
-import recurrent_network as myrnn
+
+def fillMatrix(x,featureDistribution):
+    maxGroup=numpy.array(featureDistribution).max()
+    filled=numpy.zeros(shape=(x.shape[0],maxGroup*len(featureDistribution)))
+    index=0
+    for i in range(len(featureDistribution)):
+        for j in range(i*maxGroup,i*maxGroup+featureDistribution[i]):
+            filled[:,j]=x[:,index]
+            index+=1
+    return filled
 
 def activation_summary(x):
     '''
@@ -79,7 +88,7 @@ def run(trainFile, trainLabelFile, testFile, testLabelFile, groupFile, suspFile,
     datasets = input.read_data_sets(trainFile,trainLabelFile, testFile,testLabelFile, groupFile)
     
     # load test data
-    test_data=myrnn.fillMatrix(datasets.test.instances,featureDistribution)
+    test_data=fillMatrix(datasets.test.instances,featureDistribution)
     test_data = test_data.reshape((-1, n_steps, n_input))
     test_label = datasets.test.labels
 
@@ -105,7 +114,7 @@ def run(trainFile, trainLabelFile, testFile, testLabelFile, groupFile, suspFile,
             for i in range(total_batch):
                 batch_x, batch_y, batch_g = datasets.train.next_batch(batch_size)
                 # Reshape data to get 28 seq of 28 elements
-                batch_x = myrnn.fillMatrix(batch_x,featureDistribution)
+                batch_x = fillMatrix(batch_x,featureDistribution)
                 batch_x = batch_x.reshape((batch_size, n_steps, n_input))
                 # Run optimization op (backprop)
                 _, c = sess.run([optimizer, cost], feed_dict={x: batch_x, y: batch_y, g: batch_g, keep_prob:dropout_rate})
