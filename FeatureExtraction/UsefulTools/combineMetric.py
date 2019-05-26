@@ -18,7 +18,7 @@ with open(byte_result) as br:
 		method_name = line.split(" ")[0]
 		vs = line.split(method_name + " ")[1].strip().replace(" ",",")
 		print(vs)
-		if method_name in comb_result_map:
+		if method_name in source_result_map:
 			comb_result_map[method_name] = source_result_map[method_name] + vs
 
 comb_result_path = root_path + "/FeatureValues/Complexity/Chart/1.txt"
