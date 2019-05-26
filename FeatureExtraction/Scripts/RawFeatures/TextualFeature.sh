@@ -22,7 +22,7 @@ for quer in $querys
 do
 cd $rootPath/RawFeatures/Textual/Chart/1/$quer/Documents
 sed -i 's/>/>'\\n'/g' *.txt
-cd -
+chmod -R 777 $rootPath/UsefulTools/indri-5.11
 $rootPath/UsefulTools/indri-5.11/buildindex/IndriBuildIndex $project/$quer/IndexPara
 
 $rootPath/UsefulTools/indri-5.11/runquery/IndriRunQuery $project/$quer/queryPara  -baseline=tfidf,k1:1,b:0.3>>$project/$quer/Result.txt
