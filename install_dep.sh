@@ -6,7 +6,7 @@ apt install -y maven
 
 cd FeatureExtraction/UsefulTools
 tar zxvf pitest.tar.gz
-cp -r pitest /root/.m2/repository/org/
+cp -r pitest ~/.m2/repository/org/
 unzip tools.zip
 
 cd ..
