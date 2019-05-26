@@ -8,3 +8,9 @@ cd FeatureExtraction/UsefulTools
 tar zxvf pitest.tar.gz
 cp -r pitest /root/.m2/repository/org/
 unzip tools.zip
+
+cd ..
+tar zxvf importantFolders.tar.gz
+
+cd UsefulData
+tar zxvf defects4j.tar.gz
