@@ -11,3 +11,6 @@ unzip tools.zip
 
 cd ..
 tar zxvf importantFolders.tar.gz
+
+cd UsefulData
+tar zxvf defects4j.tar.gz
