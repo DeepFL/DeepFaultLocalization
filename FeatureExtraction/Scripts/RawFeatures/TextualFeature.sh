@@ -2,6 +2,13 @@
 rootPath=$1
 project=$2
 version=$3
+
+echo "------------------------------------------------"
+echo "Start textual raw feature"
+echo "------------------------------------------------"
+
+
+
 # 1. clear previous data
 pro=$rootPath'RawFeatures/Textual/'$project/$version
 for query in $pro/*
@@ -30,4 +37,9 @@ $rootPath/UsefulTools/indri-5.11/buildindex/IndriBuildIndex $pro/$quer/IndexPara
 $rootPath/UsefulTools/indri-5.11/runquery/IndriRunQuery $pro/$quer/queryPara  -baseline=tfidf,k1:1,b:0.3>>$pro/$quer/Result.txt
 
 done
+
+
+echo "------------------------------------------------"
+echo "Textual raw feature DONE...."
+echo "------------------------------------------------"
 
