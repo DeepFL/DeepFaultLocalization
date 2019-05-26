@@ -12,5 +12,5 @@ with open(source_result) as sr:
 	for line in sr:
 		method_name = line.split(" ")[0]
 		vs = line.split(" ")[1].strip()
-		source_result_map[method_nam] = vs
+		source_result_map[method_name] = vs
 print(source_result_map)		
