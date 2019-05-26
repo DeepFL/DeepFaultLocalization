@@ -11,7 +11,7 @@ public class GetSusFromInformR {
 		String ID = args[0];
 		String Project = args[1];
 		String rootPath = args[2];
-		BufferedReader MF = new BufferedReader(new FileReader(rootPath + "FeatureValues/SpectrumandMutation/"+Project+"/"+ID+"/Ample.txt"));
+		BufferedReader MF = new BufferedReader(new FileReader(rootPath + "FeatureValues/tempResult/"+Project+"/"+ID+"/Ample.txt"));
 		String methodsName = MF.readLine();
 		while(methodsName != null){
 			MethodsCoveredbyF.add(methodsName.split(" ")[0]);
