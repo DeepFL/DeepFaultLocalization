@@ -6,6 +6,7 @@ apt install -y maven
 
 cd /DeepFaultLocalization/FeatureExtraction/UsefulTools
 tar zxvf pitest.tar.gz
+mkdir -p ~/.m2/repository/org/
 cp -r pitest ~/.m2/repository/org/
 unzip tools.zip
 
