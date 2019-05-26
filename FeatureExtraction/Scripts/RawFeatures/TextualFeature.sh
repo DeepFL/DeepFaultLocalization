@@ -1,7 +1,9 @@
 #! /bin/bash
 rootPath=$1
+project=$2
+version=$3
 # 1. clear previous data
-project=$rootPath'RawFeatures/Textual/Chart/1'
+project=$rootPath'RawFeatures/Textual/'$project/$version
 for query in $project/*
 do
 rm -rf $query/IndexPara
@@ -13,14 +15,14 @@ done
 
 
 #2. Prepare data for Indri
-java -classpath $rootPath/UsefulTools/mutationfl/lib/\*:$rootPath/UsefulTools/mutationfl/bin/  Main.RunMain InformationR 1 Chart $rootPath
+java -classpath $rootPath/UsefulTools/mutationfl/lib/\*:$rootPath/UsefulTools/mutationfl/bin/  Main.RunMain InformationR $version $project $rootPath
 
 #3. Run Indri
 
 querys="McltoT McltoTc McltoTFS McomtoT McomtoTc McomtoTFS MmtoT MmtoTc MmtoTFS MtoT MtoTc MtoTFS MvtoT MvtoTc MvtoTFS"
 for quer in $querys
 do
-cd $rootPath/RawFeatures/Textual/Chart/1/$quer/Documents
+cd $rootPath/RawFeatures/Textual/$project/$version/$quer/Documents
 sed -i 's/>/>'\\n'/g' *.txt
 chmod -R 777 $rootPath/UsefulTools/indri-5.11
 $rootPath/UsefulTools/indri-5.11/buildindex/IndriBuildIndex $project/$quer/IndexPara
