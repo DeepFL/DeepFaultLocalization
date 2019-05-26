@@ -3,8 +3,8 @@ rootPath=$1
 project=$2
 version=$3
 # 1. clear previous data
-project=$rootPath'RawFeatures/Textual/'$project/$version
-for query in $project/*
+pro=$rootPath'RawFeatures/Textual/'$project/$version
+for query in $pro/*
 do
 rm -rf $query/IndexPara
 rm -rf $query/queryPara
@@ -25,9 +25,9 @@ do
 cd $rootPath/RawFeatures/Textual/$project/$version/$quer/Documents
 sed -i 's/>/>'\\n'/g' *.txt
 chmod -R 777 $rootPath/UsefulTools/indri-5.11
-$rootPath/UsefulTools/indri-5.11/buildindex/IndriBuildIndex $project/$quer/IndexPara
+$rootPath/UsefulTools/indri-5.11/buildindex/IndriBuildIndex $pro/$quer/IndexPara
 
-$rootPath/UsefulTools/indri-5.11/runquery/IndriRunQuery $project/$quer/queryPara  -baseline=tfidf,k1:1,b:0.3>>$project/$quer/Result.txt
+$rootPath/UsefulTools/indri-5.11/runquery/IndriRunQuery $pro/$quer/queryPara  -baseline=tfidf,k1:1,b:0.3>>$pro/$quer/Result.txt
 
 done
 
