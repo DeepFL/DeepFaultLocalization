@@ -1,0 +1,3 @@
+The Lemur Toolkit makes use of the ANTLR parser generator for the Indri
+query language grammar. Source and documentation are available at
+http://www.antlr.org/.

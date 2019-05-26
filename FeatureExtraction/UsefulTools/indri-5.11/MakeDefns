@@ -1,0 +1,120 @@
+SHELL = /bin/bash
+host_os = linux-gnu
+srcdir = .
+top_srcdir = .
+
+prefix = /usr/local
+exec_prefix = ${prefix}
+bindir = ${exec_prefix}/bin
+sbindir = ${exec_prefix}/sbin
+libexecdir = ${exec_prefix}/libexec
+datadir = ${datarootdir}
+sysconfdir = ${prefix}/etc
+sharedstatedir = ${prefix}/com
+localstatedir = ${prefix}/var
+libdir = ${exec_prefix}/lib
+infodir = ${datarootdir}/info
+mandir = ${datarootdir}/man
+includedir = ${prefix}/include
+datarootdir = ${prefix}/share
+oldincludedir = /usr/include
+pkgdatadir = $(datadir)/indri
+pkglibdir = $(libdir)/indri
+pkgincludedir = $(includedir)/indri
+top_builddir = .
+
+AR = /usr/bin/ar
+CC = gcc
+GCC_33 = 0
+CXX = g++
+LEX = flex
+INSTALL = /usr/bin/install -c
+INSTALL_DATA = ${INSTALL} -m 644
+INSTALL_PROGRAM = ${INSTALL}
+INSTALL_DIR = ${INSTALL} -m 755 -d
+JAVAC =  -Xdoclint:none
+JAR = 
+JAVAINC = 
+JAVADOC =  -Xdoclint:none
+JAVAHOME = 
+NEED_ANTLR = 1
+SWIG = 
+PHP_SHARED = -shared
+JAVA_SHARED = -shared
+CSHARP_SHARED = -shared
+PHP_SO = .so
+JAVA_SO = .so
+CSHARP_SO = .so
+PHPINCLUDE = 
+MCS=
+
+DEPENDENCIES = lemur xpdf
+ifeq ($(NEED_ANTLR), 1)
+  DEPENDENCIES += antlr
+endif
+
+PACKAGE = indri
+VERSION = 5.11
+distdir = $(PACKAGE)-$(VERSION)
+top_distdir = $(distdir)
+
+INDRI_STANDALONE = 1
+INDRILIB = lib$(PACKAGE).a
+
+WITH_SWIG = 0
+WITH_JAVA = 0
+WITH_PHP = 0
+WITH_CSHARP = 0
+
+# C++ source files
+CPPSRC1 = $(notdir $(wildcard ../src/*.cpp))
+CPPSRC2 = $(notdir $(wildcard ../src/*.cc))
+CPPSRC3 = $(notdir $(wildcard ../src/*.C))
+# C source files
+CSRC =  $(notdir $(wildcard ../src/*.c))
+# flex source files
+FSRC =  $(notdir $(wildcard ../src/*.l))
+# Flex objects
+FCPP = $(filter-out $(CPPSRC1), $(FSRC:.l=.cpp))
+CPPSRC = $(CPPSRC1) $(CPPSRC3) $(CPPSRC3) $(FCPP)
+.SECONDARY: $($(wildcard ../src/*.l).l=.cpp)
+# All header files
+ALLHEADER = $(wildcard ../include/indri/*.h*)
+# Include path
+INCPATH = -I../include $(patsubst %, -I../contrib/%/include, $(DEPENDENCIES))
+ALLINCPATH = $(INCPATH)
+
+# C++ objects
+CPPOBJ = $(CPPSRC:.cpp=.o) $(CPPSRC2:.cc=.o) $(CPPSRC3:.C=.o)
+
+# C objects
+COBJ = $(CSRC:.c=.o)
+# all objects
+OBJ = $(CPPOBJ) $(COBJ)
+
+# application makefiles should set SHARED=
+# (see buildindex/Makefile
+SHARED = -shared -fPIC
+
+# C compiler and compiling options
+# C++ compiler and compiling/linking options
+CFLAGS = -DPACKAGE_NAME=\"Indri\" -DPACKAGE_TARNAME=\"indri\" -DPACKAGE_VERSION=\"5.11\" -DPACKAGE_STRING=\"Indri\ 5.11\" -DPACKAGE_BUGREPORT=\"project@lemurproject.org\" -DYYTEXT_POINTER=1 -DINDRI_STANDALONE=1 -DHAVE_LIBM=1 -DHAVE_LIBPTHREAD=1 -DHAVE_LIBZ=1 -DHAVE_NAMESPACES=/\*\*/ -DISNAN_IN_NAMESPACE_STD=/\*\*/ -DSTDC_HEADERS=1 -DHAVE_SYS_TYPES_H=1 -DHAVE_SYS_STAT_H=1 -DHAVE_STDLIB_H=1 -DHAVE_STRING_H=1 -DHAVE_MEMORY_H=1 -DHAVE_STRINGS_H=1 -DHAVE_INTTYPES_H=1 -DHAVE_STDINT_H=1 -DHAVE_UNISTD_H=1 -DHAVE_FSEEKO=1 -DHAVE_EXT_ATOMICITY_H=1 -DP_NEEDS_GNU_CXX_NAMESPACE=1 -DHAVE_MKSTEMP=1 -DHAVE_MKSTEMPS=1 -DNDEBUG=1  -g -O3 $(INCPATH) $(SHARED)
+CXXFLAGS    = -DPACKAGE_NAME=\"Indri\" -DPACKAGE_TARNAME=\"indri\" -DPACKAGE_VERSION=\"5.11\" -DPACKAGE_STRING=\"Indri\ 5.11\" -DPACKAGE_BUGREPORT=\"project@lemurproject.org\" -DYYTEXT_POINTER=1 -DINDRI_STANDALONE=1 -DHAVE_LIBM=1 -DHAVE_LIBPTHREAD=1 -DHAVE_LIBZ=1 -DHAVE_NAMESPACES=/\*\*/ -DISNAN_IN_NAMESPACE_STD=/\*\*/ -DSTDC_HEADERS=1 -DHAVE_SYS_TYPES_H=1 -DHAVE_SYS_STAT_H=1 -DHAVE_STDLIB_H=1 -DHAVE_STRING_H=1 -DHAVE_MEMORY_H=1 -DHAVE_STRINGS_H=1 -DHAVE_INTTYPES_H=1 -DHAVE_STDINT_H=1 -DHAVE_UNISTD_H=1 -DHAVE_FSEEKO=1 -DHAVE_EXT_ATOMICITY_H=1 -DP_NEEDS_GNU_CXX_NAMESPACE=1 -DHAVE_MKSTEMP=1 -DHAVE_MKSTEMPS=1 -DNDEBUG=1  -g -O3 $(INCPATH) $(SHARED)
+CXXFLAGS_NOOPT    = -DPACKAGE_NAME=\"Indri\" -DPACKAGE_TARNAME=\"indri\" -DPACKAGE_VERSION=\"5.11\" -DPACKAGE_STRING=\"Indri\ 5.11\" -DPACKAGE_BUGREPORT=\"project@lemurproject.org\" -DYYTEXT_POINTER=1 -DINDRI_STANDALONE=1 -DHAVE_LIBM=1 -DHAVE_LIBPTHREAD=1 -DHAVE_LIBZ=1 -DHAVE_NAMESPACES=/\*\*/ -DISNAN_IN_NAMESPACE_STD=/\*\*/ -DSTDC_HEADERS=1 -DHAVE_SYS_TYPES_H=1 -DHAVE_SYS_STAT_H=1 -DHAVE_STDLIB_H=1 -DHAVE_STRING_H=1 -DHAVE_MEMORY_H=1 -DHAVE_STRINGS_H=1 -DHAVE_INTTYPES_H=1 -DHAVE_STDINT_H=1 -DHAVE_UNISTD_H=1 -DHAVE_FSEEKO=1 -DHAVE_EXT_ATOMICITY_H=1 -DP_NEEDS_GNU_CXX_NAMESPACE=1 -DHAVE_MKSTEMP=1 -DHAVE_MKSTEMPS=1 -DNDEBUG=1  -g $(INCPATH) $(SHARED)
+CPPLDFLAGS  =  -lz -lpthread -lm 
+
+ifeq ($(STYLE),release)
+     CFLAGS = -DPACKAGE_NAME=\"Indri\" -DPACKAGE_TARNAME=\"indri\" -DPACKAGE_VERSION=\"5.11\" -DPACKAGE_STRING=\"Indri\ 5.11\" -DPACKAGE_BUGREPORT=\"project@lemurproject.org\" -DYYTEXT_POINTER=1 -DINDRI_STANDALONE=1 -DHAVE_LIBM=1 -DHAVE_LIBPTHREAD=1 -DHAVE_LIBZ=1 -DHAVE_NAMESPACES=/\*\*/ -DISNAN_IN_NAMESPACE_STD=/\*\*/ -DSTDC_HEADERS=1 -DHAVE_SYS_TYPES_H=1 -DHAVE_SYS_STAT_H=1 -DHAVE_STDLIB_H=1 -DHAVE_STRING_H=1 -DHAVE_MEMORY_H=1 -DHAVE_STRINGS_H=1 -DHAVE_INTTYPES_H=1 -DHAVE_STDINT_H=1 -DHAVE_UNISTD_H=1 -DHAVE_FSEEKO=1 -DHAVE_EXT_ATOMICITY_H=1 -DP_NEEDS_GNU_CXX_NAMESPACE=1 -DHAVE_MKSTEMP=1 -DHAVE_MKSTEMPS=1 -DNDEBUG=1 -DNDEBUG  -g -O3 $(INCPATH) $(SHARED)
+     CXXFLAGS    = -DPACKAGE_NAME=\"Indri\" -DPACKAGE_TARNAME=\"indri\" -DPACKAGE_VERSION=\"5.11\" -DPACKAGE_STRING=\"Indri\ 5.11\" -DPACKAGE_BUGREPORT=\"project@lemurproject.org\" -DYYTEXT_POINTER=1 -DINDRI_STANDALONE=1 -DHAVE_LIBM=1 -DHAVE_LIBPTHREAD=1 -DHAVE_LIBZ=1 -DHAVE_NAMESPACES=/\*\*/ -DISNAN_IN_NAMESPACE_STD=/\*\*/ -DSTDC_HEADERS=1 -DHAVE_SYS_TYPES_H=1 -DHAVE_SYS_STAT_H=1 -DHAVE_STDLIB_H=1 -DHAVE_STRING_H=1 -DHAVE_MEMORY_H=1 -DHAVE_STRINGS_H=1 -DHAVE_INTTYPES_H=1 -DHAVE_STDINT_H=1 -DHAVE_UNISTD_H=1 -DHAVE_FSEEKO=1 -DHAVE_EXT_ATOMICITY_H=1 -DP_NEEDS_GNU_CXX_NAMESPACE=1 -DHAVE_MKSTEMP=1 -DHAVE_MKSTEMPS=1 -DNDEBUG=1 -DNDEBUG  -g -O3 $(INCPATH) $(SHARED)
+     CPPLDFLAGS  =  -lz -lpthread -lm 
+endif
+
+ifeq ($(STYLE),profile)
+	CFLAGS=-g -pg  $(INCPATH)
+	CXXFLAGS=-g -pg  $(INCPATH)
+endif
+
+
+# generating C++ with flex
+../src/%.cpp: ../src/%.l
+	$(LEX) -8 -Cf -o$@ $<

@@ -1,0 +1,78 @@
+Virtual Machinery License
+
+Licensed Product - JHawk Academic (Research) license
+
+BY INSTALLING THIS SOFTWARE, YOU ARE CONSENTING TO BE BOUND BY, AND ARE BECOMING A PARTY, TO THIS AGREEMENT. IF YOU DO NOT AGREE TO ALL OF THE TERMS OF THIS AGREEMENT YOU MUST DESTROY ALL COPIES OF THIS SOFTWARE.
+
+LICENSE IN PLAIN ENGLISH.
+
+The full license agreement follows. This paragraph contains the "spirit" of the agreement in an easy to read summary and is provided as a convenience to you. It does not form part of the agreement itself.
+
+Virtual Machinery will provide free upgrades for the holder of an Academic License for Three years. The Academic License can be renewed at the end of this period.  
+
+If you are not satisfied with the product Virtual Machinery will refund the purchase price at any time up to 30 days after purchase. 
+
+By agreeing to this license you are entitled to install and use the Licensed Product on all computers used for postgraduate Research purposes on a single physical site. The software can only be used for the purposes of Academic Research and only by postgraduate researchers and Academic staff.Attempting to redistribute this code in any way is illegal and immediately invalidates the terms of this license. Attempting to reverse engineer this code in any way is illegal and immediately invalidates the terms of this license.
+
+ 
+
+The full text of the license agreement follows:
+
+ 
+
+PLEASE READ THIS AGREEMENT CAREFULLY BEFORE USING THE SOFTWARE. VIRTUAL MACHINERY WILL LICENSE THE SOFTWARE TO YOU ONLY IF YOU FIRST ACCEPT THE TERMS OF THIS AGREEMENT. BY USING THE SOFTWARE YOU AGREE TO THESE TERMS. IF YOU DO NOT AGREE TO THE TERMS OF THIS AGREEMENT, PROMPTLY RETURN THE UNUSED SOFTWARE TO THE PARTY FROM WHOM YOU ACQUIRED IT TO RECEIVE A REFUND OF THE AMOUNT YOU PAID.
+
+GRANT.
+
+Virtual Machinery Ltd. (the "Developers") hereby grant you a non-exclusive license to use the accompanying Java Classes (the "Software") and the accompanying written materials (the "Documentation") for academic use  by postgraduate researchers and Academic staff on all computers belonging to your Academic department located within the boundaries of a single physical site. You may copy the software into any machine-readable or printed form for backup or support of your use of the software on the these computers.
+
+
+ 
+
+SOFTWARE.
+
+The Software comprises a number of components including, but not limited to, files containing code in human readable form (the "Source") and in binary form (the "Code"). 
+
+You may make any number of backup copies of the Software for your corporate use but the Software may not be copied or transferred to another person or entity.
+
+You may not publish, translate, rent, lease, transfer, export or otherwise make available the Software to any person or entity outside of the physical site for which this license has been issued.
+
+You may not attempt to reverse engineer the code in any way.
+
+DOCUMENTATION.
+
+You may not publish, translate, rent, lease, transfer, export or otherwise make available the Documentation to any person or entity outside of the physical site for which this license has been issued..
+
+TITLE.
+
+Title, ownership rights, and intellectual property rights in and to the Software and Documentation shall remain with the Developers. The Software is protected by the copyright laws of the Republic of Ireland and international copyright treaties. 
+
+DISCLAIMER OF WARRANTY.
+
+The Software and Documentation are provided on an "AS IS" basis, without warranty of any kind, including without limitation the warranties of merchantability, fitness for a particular purpose and non-infringement. The entire risk as to the quality and performance of the Software and Documentation is borne by you. Should the Software or Documentation prove defective, you and not the Developers assume the entire cost of any service and repair. This disclaimer of warranty constitutes an essential part of the agreement. 
+
+SOME JURISDICTIONS DO NOT ALLOW EXCLUSIONS OF AN IMPLIED WARRANTY, SO THIS DISCLAIMER MAY NOT APPLY TO YOU AND YOU MAY HAVE OTHER LEGAL RIGHTS THAT VARY BY JURISDICTION.
+
+LIMITATION OF LIABILITY.
+
+UNDER NO CIRCUMSTANCES AND UNDER NO LEGAL THEORY, TORT, CONTRACT, OR OTHERWISE, SHALL THE DEVELOPERS OR THEIR SUPPLIERS OR RESELLERS BE LIABLE TO YOU OR ANY OTHER PERSON FOR ANY INDIRECT, SPECIAL, INCIDENTAL, OR CONSEQUENTIAL DAMAGES OF ANY CHARACTER INCLUDING, WITHOUT LIMITATION, DAMAGES FOR LOSS OF GOODWILL, WORK STOPPAGE, COMPUTER FAILURE OR MALFUNCTION, OR ANY AND ALL OTHER COMMERCIAL DAMAGES OR LOSSES. 
+
+IN NO EVENT WILL THE DEVELOPERS BE LIABLE FOR ANY DAMAGES IN EXCESS OF THE DEVELOPERS' LIST PRICE FOR A LICENSE TO THE SOFTWARE, EVEN IF THE DEVELOPERS SHALL HAVE BEEN INFORMED OF THE POSSIBILITY OF SUCH DAMAGES, OR FOR ANY CLAIM BY ANY OTHER PARTY. 
+
+THIS LIMITATION OF LIABILITY SHALL NOT APPLY TO LIABILITY FOR DEATH OR PERSONAL INJURY TO THE EXTENT APPLICABLE LAW PROHIBITS SUCH LIMITATION. 
+
+FURTHERMORE, SOME JURISDICTIONS DO NOT ALLOW THE EXCLUSION OR LIMITATION OF INCIDENTAL OR CONSEQUENTIAL DAMAGES, SO THIS LIMITATION AND EXCLUSION MAY NOT APPLY TO YOU.
+
+GOVERNANCE
+
+This Agreement shall be construed, interpreted and governed by the laws of the Republic of Ireland. You agree that this is the complete and exclusive statement of the Agreement between you and Virtual Machinery which supersedes any proposal or prior agreement, oral or written, and any other communications between us regarding the subject of this Agreement. If any provision of this Agreement is found unenforceable, it will not affect the validity of this Agreement, which shall remain valid and enforceable according to its terms.
+
+TERMINATION.
+
+This license will terminate automatically if you fail to comply with the limitations described above. On termination, you must destroy all copies of the Software and Documentation. Termination is without prejudice to any rights that you may have for breach of the terms of the Agreement.
+
+MISCELLANEOUS.
+
+This Agreement represents the complete agreement concerning this license between the parties and supersedes all prior agreements and representations between them relating to the Software. 
+
+ 

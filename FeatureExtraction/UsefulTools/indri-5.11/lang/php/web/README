@@ -1,0 +1,21 @@
+
+Using the Indri PHP interface:
+
+1) When compiling Indri, use the --enable-php option with the configure
+script:
+        ./configure --enable-php
+You may also have to specify where your php-config script is:
+        ./configure --enable-php \
+        --with-php-config=/usr/local/apache2/php/bin/php-config
+If you have done this correctly, the output will contain the line:
+        checking for php includes... found
+
+2) Type 'make' to build Indri.  The PHP library will appear in
+indri/swig/obj/php/libindri_php.so.  Install this library somewhere that PHP
+can find it.  You may need to talk to your system administrator to 
+figure this out.
+
+3) Put the PHP files somewhere that your webserver can find them.
+
+4) Edit the include/config.php file according to the comments in it.
+

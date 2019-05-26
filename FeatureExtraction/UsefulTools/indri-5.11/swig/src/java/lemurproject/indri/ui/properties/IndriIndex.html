@@ -1,0 +1,186 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Indri Indexer Help</title>
+</head>
+<body>
+<h1>Indri Indexer Help</h1>
+<h2>Getting Started</h2>
+<p> IndexUI is an application that simplifies the process
+of indexing a collection of data files for use with the RetUI retrieval
+application. You specify an <a href="#indexname">index name</a> and at
+least one <a href="#datafiles">data file</a> to
+index in the appropriate fields of the IndexUI's main panel. For all
+other parameters, the defaults supplied here should be appropriate for
+most applications. Review these settings (described below) and click
+the
+Build Index button to build your index.
+</p>
+
+<h3>Menus</h3>
+
+<p>IndexUI has two menus, described below.</p>
+
+<h4>File Menu</h4>
+<dl>
+  <dt><b>Quit</b></dt>
+  <dd>Exits the Indri IndexUI. This item is disabled
+when an index is being built. It is still possible to close the window
+with the title bar control. If you do close the window while an index
+is being built, the build will fail and you will have to manually remove
+the partially built index files. </dd>
+</dl>
+
+<h4>Help Menu</h4>
+<dl>
+  <dt><b>Help</b></dt>
+  <dd>Opens a window to view this help file. Any
+hyperlinks in this file will be opened in a separate window within a
+second window. </dd>
+  <dt><b>About</b></dt>
+  <dd>Displays the About Dialog.</dd>
+</dl>
+
+<h3>Indexing Tab</h3>
+
+    <p>On this tab you select the values necessary to construct your
+index. You are required to select a name for you index, and at least
+one
+input data file or directory. All other parameters have default
+values. Each is described below.
+    </p>
+    <ul>
+      <li> <em><a name="indexname">Index Name</a></em>: base name for
+the
+indri repository directory. This can be typed in directly (as an
+absolute or relative pathname), or you can use the Browse button to
+navigate to the directory where you want your index, and type the
+basename into the file chooser dialog. This directory will be created
+if it does not exist. </li>
+      <li><em><a name="datafiles">Data File(s)</a></em>: Use the Browse
+button
+to navigate to a directory and select files or directories. To remove
+unwanted items from the list, highlight the item (right click with the
+mouse) and use the Remove button to remove the entry. Multiple entries
+can be selected by using either the Shift key (to select a contiguous
+range) or the Control key (to select discontiguous elements) while
+right
+clicking with the mouse. </li>
+      <li> <em>Document Format</em>:
+        <dl>
+          <dt><b>trecweb</b></dt>
+          <dd>for trec web formatted documents. This is the default
+document format.</dd>
+          <dt><b>trectext</b></dt>
+          <dd>for standard TREC formatted documents</dd>
+          <dt><b>txt</b></dt>
+          <dd> for plain text</dd>
+          <dt><dt><b>html</b></dt>
+          </dt>
+          <dd>for web pages.</dd>
+          <dt><b>doc</b></dt>
+          <dd>For Microsoft Word documents (Windows only).<br>
+          </dd>
+          <dt> <b>ppt</b> </dt>
+          <dd>For Microsoft PowerPoint documents (Windows only)</dd>
+        </dl>
+        <dl>
+          <dt style="font-weight: bold;">pdf</dt>
+          <dd>For Adobe PDF documents.<br>
+          </dd>
+        </dl>
+        <dl>
+        </dl>
+      </li>
+      <li><em>Filename filter</em>: If a filter is supplied, it is used
+for
+the file selection dialog box. Additionally, if the filter is supplied
+and an entry is a directory, all files in that directory that match the
+filter are added to the list of datafiles. The filter should be a
+command line filename regular expression, eg *.sgml or data?.txt. In
+the
+pattern, '*' expands into 0 or more characters (including .) and '?'
+expands into 0 or 1 character (including .). </li>
+      <li><em>Recurse into subdirectories</em>: if selected and an
+entry in
+the data files list is a directory, we recurse into each subdirectory,
+again applying any supplied filename filter. If the filter is empty,
+all
+files in a directory are added to the list of data files for
+indexing. </li>
+      <li><em>Collection Fields</em> Enter a comma delimited list of
+      field names to index as metadata, such as docno, title, without
+      spaces between the field names. Fields
+      that are not indexed as metadata can be retrieved (eg title
+      display in the retrieval ui), indexing them as metadata speeds up
+      that retrieval</li>
+      <li><em>Indexed Fields</em> Enter a comma delimited list of field
+      names, without
+      spaces between the field names, to index as data, such as title,
+      heading (h1, h2, h3, and h4 html tags), headline (newswire head,
+      hl, headline),  etc. for use in queries. Fields that are not
+      indexed will not be available for use in queries. </li>
+
+      <li><em>Memory Limit</em>: Select How much memory to use while
+indexing. A rule of thumb is no more than 3/4 of your physical memory
+(default 128MB). </li>
+      <li><em>Stopword list</em> Enter the name of file containing the
+stopword list you wish to use or use the Browse button to navigate to
+the file. The file should contain the list of stopwords that you wish to
+use, one word per line.</li>
+      <li><em>Stem Collection</em>: Select this check box to enable
+stemming
+(conflation of morphological variants) for the index (default on). </li>
+      <li><em>Stemmer</em>:
+        <dl>
+          <dt>krovetz</dt>
+          <dd>Krovetz stemmer (default).</dd>
+          <dt>porter</dt>
+          <dd>Porter stemmer.</dd>
+        </dl>
+      </li>
+      <li><em>Build Index</em>: Enabled when an <a
+ href="IndriIndex.html#indexname">index
+name</a> and at least one <a href="IndriIndex.html#datafiles">data file</a>
+have been
+entered. Builds the index. displaying status messages in the <a
+ href="IndriIndex.html#status">Status Messages</a> tab, which is
+brought to the front
+when indexing is started. You should not close the application while an
+index is being built. If you do, partially built index files will be
+left behind. </li>
+      <li><em>Quit</em>: Exits the IndexUI. This item is disabled
+when an index is being built. It is still possible to close the window
+with the title bar control. If you do close the window while an index
+is
+being built, the build will fail and you will have to manually remove
+the partially built index files.</li>
+    </ul>
+    <h3><a name="status">Status Messages Tab</a></h3>
+    <p> This tab provides status messages from the indexing process. It
+is
+updated as the process runs and should scroll to (or near) the bottom
+as
+messages are added.
+    </p>
+    <br>
+
+    <hr>
+    <center>
+    <table border="0" cellpadding="5" width="650">
+      <tbody>
+        <tr>
+          <td align="right" valign="middle"> <a
+ href="http://ciir.cs.umass.edu/"> <img
+ src="http://ciir.cs.umass.edu/images/ciirlogo1.gif" border="0"></a> </td>
+          <td align="left" valign="middle"> <a
+ href="http://www.lti.cs.cmu.edu"> <img
+ src="http://www.cs.cmu.edu/%7Elemur/ltilogo.gif" border="0"></a> </td>
+        </tr>
+      </tbody>
+    </table>
+    </center>
+  </dd>
+</dl>
+</body>
+</html>

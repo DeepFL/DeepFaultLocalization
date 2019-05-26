@@ -1,0 +1,22 @@
+## your application name here
+APP=
+SRC=$(APP).cpp
+## extra object files for your app here
+OBJ=
+
+prefix = @prefix@
+exec_prefix = ${prefix}
+libdir = @libdir@
+includedir = @includedir@
+INCPATH=-I$(includedir)
+LIBPATH=-L$(libdir)
+CXXFLAGS=@DEFS@ @CPPFLAGS@ @CXXFLAGS@ $(INCPATH)
+CPPLDFLAGS  = @LDFLAGS@ -lindri @LIBS@
+
+all:
+	$(CXX) $(CXXFLAGS) $(SRC) -o $(APP) $(OBJ) $(LIBPATH) $(CPPLDFLAGS)
+
+clean:
+	rm -f $(APP)
+
+

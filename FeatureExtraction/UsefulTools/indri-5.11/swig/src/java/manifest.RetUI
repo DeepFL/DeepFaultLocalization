@@ -1,0 +1,7 @@
+Name: lemurproject/indri/ui
+Main-Class: lemurproject.indri.ui.RetUI
+Specification-Title:  Indri Retrieval UI
+Specification-Vendor: Lemur Project
+Specification-Version: 0.6
+Package-Title: lemurproject.indri.ui
+Package-Vendor: Lemur Project

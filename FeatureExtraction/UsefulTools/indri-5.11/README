@@ -1,0 +1,47 @@
+-----
+Help!
+-----
+
+If you have trouble using Indri, check online at lemurproject.org for updated
+documentation.  You can also ask a question in the Lemur public
+forums, on SourceForge at http://sourceforge.net/p/lemur/discussion/.
+The Lemur project developers watch the forums and can answer your questions.
+
+--------------
+What is Indri?
+--------------
+
+Indri is an information retrieval system from the Lemur project; a
+joint effort between the University of Massachusetts and Carnegie Mellon
+University.  It combines the language modeling and inference network
+approaches to information retrieval into one system.
+
+For those who have used the Inquery system, Indri uses a query language
+that is very similar, but adds additional features.  In particular,
+Indri understands tagged documents, like HTML and XML documents, and can
+therefore understand queries like #1(george bush).person (which means
+find the phrase george bush appearing inside a person tag).  Indri can
+also understand numeric quantities.  You can find out more about the
+query language in the query language documentation.
+
+Library:
+
+Indri provides the QueryEnvironment and IndexEnvironment classes, which
+can be used from C++, Java, C# or PHP (although indexing is not
+supported from PHP).
+
+IndexEnvironment understands many different file types.  However, you
+can create your own file type, as long as it is XML-like, and tell
+IndexEnvironment how to index it.  Then, using the addFile method,
+IndexEnvironment can index your document(s).  If you want to do more
+complex processing on your data, or if your data is arriving in real
+time, you may parse your document into a ParsedDocument structure.  The
+IndexEnvrionment object can index these structures directly.
+
+QueryEnvironment allows you to run queries and retrieve a ranked list of
+results.  You can use runAnnotatedQuery to retrieve match information
+(annotations), which is useful for highlighting matched words in
+documents.  By using the addIndex method with an instance of
+IndexEnvironment, you can evaluate queries on an index that is currently
+being built.  The addServer method allows you to connect to IndriDaemon
+processes for distributed retrieval.

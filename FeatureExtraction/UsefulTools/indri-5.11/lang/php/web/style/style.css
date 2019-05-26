@@ -1,0 +1,124 @@
+/*
+ * Stylesheet for Indri website
+ * Based in part on the BibDesk website, and a rough design from
+ * http://www.inknoise.com/experimental/layoutomatic.php
+ */
+
+a {
+  text-decoration: none;
+}
+
+#content {
+  width: 600px;
+  border: 1px solid gray;
+  margin: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 10px;
+  font-size: 11pt;
+}
+
+#content td {
+ padding: 2px 5px;
+}
+
+#content h1, h2, h3, h4 {
+  font-family: Optima, Verdana, sans-serif;
+}
+
+#query {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+#header {
+  padding:  20px;
+  margin-bottom: 5px;
+  background-color: rgb( 92, 115, 184);
+  font-family: Optima, Verdana, sans-serif;
+}
+
+#header h1 {
+  color: white;
+  font-family: Cochin, Georgia, "Times New Roman", serif;
+  font-size: 2em;
+  font-weight: bold;
+  margin: 0;
+}
+
+#header h2 {
+  color: white;
+  font-family: Cochin, Georgia, "Times New Roman", serif;
+  font-weight: bold;
+  font-size: 1em;
+  margin: 0;
+}
+
+
+#description {
+  padding: 15px;
+  margin-right: 215px;
+  background-color: white;
+  font-family: Optima, Verdana, sans-serif;
+}
+
+#actions {
+  float: right;
+  width: 250px;
+  margin: 10px;
+  padding: 0 0 0 20px;
+  height: 100%;
+  background-color: rgb(235, 235, 235);
+  font-family: Optima, Verdana, sans-serif;
+}
+
+#actions h1, h2, h3, h4 {
+  font-family: Cochin, Georgia, "Times New Roman", serif;
+}
+
+#actions a {
+  text-decoration: none;
+}
+
+#actions ul {
+  list-style-type: none;
+}
+
+#actions li {
+  margin: 0  0 7px 0;
+}
+
+#footer {
+  clear: both;
+  height: 100px;
+  padding: 5px;
+  margin-top: 5px;
+  font-family: Optima, Verdana, sans-serif;
+  text-align: right;
+}
+
+#footer img {
+  float: right;
+  border-style: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+#actions a:hover {
+  text-decoration: underline;
+}
+
+#header a {
+  color: white;
+  text-decoration: none;
+}
+
+#header h1:first-letter {
+  font-size: 1.25em;
+}
+

@@ -1,0 +1,27 @@
+#!/bin/sh
+INDRI=@abs_srcdir@
+FOREGROUND=true
+export FOREGROUND
+JAVA_HOME=@JAVAHOME@
+export JAVA_HOME
+HERITRIX=$INDRI/heritrix/bin/heritrix
+HARVEST=$INDRI/../harvestlinks/harvestlinks
+BUILD=$INDRI/../buildindex/buildindex
+# make sure we're in the right directory
+cd $INDRI
+#clear the directory, save one backup instance
+test -d crawl.bak && rm -rf crawl.bak
+test -d crawl &&  mv crawl crawl.bak
+test -d crawl || mkdir crawl
+#install files
+cp order.xml seeds.txt excluded_hosts build.param crawl
+#run in the crawl subdirectory.
+cd crawl
+# run crawl in foreground, no ui
+$HERITRIX -n order.xml || exit 1
+test -d linkz || mkdir linkz
+$HARVEST -corpus=corpus -output=linkz -redirect=/dev/null || exit 1
+test -d index || mkdir index
+$BUILD build.param ../stopwords  || exit 1
+# make the index files world and group readable
+chmod -R og+r index

@@ -1,0 +1,37 @@
+{%LemurSearchSetTitle("Lemur Search")%}
+
+<html>
+	<head>
+		<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+		<title>{%LemurSearchTitle%}</title>
+	</head>
+	<body>
+
+		<!-- header (logo and title) -->
+
+		<table border="0">
+			<tr>
+				<td><img src="lemur100.gif" alt="Lemur Project Logo" height="79px" width="100px"></td>
+				<td width="15px">&nbsp;</td>
+				<td align=center valign=center>
+					<font size="+2" color=#0000FF><strong>{%LemurSearchTitle%}</strong></font><br/>
+					<font color=#0000FF><strong>{%LemurSubTitle%}</strong></font><br/>
+				</td>
+			</tr>
+		</table>
+
+		<!-- end header -->
+
+		{%LemurCGIItems%}
+
+		<!-- footer -->
+
+		<center>
+			<font size="-1">
+				&copy;2006 The Lemur Project.  Powered by the <a href="http://www.lemurproject.org/" target="_blank">Lemur Toolkit</a>.  Search engine last updated {%LemurSearchCompileDate%}, Version {%LemurSearchVersion%}.  Contact <a href="">[Contact Information Here]</a> for more information.
+			</font>
+		</center>
+
+		<!-- end footer -->
+	</body>
+</html>

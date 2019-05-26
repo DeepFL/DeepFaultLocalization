@@ -1,0 +1,120 @@
+SHELL = @SHELL@
+host_os = @host_os@
+srcdir = @srcdir@
+top_srcdir = @top_srcdir@
+VPATH = @srcdir@
+prefix = @prefix@
+exec_prefix = @exec_prefix@
+bindir = @bindir@
+sbindir = @sbindir@
+libexecdir = @libexecdir@
+datadir = @datadir@
+sysconfdir = @sysconfdir@
+sharedstatedir = @sharedstatedir@
+localstatedir = @localstatedir@
+libdir = @libdir@
+infodir = @infodir@
+mandir = @mandir@
+includedir = @includedir@
+datarootdir = @datarootdir@
+oldincludedir = /usr/include
+pkgdatadir = $(datadir)/@PACKAGE_TARNAME@
+pkglibdir = $(libdir)/@PACKAGE_TARNAME@
+pkgincludedir = $(includedir)/@PACKAGE_TARNAME@
+top_builddir = .
+
+AR = @AR@
+CC = @CC@
+GCC_33 = @GCC_33@
+CXX = @CXX@
+LEX = @LEX@
+INSTALL = @INSTALL@
+INSTALL_DATA = @INSTALL_DATA@
+INSTALL_PROGRAM = @INSTALL_PROGRAM@
+INSTALL_DIR = ${INSTALL} -m 755 -d
+JAVAC = @JAVAC@ -Xdoclint:none
+JAR = @JAR@
+JAVAINC = @JAVAINC@
+JAVADOC = @JAVADOC@ -Xdoclint:none
+JAVAHOME = @JAVAHOME@
+NEED_ANTLR = @NEED_ANTLR@
+SWIG = @SWIG@
+PHP_SHARED = @PHP_SHARED@
+JAVA_SHARED = @JAVA_SHARED@
+CSHARP_SHARED = @CSHARP_SHARED@
+PHP_SO = @PHP_SO@
+JAVA_SO = @JAVA_SO@
+CSHARP_SO = @CSHARP_SO@
+PHPINCLUDE = @PHPINCLUDE@
+MCS=@MCS@
+
+DEPENDENCIES = lemur xpdf
+ifeq ($(NEED_ANTLR), 1)
+  DEPENDENCIES += antlr
+endif
+
+PACKAGE = @PACKAGE_TARNAME@
+VERSION = @PACKAGE_VERSION@
+distdir = $(PACKAGE)-$(VERSION)
+top_distdir = $(distdir)
+
+INDRI_STANDALONE = @INDRI_STANDALONE@
+INDRILIB = lib$(PACKAGE).a
+
+WITH_SWIG = @WITH_SWIG@
+WITH_JAVA = @WITH_JAVA@
+WITH_PHP = @WITH_PHP@
+WITH_CSHARP = @WITH_CSHARP@
+
+# C++ source files
+CPPSRC1 = $(notdir $(wildcard ../src/*.cpp))
+CPPSRC2 = $(notdir $(wildcard ../src/*.cc))
+CPPSRC3 = $(notdir $(wildcard ../src/*.C))
+# C source files
+CSRC =  $(notdir $(wildcard ../src/*.c))
+# flex source files
+FSRC =  $(notdir $(wildcard ../src/*.l))
+# Flex objects
+FCPP = $(filter-out $(CPPSRC1), $(FSRC:.l=.cpp))
+CPPSRC = $(CPPSRC1) $(CPPSRC3) $(CPPSRC3) $(FCPP)
+.SECONDARY: $($(wildcard ../src/*.l).l=.cpp)
+# All header files
+ALLHEADER = $(wildcard ../include/indri/*.h*)
+# Include path
+INCPATH = -I../include $(patsubst %, -I../contrib/%/include, $(DEPENDENCIES))
+ALLINCPATH = $(INCPATH)
+
+# C++ objects
+CPPOBJ = $(CPPSRC:.cpp=.o) $(CPPSRC2:.cc=.o) $(CPPSRC3:.C=.o)
+
+# C objects
+COBJ = $(CSRC:.c=.o)
+# all objects
+OBJ = $(CPPOBJ) $(COBJ)
+
+# application makefiles should set SHARED=
+# (see buildindex/Makefile
+SHARED = @SHARED@
+
+# C compiler and compiling options
+# C++ compiler and compiling/linking options
+CFLAGS = @DEFS@ @CPPFLAGS@ @CFLAGS@ $(INCPATH) $(SHARED)
+CXXFLAGS    = @DEFS@ @CPPFLAGS@ @CXXFLAGS@ $(INCPATH) $(SHARED)
+CXXFLAGS_NOOPT    = @DEFS@ @CPPFLAGS@ -g $(INCPATH) $(SHARED)
+CPPLDFLAGS  = @LDFLAGS@ @LIBS@
+
+ifeq ($(STYLE),release)
+     CFLAGS = @DEFS@ -DNDEBUG @CPPFLAGS@ @CFLAGS@ $(INCPATH) $(SHARED)
+     CXXFLAGS    = @DEFS@ -DNDEBUG @CPPFLAGS@ @CXXFLAGS@ $(INCPATH) $(SHARED)
+     CPPLDFLAGS  = @LDFLAGS@ @LIBS@
+endif
+
+ifeq ($(STYLE),profile)
+	CFLAGS=-g -pg @CPPFLAGS@ $(INCPATH)
+	CXXFLAGS=-g -pg @CPPFLAGS@ $(INCPATH)
+endif
+
+
+# generating C++ with flex
+../src/%.cpp: ../src/%.l
+	$(LEX) -8 -Cf -o$@ $<

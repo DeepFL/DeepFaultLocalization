@@ -1,0 +1,816 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>dist</ProjectName>
+    <ProjectGuid>{96C92D82-4468-4E36-9CFC-C4EA0A792E99}</ProjectGuid>
+    <RootNamespace>dist</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v110</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v110</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v110</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v110</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Debug\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Release\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Platform)\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Platform)\$(Configuration)\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Platform)\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Platform)\$(Configuration)\</IntDir>
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release|x64'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release|x64'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release|x64'" />
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">indri</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">indri</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">indri</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">indri</TargetName>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\contrib\lemur\include\lemur;..\contrib\lemur\include;..\contrib\zlib\include;..\contrib\xpdf\include;..\contrib\antlr\include;..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level1</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(OutDir)indri.lib</OutputFile>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\contrib\lemur\include\lemur;..\contrib\lemur\include;..\contrib\zlib\include;..\contrib\xpdf\include;..\contrib\antlr\include;..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level1</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(OutDir)indri.lib</OutputFile>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\contrib\lemur\include\lemur;..\contrib\lemur\include;..\contrib\zlib\include;..\contrib\xpdf\include;..\contrib\antlr\include;..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level1</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(OutDir)indri.lib</OutputFile>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\contrib\lemur\include\lemur;..\contrib\lemur\include;..\contrib\zlib\include;..\contrib\xpdf\include;..\contrib\antlr\include;..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level1</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(OutDir)indri.lib</OutputFile>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\contrib\antlr\src\antlrParser.cpp" />
+    <ClCompile Include="..\contrib\antlr\src\ANTLRUtil.cpp" />
+    <ClCompile Include="..\contrib\antlr\src\ASTFactory.cpp" />
+    <ClCompile Include="..\contrib\antlr\src\ASTNULLType.cpp" />
+    <ClCompile Include="..\contrib\antlr\src\ASTRefCount.cpp" />
+    <ClCompile Include="..\contrib\antlr\src\BaseAST.cpp" />
+    <ClCompile Include="..\contrib\antlr\src\BitSet.cpp" />
+    <ClCompile Include="..\contrib\antlr\src\CharBuffer.cpp" />
+    <ClCompile Include="..\contrib\antlr\src\CharScanner.cpp" />
+    <ClCompile Include="..\contrib\antlr\src\CommonAST.cpp" />
+    <ClCompile Include="..\contrib\antlr\src\CommonASTWithHiddenTokens.cpp" />
+    <ClCompile Include="..\contrib\antlr\src\CommonHiddenStreamToken.cpp" />
+    <ClCompile Include="..\contrib\antlr\src\CommonToken.cpp" />
+    <ClCompile Include="..\contrib\antlr\src\InputBuffer.cpp" />
+    <ClCompile Include="..\contrib\antlr\src\LLkParser.cpp" />
+    <ClCompile Include="..\contrib\antlr\src\MismatchedCharException.cpp" />
+    <ClCompile Include="..\contrib\antlr\src\MismatchedTokenException.cpp" />
+    <ClCompile Include="..\contrib\antlr\src\NoViableAltException.cpp" />
+    <ClCompile Include="..\contrib\antlr\src\NoViableAltForCharException.cpp" />
+    <ClCompile Include="..\contrib\antlr\src\RecognitionException.cpp" />
+    <ClCompile Include="..\contrib\antlr\src\String.cpp" />
+    <ClCompile Include="..\contrib\antlr\src\Token.cpp" />
+    <ClCompile Include="..\contrib\antlr\src\TokenBuffer.cpp" />
+    <ClCompile Include="..\contrib\antlr\src\TokenStreamBasicFilter.cpp" />
+    <ClCompile Include="..\contrib\antlr\src\TokenStreamHiddenTokenFilter.cpp" />
+    <ClCompile Include="..\contrib\antlr\src\TokenStreamSelector.cpp" />
+    <ClCompile Include="..\contrib\antlr\src\TreeParser.cpp" />
+    <ClCompile Include="..\contrib\lemur\src\fileio.c" />
+    <ClCompile Include="..\contrib\lemur\src\fn_f.c" />
+    <ClCompile Include="..\contrib\lemur\src\HarvestSortMerge.cpp" />
+    <ClCompile Include="..\contrib\lemur\src\Keyfile.cpp" />
+    <ClCompile Include="..\contrib\lemur\src\keyfilecode.c" />
+    <ClCompile Include="..\contrib\lemur\src\keyfilecompress.c" />
+    <ClCompile Include="..\contrib\lemur\src\keyprint.c" />
+    <ClCompile Include="..\contrib\lemur\src\lemur-compat.cpp" />
+    <ClCompile Include="..\contrib\lemur\src\RVLCompress.cpp" />
+    <ClCompile Include="..\contrib\lemur\src\SHA1.cpp" />
+    <ClCompile Include="..\contrib\lemur\src\SortMergeTextFiles.cpp" />
+    <ClCompile Include="..\contrib\lemur\src\string-set.c" />
+    <ClCompile Include="..\contrib\xpdf\src\Annot.cc" />
+    <ClCompile Include="..\contrib\xpdf\src\Array.cc" />
+    <ClCompile Include="..\contrib\xpdf\src\BuiltinFont.cc" />
+    <ClCompile Include="..\contrib\xpdf\src\BuiltinFontTables.cc" />
+    <ClCompile Include="..\contrib\xpdf\src\Catalog.cc" />
+    <ClCompile Include="..\contrib\xpdf\src\CharCodeToUnicode.cc" />
+    <ClCompile Include="..\contrib\xpdf\src\CMap.cc" />
+    <ClCompile Include="..\contrib\xpdf\src\Decrypt.cc" />
+    <ClCompile Include="..\contrib\xpdf\src\Dict.cc" />
+    <ClCompile Include="..\contrib\xpdf\src\Error.cc" />
+    <ClCompile Include="..\contrib\xpdf\src\FoFiBase.cc" />
+    <ClCompile Include="..\contrib\xpdf\src\FoFiEncodings.cc" />
+    <ClCompile Include="..\contrib\xpdf\src\FoFiTrueType.cc" />
+    <ClCompile Include="..\contrib\xpdf\src\FoFiType1.cc" />
+    <ClCompile Include="..\contrib\xpdf\src\FoFiType1C.cc" />
+    <ClCompile Include="..\contrib\xpdf\src\FontEncodingTables.cc" />
+    <ClCompile Include="..\contrib\xpdf\src\Function.cc" />
+    <ClCompile Include="..\contrib\xpdf\src\gfile.cc" />
+    <ClCompile Include="..\contrib\xpdf\src\Gfx.cc" />
+    <ClCompile Include="..\contrib\xpdf\src\GfxFont.cc" />
+    <ClCompile Include="..\contrib\xpdf\src\GfxState.cc" />
+    <ClCompile Include="..\contrib\xpdf\src\GHash.cc" />
+    <ClCompile Include="..\contrib\xpdf\src\GList.cc" />
+    <ClCompile Include="..\contrib\xpdf\src\GlobalParams.cc" />
+    <ClCompile Include="..\contrib\xpdf\src\gmem.cc" />
+    <ClCompile Include="..\contrib\xpdf\src\GString.cc" />
+    <ClCompile Include="..\contrib\xpdf\src\JArithmeticDecoder.cc" />
+    <ClCompile Include="..\contrib\xpdf\src\JBIG2Stream.cc" />
+    <ClCompile Include="..\contrib\xpdf\src\JPXStream.cc" />
+    <ClCompile Include="..\contrib\xpdf\src\Lexer.cc" />
+    <ClCompile Include="..\contrib\xpdf\src\Link.cc" />
+    <ClCompile Include="..\contrib\xpdf\src\NameToCharCode.cc" />
+    <ClCompile Include="..\contrib\xpdf\src\Object.cc" />
+    <ClCompile Include="..\contrib\xpdf\src\Outline.cc" />
+    <ClCompile Include="..\contrib\xpdf\src\OutputDev.cc" />
+    <ClCompile Include="..\contrib\xpdf\src\Page.cc" />
+    <ClCompile Include="..\contrib\xpdf\src\parseargs.c" />
+    <ClCompile Include="..\contrib\xpdf\src\PDFDoc.cc" />
+    <ClCompile Include="..\contrib\xpdf\src\PDFDocEncoding.cc" />
+    <ClCompile Include="..\contrib\xpdf\src\PSOutputDev.cc" />
+    <ClCompile Include="..\contrib\xpdf\src\PSTokenizer.cc" />
+    <ClCompile Include="..\contrib\xpdf\src\SecurityHandler.cc" />
+    <ClCompile Include="..\contrib\xpdf\src\Stream.cc" />
+    <ClCompile Include="..\contrib\xpdf\src\TextOutputDev.cc" />
+    <ClCompile Include="..\contrib\xpdf\src\UnicodeMap.cc" />
+    <ClCompile Include="..\contrib\xpdf\src\UnicodeTypeTable.cc" />
+    <ClCompile Include="..\contrib\xpdf\src\xpdfParser.cc" />
+    <ClCompile Include="..\contrib\xpdf\src\XRef.cc" />
+    <ClCompile Include="..\contrib\zlib\src\adler32.c" />
+    <ClCompile Include="..\contrib\zlib\src\compress.c" />
+    <ClCompile Include="..\contrib\zlib\src\crc32.c" />
+    <ClCompile Include="..\contrib\zlib\src\deflate.c" />
+    <ClCompile Include="..\contrib\zlib\src\gzio.c" />
+    <ClCompile Include="..\contrib\zlib\src\infback.c" />
+    <ClCompile Include="..\contrib\zlib\src\inffast.c" />
+    <ClCompile Include="..\contrib\zlib\src\inflate.c" />
+    <ClCompile Include="..\contrib\zlib\src\inftrees.c" />
+    <ClCompile Include="..\contrib\zlib\src\trees.c" />
+    <ClCompile Include="..\contrib\zlib\src\uncompr.c" />
+    <ClCompile Include="..\contrib\zlib\src\zutil.c" />
+    <ClCompile Include="..\src\AnchorTextHarvester.cpp" />
+    <ClCompile Include="..\src\Annotator.cpp" />
+    <ClCompile Include="..\src\ArabicStemmerTransformation.cpp" />
+    <ClCompile Include="..\src\Arabic_Stemmer_utf8.cpp" />
+    <ClCompile Include="..\src\BooleanAndNode.cpp" />
+    <ClCompile Include="..\src\BulkTree.cpp" />
+    <ClCompile Include="..\src\CachedFrequencyBeliefNode.cpp" />
+    <ClCompile Include="..\src\CombinedVocabularyIterator.cpp" />
+    <ClCompile Include="..\src\Combiner.cpp" />
+    <ClCompile Include="..\src\CompressedCollection.cpp" />
+    <ClCompile Include="..\src\ContextCountAccumulator.cpp" />
+    <ClCompile Include="..\src\ContextInclusionAndNode.cpp" />
+    <ClCompile Include="..\src\ContextSimpleCountAccumulator.cpp" />
+    <ClCompile Include="..\src\Copier.cpp" />
+    <ClCompile Include="..\src\DeletedDocumentList.cpp" />
+    <ClCompile Include="..\src\DirectoryIterator.cpp" />
+    <ClCompile Include="..\src\DiskDocExtentListIterator.cpp" />
+    <ClCompile Include="..\src\DiskDocListFileIterator.cpp" />
+    <ClCompile Include="..\src\DiskDocListIterator.cpp" />
+    <ClCompile Include="..\src\DiskDocumentDataIterator.cpp" />
+    <ClCompile Include="..\src\DiskFrequentVocabularyIterator.cpp" />
+    <ClCompile Include="..\src\DiskIndex.cpp" />
+    <ClCompile Include="..\src\DiskKeyfileVocabularyIterator.cpp" />
+    <ClCompile Include="..\src\DiskTermListFileIterator.cpp" />
+    <ClCompile Include="..\src\DocExtentListMemoryBuilder.cpp" />
+    <ClCompile Include="..\src\DocExtentListMemoryBuilderIterator.cpp" />
+    <ClCompile Include="..\src\DocListIteratorNode.cpp" />
+    <ClCompile Include="..\src\DocListMemoryBuilder.cpp" />
+    <ClCompile Include="..\src\DocListMemoryBuilderIterator.cpp" />
+    <ClCompile Include="..\src\DocumentIteratorFactory.cpp" />
+    <ClCompile Include="..\src\DocumentStructure.cpp" />
+    <ClCompile Include="..\src\DocumentStructureHolderNode.cpp" />
+    <ClCompile Include="..\src\DocumentVector.cpp" />
+    <ClCompile Include="..\src\ExtentAndNode.cpp" />
+    <ClCompile Include="..\src\ExtentChildNode.cpp" />
+    <ClCompile Include="..\src\ExtentDescendantNode.cpp" />
+    <ClCompile Include="..\src\ExtentEnforcementNode.cpp" />
+    <ClCompile Include="..\src\ExtentInsideNode.cpp" />
+    <ClCompile Include="..\src\ExtentOrNode.cpp" />
+    <ClCompile Include="..\src\ExtentParentNode.cpp" />
+    <ClCompile Include="..\src\ExtentRestrictionNode.cpp" />
+    <ClCompile Include="..\src\FieldBetweenNode.cpp" />
+    <ClCompile Include="..\src\FieldEqualsNode.cpp" />
+    <ClCompile Include="..\src\FieldGreaterNode.cpp" />
+    <ClCompile Include="..\src\FieldIteratorNode.cpp" />
+    <ClCompile Include="..\src\FieldLessNode.cpp" />
+    <ClCompile Include="..\src\FieldWildcardNode.cpp" />
+    <ClCompile Include="..\src\File.cpp" />
+    <ClCompile Include="..\src\FileClassEnvironmentFactory.cpp" />
+    <ClCompile Include="..\src\FileTreeIterator.cpp" />
+    <ClCompile Include="..\src\FilterRejectNode.cpp" />
+    <ClCompile Include="..\src\FilterRequireNode.cpp" />
+    <ClCompile Include="..\src\FixedPassageNode.cpp" />
+    <ClCompile Include="..\src\HTMLParser.cpp" />
+    <ClCompile Include="..\src\IndexEnvironment.cpp" />
+    <ClCompile Include="..\src\IndexWriter.cpp" />
+    <ClCompile Include="..\src\IndriTimer.cpp" />
+    <ClCompile Include="..\src\InferenceNetwork.cpp" />
+    <ClCompile Include="..\src\InferenceNetworkBuilder.cpp" />
+    <ClCompile Include="..\src\KrovetzStemmer.cpp" />
+    <ClCompile Include="..\src\KrovetzStemmerTransformation.cpp" />
+    <ClCompile Include="..\src\LengthPriorNode.cpp" />
+    <ClCompile Include="..\src\ListAccumulator.cpp" />
+    <ClCompile Include="..\src\ListBeliefNode.cpp" />
+    <ClCompile Include="..\src\LocalQueryServer.cpp" />
+    <ClCompile Include="..\src\MboxDocumentIterator.cpp" />
+    <ClCompile Include="..\src\MemoryDocumentDataIterator.cpp" />
+    <ClCompile Include="..\src\MemoryIndex.cpp" />
+    <ClCompile Include="..\src\MemoryIndexTermListFileIterator.cpp" />
+    <ClCompile Include="..\src\NestedExtentInsideNode.cpp" />
+    <ClCompile Include="..\src\NestedListBeliefNode.cpp" />
+    <ClCompile Include="..\src\NetworkMessageStream.cpp" />
+    <ClCompile Include="..\src\NetworkServerProxy.cpp" />
+    <ClCompile Include="..\src\NetworkServerStub.cpp" />
+    <ClCompile Include="..\src\NexiLexer.cpp" />
+    <ClCompile Include="..\src\NexiParser.cpp" />
+    <ClCompile Include="..\src\NormalizationTransformation.cpp" />
+    <ClCompile Include="..\src\NotNode.cpp" />
+    <ClCompile Include="..\src\NullListNode.cpp" />
+    <ClCompile Include="..\src\NullScorerNode.cpp" />
+    <ClCompile Include="..\src\OfficeHelper.cpp" />
+    <ClCompile Include="..\src\OffsetAnnotationAnnotator.cpp" />
+    <ClCompile Include="..\src\OffsetMetadataAnnotator.cpp" />
+    <ClCompile Include="..\src\OrderedWindowNode.cpp" />
+    <ClCompile Include="..\src\OrNode.cpp" />
+    <ClCompile Include="..\src\Packer.cpp" />
+    <ClCompile Include="..\src\PageRank.cpp" />
+    <ClCompile Include="..\src\Parameters.cpp" />
+    <ClCompile Include="..\src\ParserFactory.cpp" />
+    <ClCompile Include="..\src\Path.cpp" />
+    <ClCompile Include="..\src\PDFDocumentExtractor.cpp" />
+    <ClCompile Include="..\src\PlusNode.cpp" />
+    <ClCompile Include="..\src\PonteExpander.cpp" />
+    <ClCompile Include="..\src\PorterStemmerTransformation.cpp" />
+    <ClCompile Include="..\src\Porter_Stemmer.cpp" />
+    <ClCompile Include="..\src\PowerPointDocumentExtractor.cpp" />
+    <ClCompile Include="..\src\PriorFactory.cpp" />
+    <ClCompile Include="..\src\PriorListIterator.cpp" />
+    <ClCompile Include="..\src\PriorNode.cpp" />
+    <ClCompile Include="..\src\QueryAnnotation.cpp" />
+    <ClCompile Include="..\src\QueryEnvironment.cpp" />
+    <ClCompile Include="..\src\QueryExpander.cpp" />
+    <ClCompile Include="..\src\QueryLexer.cpp" />
+    <ClCompile Include="..\src\QueryParser.cpp" />
+    <ClCompile Include="..\src\QueryParserFactory.cpp" />
+    <ClCompile Include="..\src\QueryStopper.cpp" />
+    <ClCompile Include="..\src\ReformulateQuery.cpp" />
+    <ClCompile Include="..\src\RelevanceModel.cpp" />
+    <ClCompile Include="..\src\Repository.cpp" />
+    <ClCompile Include="..\src\RepositoryLoadThread.cpp" />
+    <ClCompile Include="..\src\RepositoryMaintenanceThread.cpp" />
+    <ClCompile Include="..\src\RMExpander.cpp" />
+    <ClCompile Include="..\src\ShrinkageBeliefNode.cpp" />
+    <ClCompile Include="..\src\SnippetBuilder.cpp" />
+    <ClCompile Include="..\src\StemmerFactory.cpp" />
+    <ClCompile Include="..\src\StopperTransformation.cpp" />
+    <ClCompile Include="..\src\StopStructureRemover.cpp" />
+    <ClCompile Include="..\src\TaggedDocumentIterator.cpp" />
+    <ClCompile Include="..\src\TaggedTextParser.cpp" />
+    <ClCompile Include="..\src\TermFrequencyBeliefNode.cpp" />
+    <ClCompile Include="..\src\TermScoreFunctionFactory.cpp" />
+    <ClCompile Include="..\src\TextDocumentExtractor.cpp" />
+    <ClCompile Include="..\src\TextParser.cpp" />
+    <ClCompile Include="..\src\TextTokenizer.cpp" />
+    <ClCompile Include="..\src\TFIDFExpander.cpp" />
+    <ClCompile Include="..\src\TFIDFTermScoreFunction.cpp" />
+    <ClCompile Include="..\src\Thread.cpp" />
+    <ClCompile Include="..\src\TokenizerFactory.cpp" />
+    <ClCompile Include="..\src\uint64comp.cpp" />
+    <ClCompile Include="..\src\UnorderedWindowNode.cpp" />
+    <ClCompile Include="..\src\Unpacker.cpp" />
+    <ClCompile Include="..\src\UnpackerInternal.cpp" />
+    <ClCompile Include="..\src\UTF8CaseNormalizationTransformation.cpp" />
+    <ClCompile Include="..\src\UTF8Transcoder.cpp" />
+    <ClCompile Include="..\src\UtilityThread.cpp" />
+    <ClCompile Include="..\src\Walker.cpp" />
+    <ClCompile Include="..\src\WARCDocumentIterator.cpp" />
+    <ClCompile Include="..\src\WeightedAndNode.cpp" />
+    <ClCompile Include="..\src\WeightedExtentOrNode.cpp" />
+    <ClCompile Include="..\src\WeightedSumNode.cpp" />
+    <ClCompile Include="..\src\WordDocumentExtractor.cpp" />
+    <ClCompile Include="..\src\WPlusNode.cpp" />
+    <ClCompile Include="..\src\XMLNode.cpp" />
+    <ClCompile Include="..\src\XMLReader.cpp" />
+    <ClCompile Include="..\src\XMLWriter.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\contrib\antlr\src\Makefile" />
+    <None Include="..\contrib\lemur\src\Makefile" />
+    <None Include="..\contrib\xpdf\src\Makefile" />
+    <None Include="..\include\indri\count_iterator" />
+    <None Include="..\include\indri\greedy_vector" />
+    <None Include="..\src\indri.vcproj" />
+    <None Include="..\src\Makefile" />
+    <None Include="..\src\TextTokenizer.l" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\contrib\antlr\include\antlr\ANTLRException.hpp" />
+    <ClInclude Include="..\contrib\antlr\include\antlr\ANTLRUtil.hpp" />
+    <ClInclude Include="..\contrib\antlr\include\antlr\AST.hpp" />
+    <ClInclude Include="..\contrib\antlr\include\antlr\ASTArray.hpp" />
+    <ClInclude Include="..\contrib\antlr\include\antlr\ASTFactory.hpp" />
+    <ClInclude Include="..\contrib\antlr\include\antlr\ASTNULLType.hpp" />
+    <ClInclude Include="..\contrib\antlr\include\antlr\ASTPair.hpp" />
+    <ClInclude Include="..\contrib\antlr\include\antlr\ASTRefCount.hpp" />
+    <ClInclude Include="..\contrib\antlr\include\antlr\BaseAST.hpp" />
+    <ClInclude Include="..\contrib\antlr\include\antlr\BitSet.hpp" />
+    <ClInclude Include="..\contrib\antlr\include\antlr\CharBuffer.hpp" />
+    <ClInclude Include="..\contrib\antlr\include\antlr\CharInputBuffer.hpp" />
+    <ClInclude Include="..\contrib\antlr\include\antlr\CharScanner.hpp" />
+    <ClInclude Include="..\contrib\antlr\include\antlr\CharStreamException.hpp" />
+    <ClInclude Include="..\contrib\antlr\include\antlr\CharStreamIOException.hpp" />
+    <ClInclude Include="..\contrib\antlr\include\antlr\CircularQueue.hpp" />
+    <ClInclude Include="..\contrib\antlr\include\antlr\CommonAST.hpp" />
+    <ClInclude Include="..\contrib\antlr\include\antlr\CommonASTWithHiddenTokens.hpp" />
+    <ClInclude Include="..\contrib\antlr\include\antlr\CommonHiddenStreamToken.hpp" />
+    <ClInclude Include="..\contrib\antlr\include\antlr\CommonToken.hpp" />
+    <ClInclude Include="..\contrib\antlr\include\antlr\config.hpp" />
+    <ClInclude Include="..\contrib\antlr\include\antlr\InputBuffer.hpp" />
+    <ClInclude Include="..\contrib\antlr\include\antlr\IOException.hpp" />
+    <ClInclude Include="..\contrib\antlr\include\antlr\LexerSharedInputState.hpp" />
+    <ClInclude Include="..\contrib\antlr\include\antlr\LLkParser.hpp" />
+    <ClInclude Include="..\contrib\antlr\include\antlr\MismatchedCharException.hpp" />
+    <ClInclude Include="..\contrib\antlr\include\antlr\MismatchedTokenException.hpp" />
+    <ClInclude Include="..\contrib\antlr\include\antlr\NoViableAltException.hpp" />
+    <ClInclude Include="..\contrib\antlr\include\antlr\NoViableAltForCharException.hpp" />
+    <ClInclude Include="..\contrib\antlr\include\antlr\Parser.hpp" />
+    <ClInclude Include="..\contrib\antlr\include\antlr\ParserSharedInputState.hpp" />
+    <ClInclude Include="..\contrib\antlr\include\antlr\RecognitionException.hpp" />
+    <ClInclude Include="..\contrib\antlr\include\antlr\RefCount.hpp" />
+    <ClInclude Include="..\contrib\antlr\include\antlr\SemanticException.hpp" />
+    <ClInclude Include="..\contrib\antlr\include\antlr\String.hpp" />
+    <ClInclude Include="..\contrib\antlr\include\antlr\Token.hpp" />
+    <ClInclude Include="..\contrib\antlr\include\antlr\TokenBuffer.hpp" />
+    <ClInclude Include="..\contrib\antlr\include\antlr\TokenStream.hpp" />
+    <ClInclude Include="..\contrib\antlr\include\antlr\TokenStreamBasicFilter.hpp" />
+    <ClInclude Include="..\contrib\antlr\include\antlr\TokenStreamException.hpp" />
+    <ClInclude Include="..\contrib\antlr\include\antlr\TokenStreamHiddenTokenFilter.hpp" />
+    <ClInclude Include="..\contrib\antlr\include\antlr\TokenStreamIOException.hpp" />
+    <ClInclude Include="..\contrib\antlr\include\antlr\TokenStreamRecognitionException.hpp" />
+    <ClInclude Include="..\contrib\antlr\include\antlr\TokenStreamRetryException.hpp" />
+    <ClInclude Include="..\contrib\antlr\include\antlr\TokenStreamSelector.hpp" />
+    <ClInclude Include="..\contrib\antlr\include\antlr\TreeParser.hpp" />
+    <ClInclude Include="..\contrib\antlr\include\antlr\TreeParserSharedInputState.hpp" />
+    <ClInclude Include="..\contrib\lemur\include\lemur\common_headers.hpp" />
+    <ClInclude Include="..\contrib\lemur\include\lemur\Exception.hpp" />
+    <ClInclude Include="..\contrib\lemur\include\lemur\fileio.h" />
+    <ClInclude Include="..\contrib\lemur\include\lemur\HarvestSortMerge.hpp" />
+    <ClInclude Include="..\contrib\lemur\include\lemur\IndexTypes.hpp" />
+    <ClInclude Include="..\contrib\lemur\include\lemur\integer_types.h" />
+    <ClInclude Include="..\contrib\lemur\include\lemur\InvFPTypes.hpp" />
+    <ClInclude Include="..\contrib\lemur\include\lemur\keydef.h" />
+    <ClInclude Include="..\contrib\lemur\include\lemur\keyerr.h" />
+    <ClInclude Include="..\contrib\lemur\include\lemur\keyfile.h" />
+    <ClInclude Include="..\contrib\lemur\include\lemur\Keyfile.hpp" />
+    <ClInclude Include="..\contrib\lemur\include\lemur\keyprint.h" />
+    <ClInclude Include="..\contrib\lemur\include\lemur\keyref.h" />
+    <ClInclude Include="..\contrib\lemur\include\lemur\key_consts.h" />
+    <ClInclude Include="..\contrib\lemur\include\lemur\kf6ref.h" />
+    <ClInclude Include="..\contrib\lemur\include\lemur\lemur-compat.hpp" />
+    <ClInclude Include="..\contrib\lemur\include\lemur\lemur-platform.h" />
+    <ClInclude Include="..\contrib\lemur\include\lemur\RVLCompress.hpp" />
+    <ClInclude Include="..\contrib\lemur\include\lemur\SHA1.hpp" />
+    <ClInclude Include="..\contrib\lemur\include\lemur\SortMergeTextFiles.hpp" />
+    <ClInclude Include="..\contrib\lemur\include\lemur\string-set.h" />
+    <ClInclude Include="..\contrib\xpdf\include\Annot.h" />
+    <ClInclude Include="..\contrib\xpdf\include\Array.h" />
+    <ClInclude Include="..\contrib\xpdf\include\BuiltinFont.h" />
+    <ClInclude Include="..\contrib\xpdf\include\BuiltinFontTables.h" />
+    <ClInclude Include="..\contrib\xpdf\include\Catalog.h" />
+    <ClInclude Include="..\contrib\xpdf\include\CharCodeToUnicode.h" />
+    <ClInclude Include="..\contrib\xpdf\include\CharTypes.h" />
+    <ClInclude Include="..\contrib\xpdf\include\CMap.h" />
+    <ClInclude Include="..\contrib\xpdf\include\CompactFontTables.h" />
+    <ClInclude Include="..\contrib\xpdf\include\config.h" />
+    <ClInclude Include="..\contrib\xpdf\include\Decrypt.h" />
+    <ClInclude Include="..\contrib\xpdf\include\Dict.h" />
+    <ClInclude Include="..\contrib\xpdf\include\Error.h" />
+    <ClInclude Include="..\contrib\xpdf\include\ErrorCodes.h" />
+    <ClInclude Include="..\contrib\xpdf\include\FoFiBase.h" />
+    <ClInclude Include="..\contrib\xpdf\include\FoFiEncodings.h" />
+    <ClInclude Include="..\contrib\xpdf\include\FoFiTrueType.h" />
+    <ClInclude Include="..\contrib\xpdf\include\FoFiType1.h" />
+    <ClInclude Include="..\contrib\xpdf\include\FoFiType1C.h" />
+    <ClInclude Include="..\contrib\xpdf\include\FontEncodingTables.h" />
+    <ClInclude Include="..\contrib\xpdf\include\Function.h" />
+    <ClInclude Include="..\contrib\xpdf\include\gfile.h" />
+    <ClInclude Include="..\contrib\xpdf\include\Gfx.h" />
+    <ClInclude Include="..\contrib\xpdf\include\GfxFont.h" />
+    <ClInclude Include="..\contrib\xpdf\include\GfxState.h" />
+    <ClInclude Include="..\contrib\xpdf\include\GHash.h" />
+    <ClInclude Include="..\contrib\xpdf\include\GList.h" />
+    <ClInclude Include="..\contrib\xpdf\include\GlobalParams.h" />
+    <ClInclude Include="..\contrib\xpdf\include\gmem.h" />
+    <ClInclude Include="..\contrib\xpdf\include\GMutex.h" />
+    <ClInclude Include="..\contrib\xpdf\include\GString.h" />
+    <ClInclude Include="..\contrib\xpdf\include\gtypes.h" />
+    <ClInclude Include="..\contrib\xpdf\include\JArithmeticDecoder.h" />
+    <ClInclude Include="..\contrib\xpdf\include\JBIG2Stream.h" />
+    <ClInclude Include="..\contrib\xpdf\include\JPXStream.h" />
+    <ClInclude Include="..\contrib\xpdf\include\Lexer.h" />
+    <ClInclude Include="..\contrib\xpdf\include\Link.h" />
+    <ClInclude Include="..\contrib\xpdf\include\NameToCharCode.h" />
+    <ClInclude Include="..\contrib\xpdf\include\NameToUnicodeTable.h" />
+    <ClInclude Include="..\contrib\xpdf\include\Object.h" />
+    <ClInclude Include="..\contrib\xpdf\include\Outline.h" />
+    <ClInclude Include="..\contrib\xpdf\include\OutputDev.h" />
+    <ClInclude Include="..\contrib\xpdf\include\Page.h" />
+    <ClInclude Include="..\contrib\xpdf\include\parseargs.h" />
+    <ClInclude Include="..\contrib\xpdf\include\Parser.h" />
+    <ClInclude Include="..\contrib\xpdf\include\PDFDoc.h" />
+    <ClInclude Include="..\contrib\xpdf\include\PDFDocEncoding.h" />
+    <ClInclude Include="..\contrib\xpdf\include\PreScanOutputDev.h" />
+    <ClInclude Include="..\contrib\xpdf\include\PSOutputDev.h" />
+    <ClInclude Include="..\contrib\xpdf\include\PSTokenizer.h" />
+    <ClInclude Include="..\contrib\xpdf\include\SecurityHandler.h" />
+    <ClInclude Include="..\contrib\xpdf\include\Stream-CCITT.h" />
+    <ClInclude Include="..\contrib\xpdf\include\Stream.h" />
+    <ClInclude Include="..\contrib\xpdf\include\TextOutputDev.h" />
+    <ClInclude Include="..\contrib\xpdf\include\UnicodeMap.h" />
+    <ClInclude Include="..\contrib\xpdf\include\UnicodeMapTables.h" />
+    <ClInclude Include="..\contrib\xpdf\include\UnicodeTypeTable.h" />
+    <ClInclude Include="..\contrib\xpdf\include\UTF8.h" />
+    <ClInclude Include="..\contrib\xpdf\include\XRef.h" />
+    <ClInclude Include="..\contrib\zlib\include\crc32.h" />
+    <ClInclude Include="..\contrib\zlib\include\deflate.h" />
+    <ClInclude Include="..\contrib\zlib\include\inffast.h" />
+    <ClInclude Include="..\contrib\zlib\include\inffixed.h" />
+    <ClInclude Include="..\contrib\zlib\include\inflate.h" />
+    <ClInclude Include="..\contrib\zlib\include\inftrees.h" />
+    <ClInclude Include="..\contrib\zlib\include\trees.h" />
+    <ClInclude Include="..\contrib\zlib\include\zconf.h" />
+    <ClInclude Include="..\contrib\zlib\include\zlib.h" />
+    <ClInclude Include="..\contrib\zlib\include\zutil.h" />
+    <ClInclude Include="..\include\indri\AnchorTextAnnotator.hpp" />
+    <ClInclude Include="..\include\indri\AnchorTextHarvester.hpp" />
+    <ClInclude Include="..\include\indri\AnchorTextWriter.hpp" />
+    <ClInclude Include="..\include\indri\Annotator.hpp" />
+    <ClInclude Include="..\include\indri\Appliers.hpp" />
+    <ClInclude Include="..\include\indri\ArabicStemmerTransformation.hpp" />
+    <ClInclude Include="..\include\indri\Arabic_Stemmer_utf8.hpp" />
+    <ClInclude Include="..\include\indri\atomic.hpp" />
+    <ClInclude Include="..\include\indri\AttributeValuePair.hpp" />
+    <ClInclude Include="..\include\indri\BeliefNode.hpp" />
+    <ClInclude Include="..\include\indri\BooleanAndNode.hpp" />
+    <ClInclude Include="..\include\indri\Buffer.hpp" />
+    <ClInclude Include="..\include\indri\BulkTree.hpp" />
+    <ClInclude Include="..\include\indri\CachedFrequencyBeliefNode.hpp" />
+    <ClInclude Include="..\include\indri\Collection.hpp" />
+    <ClInclude Include="..\include\indri\CombinedVocabularyIterator.hpp" />
+    <ClInclude Include="..\include\indri\Combiner.hpp" />
+    <ClInclude Include="..\include\indri\CompressedCollection.hpp" />
+    <ClInclude Include="..\include\indri\ConditionVariable.hpp" />
+    <ClInclude Include="..\include\indri\Conflater.hpp" />
+    <ClInclude Include="..\include\indri\ConflationPattern.hpp" />
+    <ClInclude Include="..\include\indri\ContextCountAccumulator.hpp" />
+    <ClInclude Include="..\include\indri\ContextCountGraphCopier.hpp" />
+    <ClInclude Include="..\include\indri\ContextCountGraphExtractor.hpp" />
+    <ClInclude Include="..\include\indri\ContextInclusionAndNode.hpp" />
+    <ClInclude Include="..\include\indri\ContextSimpleCountAccumulator.hpp" />
+    <ClInclude Include="..\include\indri\ContextSimpleCountCollectorCopier.hpp" />
+    <ClInclude Include="..\include\indri\Copier.hpp" />
+    <ClInclude Include="..\include\indri\CorpusStatistics.hpp" />
+    <ClInclude Include="..\include\indri\DagCopier.hpp" />
+    <ClInclude Include="..\include\indri\DateFieldAnnotator.hpp" />
+    <ClInclude Include="..\include\indri\DateParse.hpp" />
+    <ClInclude Include="..\include\indri\DeletedDocumentList.hpp" />
+    <ClInclude Include="..\include\indri\delete_range.hpp" />
+    <ClInclude Include="..\include\indri\DirectoryIterator.hpp" />
+    <ClInclude Include="..\include\indri\DirichletTermScoreFunction.hpp" />
+    <ClInclude Include="..\include\indri\DiskDocExtentListIterator.hpp" />
+    <ClInclude Include="..\include\indri\DiskDocListFileIterator.hpp" />
+    <ClInclude Include="..\include\indri\DiskDocListIterator.hpp" />
+    <ClInclude Include="..\include\indri\DiskDocumentDataIterator.hpp" />
+    <ClInclude Include="..\include\indri\DiskFrequentVocabularyIterator.hpp" />
+    <ClInclude Include="..\include\indri\DiskIndex.hpp" />
+    <ClInclude Include="..\include\indri\DiskKeyfileVocabularyIterator.hpp" />
+    <ClInclude Include="..\include\indri\DiskTermData.hpp" />
+    <ClInclude Include="..\include\indri\DiskTermListFileIterator.hpp" />
+    <ClInclude Include="..\include\indri\DocExtentListIterator.hpp" />
+    <ClInclude Include="..\include\indri\DocExtentListMemoryBuilder.hpp" />
+    <ClInclude Include="..\include\indri\DocListFileIterator.hpp" />
+    <ClInclude Include="..\include\indri\DocListIterator.hpp" />
+    <ClInclude Include="..\include\indri\DocListIteratorNode.hpp" />
+    <ClInclude Include="..\include\indri\DocListMemoryBuilder.hpp" />
+    <ClInclude Include="..\include\indri\DocumentCount.hpp" />
+    <ClInclude Include="..\include\indri\DocumentData.hpp" />
+    <ClInclude Include="..\include\indri\DocumentDataIterator.hpp" />
+    <ClInclude Include="..\include\indri\DocumentIterator.hpp" />
+    <ClInclude Include="..\include\indri\DocumentIteratorFactory.hpp" />
+    <ClInclude Include="..\include\indri\DocumentStructure.hpp" />
+    <ClInclude Include="..\include\indri\DocumentStructureHolderNode.hpp" />
+    <ClInclude Include="..\include\indri\DocumentVector.hpp" />
+    <ClInclude Include="..\include\indri\EvaluatorNode.hpp" />
+    <ClInclude Include="..\include\indri\Extent.hpp" />
+    <ClInclude Include="..\include\indri\ExtentAndNode.hpp" />
+    <ClInclude Include="..\include\indri\ExtentChildNode.hpp" />
+    <ClInclude Include="..\include\indri\ExtentDescendantNode.hpp" />
+    <ClInclude Include="..\include\indri\ExtentEnforcementNode.hpp" />
+    <ClInclude Include="..\include\indri\ExtentInsideNode.hpp" />
+    <ClInclude Include="..\include\indri\ExtentOrNode.hpp" />
+    <ClInclude Include="..\include\indri\ExtentParentNode.hpp" />
+    <ClInclude Include="..\include\indri\ExtentRestrictionModelAnnotatorCopier.hpp" />
+    <ClInclude Include="..\include\indri\ExtentRestrictionNode.hpp" />
+    <ClInclude Include="..\include\indri\FieldBelowWalker.hpp" />
+    <ClInclude Include="..\include\indri\FieldBetweenNode.hpp" />
+    <ClInclude Include="..\include\indri\FieldEqualsNode.hpp" />
+    <ClInclude Include="..\include\indri\FieldExtent.hpp" />
+    <ClInclude Include="..\include\indri\FieldGreaterNode.hpp" />
+    <ClInclude Include="..\include\indri\FieldIteratorNode.hpp" />
+    <ClInclude Include="..\include\indri\FieldLessNode.hpp" />
+    <ClInclude Include="..\include\indri\FieldListIterator.hpp" />
+    <ClInclude Include="..\include\indri\FieldStatistics.hpp" />
+    <ClInclude Include="..\include\indri\FieldWildcardNode.hpp" />
+    <ClInclude Include="..\include\indri\File.hpp" />
+    <ClInclude Include="..\include\indri\FileClassEnvironment.hpp" />
+    <ClInclude Include="..\include\indri\FileClassEnvironmentFactory.hpp" />
+    <ClInclude Include="..\include\indri\FileTreeIterator.hpp" />
+    <ClInclude Include="..\include\indri\FilterNode.hpp" />
+    <ClInclude Include="..\include\indri\FilterRejectNode.hpp" />
+    <ClInclude Include="..\include\indri\FilterRequireNode.hpp" />
+    <ClInclude Include="..\include\indri\FixedPassageNode.hpp" />
+    <ClInclude Include="..\include\indri\FrequencyListCopier.hpp" />
+    <ClInclude Include="..\include\indri\HashTable.hpp" />
+    <ClInclude Include="..\include\indri\HTMLParser.hpp" />
+    <ClInclude Include="..\include\indri\Index.hpp" />
+    <ClInclude Include="..\include\indri\IndexEnvironment.hpp" />
+    <ClInclude Include="..\include\indri\IndexWriter.hpp" />
+    <ClInclude Include="..\include\indri\indri-platform.h" />
+    <ClInclude Include="..\include\indri\IndriParser.hpp" />
+    <ClInclude Include="..\include\indri\IndriTimer.hpp" />
+    <ClInclude Include="..\include\indri\IndriTokenizer.hpp" />
+    <ClInclude Include="..\include\indri\InferenceNetwork.hpp" />
+    <ClInclude Include="..\include\indri\InferenceNetworkBuilder.hpp" />
+    <ClInclude Include="..\include\indri\InferenceNetworkNode.hpp" />
+    <ClInclude Include="..\include\indri\InternalFileBuffer.hpp" />
+    <ClInclude Include="..\include\indri\JelinekMercerTermScoreFunction.hpp" />
+    <ClInclude Include="..\include\indri\KrovetzStemmer.hpp" />
+    <ClInclude Include="..\include\indri\KrovetzStemmerTransformation.hpp" />
+    <ClInclude Include="..\include\indri\LengthPriorNode.hpp" />
+    <ClInclude Include="..\include\indri\ListAccumulator.hpp" />
+    <ClInclude Include="..\include\indri\ListBeliefNode.hpp" />
+    <ClInclude Include="..\include\indri\ListCache.hpp" />
+    <ClInclude Include="..\include\indri\ListIteratorNode.hpp" />
+    <ClInclude Include="..\include\indri\LocalQueryServer.hpp" />
+    <ClInclude Include="..\include\indri\Lockable.hpp" />
+    <ClInclude Include="..\include\indri\MaxNode.hpp" />
+    <ClInclude Include="..\include\indri\MboxDocumentIterator.hpp" />
+    <ClInclude Include="..\include\indri\MemoryDocumentDataIterator.hpp" />
+    <ClInclude Include="..\include\indri\MemoryIndex.hpp" />
+    <ClInclude Include="..\include\indri\MemoryIndexDocListFileIterator.hpp" />
+    <ClInclude Include="..\include\indri\MemoryIndexTermListFileIterator.hpp" />
+    <ClInclude Include="..\include\indri\MemoryIndexVocabularyIterator.hpp" />
+    <ClInclude Include="..\include\indri\MetadataPair.hpp" />
+    <ClInclude Include="..\include\indri\Mutex.hpp" />
+    <ClInclude Include="..\include\indri\NestedExtentInsideNode.hpp" />
+    <ClInclude Include="..\include\indri\NestedListBeliefNode.hpp" />
+    <ClInclude Include="..\include\indri\NetworkListener.hpp" />
+    <ClInclude Include="..\include\indri\NetworkMessageStream.hpp" />
+    <ClInclude Include="..\include\indri\NetworkServerProxy.hpp" />
+    <ClInclude Include="..\include\indri\NetworkServerStub.hpp" />
+    <ClInclude Include="..\include\indri\NetworkStream.hpp" />
+    <ClInclude Include="..\include\indri\NexiLexer.hpp" />
+    <ClInclude Include="..\include\indri\NexiLexerTokenTypes.hpp" />
+    <ClInclude Include="..\include\indri\NexiParser.hpp" />
+    <ClInclude Include="..\include\indri\NormalDistribution.hpp" />
+    <ClInclude Include="..\include\indri\NormalizationTransformation.hpp" />
+    <ClInclude Include="..\include\indri\NotNode.hpp" />
+    <ClInclude Include="..\include\indri\NullListNode.hpp" />
+    <ClInclude Include="..\include\indri\NullScorerNode.hpp" />
+    <ClInclude Include="..\include\indri\NumericFieldAnnotator.hpp" />
+    <ClInclude Include="..\include\indri\ObjectHandler.hpp" />
+    <ClInclude Include="..\include\indri\OfficeHelper.hpp" />
+    <ClInclude Include="..\include\indri\OffsetAnnotationAnnotator.hpp" />
+    <ClInclude Include="..\include\indri\OffsetMetadataAnnotator.hpp" />
+    <ClInclude Include="..\include\indri\OrderedWindowNode.hpp" />
+    <ClInclude Include="..\include\indri\OrNode.hpp" />
+    <ClInclude Include="..\include\indri\Packer.hpp" />
+    <ClInclude Include="..\include\indri\PageRank.hpp" />
+    <ClInclude Include="..\include\indri\Parameters.hpp" />
+    <ClInclude Include="..\include\indri\ParsedDocument.hpp" />
+    <ClInclude Include="..\include\indri\ParserFactory.hpp" />
+    <ClInclude Include="..\include\indri\Path.hpp" />
+    <ClInclude Include="..\include\indri\PDFDocumentExtractor.hpp" />
+    <ClInclude Include="..\include\indri\PlusNode.hpp" />
+    <ClInclude Include="..\include\indri\PonteExpander.hpp" />
+    <ClInclude Include="..\include\indri\PorterStemmerTransformation.hpp" />
+    <ClInclude Include="..\include\indri\Porter_Stemmer.hpp" />
+    <ClInclude Include="..\include\indri\PowerPointDocumentExtractor.hpp" />
+    <ClInclude Include="..\include\indri\PriorFactory.hpp" />
+    <ClInclude Include="..\include\indri\PriorListIterator.hpp" />
+    <ClInclude Include="..\include\indri\PriorNode.hpp" />
+    <ClInclude Include="..\include\indri\QueryAnnotation.hpp" />
+    <ClInclude Include="..\include\indri\QueryEnvironment.hpp" />
+    <ClInclude Include="..\include\indri\QueryExpander.hpp" />
+    <ClInclude Include="..\include\indri\QueryLexer.hpp" />
+    <ClInclude Include="..\include\indri\QueryLexerTokenTypes.hpp" />
+    <ClInclude Include="..\include\indri\QueryParser.hpp" />
+    <ClInclude Include="..\include\indri\QueryParserFactory.hpp" />
+    <ClInclude Include="..\include\indri\QueryResponsePacker.hpp" />
+    <ClInclude Include="..\include\indri\QueryResponseUnpacker.hpp" />
+    <ClInclude Include="..\include\indri\QueryServer.hpp" />
+    <ClInclude Include="..\include\indri\QuerySpec.hpp" />
+    <ClInclude Include="..\include\indri\QueryStopper.hpp" />
+    <ClInclude Include="..\include\indri\QueryTFWalker.hpp" />
+    <ClInclude Include="..\include\indri\RawScorerNodeExtractor.hpp" />
+    <ClInclude Include="..\include\indri\RawTextParser.hpp" />
+    <ClInclude Include="..\include\indri\ReaderLockable.hpp" />
+    <ClInclude Include="..\include\indri\ReadersWritersLock.hpp" />
+    <ClInclude Include="..\include\indri\ReformulateQuery.hpp" />
+    <ClInclude Include="..\include\indri\ref_ptr.hpp" />
+    <ClInclude Include="..\include\indri\RegionAllocator.hpp" />
+    <ClInclude Include="..\include\indri\RelevanceModel.hpp" />
+    <ClInclude Include="..\include\indri\Repository.hpp" />
+    <ClInclude Include="..\include\indri\RepositoryLoadThread.hpp" />
+    <ClInclude Include="..\include\indri\RepositoryMaintenanceThread.hpp" />
+    <ClInclude Include="..\include\indri\RMExpander.hpp" />
+    <ClInclude Include="..\include\indri\RVLCompressStream.hpp" />
+    <ClInclude Include="..\include\indri\RVLDecompressStream.hpp" />
+    <ClInclude Include="..\include\indri\ScopedLock.hpp" />
+    <ClInclude Include="..\include\indri\ScopedMonitor.hpp" />
+    <ClInclude Include="..\include\indri\ScoredExtentAccumulator.hpp" />
+    <ClInclude Include="..\include\indri\ScoredExtentResult.hpp" />
+    <ClInclude Include="..\include\indri\SequentialReadBuffer.hpp" />
+    <ClInclude Include="..\include\indri\SequentialWriteBuffer.hpp" />
+    <ClInclude Include="..\include\indri\ShrinkageBeliefNode.hpp" />
+    <ClInclude Include="..\include\indri\SimpleCopier.hpp" />
+    <ClInclude Include="..\include\indri\SkippingCapableNode.hpp" />
+    <ClInclude Include="..\include\indri\SmoothingAnnotatorWalker.hpp" />
+    <ClInclude Include="..\include\indri\SnippetBuilder.hpp" />
+    <ClInclude Include="..\include\indri\StemmerFactory.hpp" />
+    <ClInclude Include="..\include\indri\StopperTransformation.hpp" />
+    <ClInclude Include="..\include\indri\StopStructureRemover.hpp" />
+    <ClInclude Include="..\include\indri\SumNode.hpp" />
+    <ClInclude Include="..\include\indri\Tag.hpp" />
+    <ClInclude Include="..\include\indri\TagDocumentIterator.hpp" />
+    <ClInclude Include="..\include\indri\TagEvent.hpp" />
+    <ClInclude Include="..\include\indri\TagExtent.hpp" />
+    <ClInclude Include="..\include\indri\TaggedDocumentIterator.hpp" />
+    <ClInclude Include="..\include\indri\TaggedTextParser.hpp" />
+    <ClInclude Include="..\include\indri\TagList.hpp" />
+    <ClInclude Include="..\include\indri\TermBitmap.hpp" />
+    <ClInclude Include="..\include\indri\TermData.hpp" />
+    <ClInclude Include="..\include\indri\TermExtent.hpp" />
+    <ClInclude Include="..\include\indri\TermFieldStatistics.hpp" />
+    <ClInclude Include="..\include\indri\TermFrequencyBeliefNode.hpp" />
+    <ClInclude Include="..\include\indri\TermList.hpp" />
+    <ClInclude Include="..\include\indri\TermListFileIterator.hpp" />
+    <ClInclude Include="..\include\indri\TermRecorder.hpp" />
+    <ClInclude Include="..\include\indri\TermScoreFunction.hpp" />
+    <ClInclude Include="..\include\indri\TermScoreFunctionFactory.hpp" />
+    <ClInclude Include="..\include\indri\TermTranslator.hpp" />
+    <ClInclude Include="..\include\indri\TextDocumentExtractor.hpp" />
+    <ClInclude Include="..\include\indri\TextParser.hpp" />
+    <ClInclude Include="..\include\indri\TextTokenizer.hpp" />
+    <ClInclude Include="..\include\indri\TFIDFExpander.hpp" />
+    <ClInclude Include="..\include\indri\TFIDFTermScoreFunction.hpp" />
+    <ClInclude Include="..\include\indri\Thread.hpp" />
+    <ClInclude Include="..\include\indri\TokenizedDocument.hpp" />
+    <ClInclude Include="..\include\indri\TokenizerFactory.hpp" />
+    <ClInclude Include="..\include\indri\Transformation.hpp" />
+    <ClInclude Include="..\include\indri\TreePrinterWalker.hpp" />
+    <ClInclude Include="..\include\indri\TwoStageTermScoreFunction.hpp" />
+    <ClInclude Include="..\include\indri\uint64comp.hpp" />
+    <ClInclude Include="..\include\indri\UnnecessaryNodeRemoverCopier.hpp" />
+    <ClInclude Include="..\include\indri\UnorderedWindowNode.hpp" />
+    <ClInclude Include="..\include\indri\Unpacker.hpp" />
+    <ClInclude Include="..\include\indri\UnparsedDocument.hpp" />
+    <ClInclude Include="..\include\indri\URLTextAnnotator.hpp" />
+    <ClInclude Include="..\include\indri\UTF8CaseNormalizationTransformation.hpp" />
+    <ClInclude Include="..\include\indri\UTF8Transcoder.hpp" />
+    <ClInclude Include="..\include\indri\UtilityThread.hpp" />
+    <ClInclude Include="..\include\indri\VocabularyIterator.hpp" />
+    <ClInclude Include="..\include\indri\Walker.hpp" />
+    <ClInclude Include="..\include\indri\WARCDocumentIterator.hpp" />
+    <ClInclude Include="..\include\indri\WeightedAndNode.hpp" />
+    <ClInclude Include="..\include\indri\WeightedExtentOrNode.hpp" />
+    <ClInclude Include="..\include\indri\WeightedSumNode.hpp" />
+    <ClInclude Include="..\include\indri\WeightFoldingCopier.hpp" />
+    <ClInclude Include="..\include\indri\WordDocumentExtractor.hpp" />
+    <ClInclude Include="..\include\indri\WPlusNode.hpp" />
+    <ClInclude Include="..\include\indri\WriterLockable.hpp" />
+    <ClInclude Include="..\include\indri\XMLNode.hpp" />
+    <ClInclude Include="..\include\indri\XMLReader.hpp" />
+    <ClInclude Include="..\include\indri\XMLWriter.hpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

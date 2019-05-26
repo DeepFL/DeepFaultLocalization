@@ -1,0 +1,109 @@
+/*==========================================================================
+ * Copyright (c) 2004 University of Massachusetts.  All Rights Reserved.
+ *
+ * Use of the Lemur Toolkit for Language Modeling and Information Retrieval
+ * is subject to the terms of the software license set forth in the LICENSE
+ * file included with this software, and also available at
+ * http://www.lemurproject.org/license.html
+ *
+ *==========================================================================
+ */
+
+
+//
+// count_iterator
+//
+// March 2004 -- tds
+//
+
+#ifndef INDRI_COUNTITERATOR_HPP
+#define INDRI_COUNTITERATOR_HPP
+
+#include <indri/greedy_vector>
+#include <algorithm>
+namespace indri
+{
+  namespace utility
+  {
+                      
+    template<typename _ObjectType, typename _IterType = typename greedy_vector<_ObjectType>::iterator>
+    class count_iterator {
+    public:
+      struct value_type {
+        unsigned int count;
+        _ObjectType object;
+      };
+
+    private:
+      // begin position of the input vector
+      _IterType _begin;
+      // end position of the input vector
+      _IterType _end;
+
+      // read position (the next location we'll read from in _buildValue)
+      _IterType _read;
+      // current position (the effective location of the iterator, which will be earlier than _read)
+      _IterType _current;
+
+      value_type _value;
+
+      // this starts at the _read pointer location, then counts
+      // all of the objects in this vector that have the same value
+      // as the first object that was read.  Since the vector is in
+      // sorted order, this can be done with a simple forward scan.
+
+      void _buildValue() {
+
+        if( _read == _end ) {
+          _value.count = 0;
+          return;
+        } else {
+          _value.count = 0;
+          _value.object = *_read;
+                                                        
+          for( ; _read != _end; _read++ ) {
+            if( (*_read) != _value.object )
+              break;
+
+            _value.count++;
+          }
+        }
+      }
+
+    public:
+      count_iterator( _IterType begin, _IterType end )
+        :
+        _begin( begin ),
+        _end( end ),
+        _current( begin ),
+        _read( begin )
+      {
+        std::sort( _begin, _end );
+
+        if( _current != _end )
+          _buildValue();
+      }
+
+      const value_type& operator* ( ) {
+        return _value;
+      }
+
+      const count_iterator& operator++ ( ) {
+        assert( _current != _end );
+        _current = _read;
+        _buildValue();
+        return *this;
+      }
+
+      bool operator!= ( _IterType other ) {
+        return _current != other;
+      }
+
+      bool operator== ( _IterType other ) {
+        return _current == other;
+      }
+    };
+  }
+}
+
+#endif // INDRI_COUNTITERATOR_HPP

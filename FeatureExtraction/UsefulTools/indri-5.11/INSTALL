@@ -1,0 +1,101 @@
+/*! \mainpage Indri Documentation
+
+  \section install Installation 
+ 
+  - To configure indri
+      -# go to top level indri directory.
+      -# run <tt>configure</tt> to generate MakeDefns 
+         and Makefile.app. <tt>configure</tt> accepts following arguments:
+		- <tt>--prefix=<install-directory></tt> Specifies the 
+		  base directory for installation. 
+		  Default is /usr/local.
+		- <tt>--enable-assert</tt> Enable assert statements in
+                  the code. Default is disabled.
+		- <tt>--enable-java</tt> compiles and installs the
+		  swig generated java wrappers. Default is disabled.
+		- <tt>--enable-php</tt> compiles and installs the
+		  swig generated php wrappers. Default is disabled.
+		- <tt>--enable-csharp</tt> compiles and installs the
+		  swig generated C# wrappers. Default is disabled.
+		- <tt>--with-javahome=<path></tt> Path to JAVAHOME for
+		  compiling the swig generated shared library. 
+		- <tt>--with-php-config=<path></tt> Path to php-config
+                  binary. Only required if php-config is not on the path. 
+		- <tt>--with-swig=<path></tt> Path to swig binary. Only
+		  required if the wrapper interfaces are changed. 
+                - <tt>--with-site-seed=&lt;hostname&gt;</tt> Hostname
+                  to use as the seed for building a site search index.
+
+  - To make the indri library and applications
+      -# go to top level indri directory.
+      -# configure indri
+      -# run <tt>make</tt> (or gmake)
+
+  - To clean the indri source tree (remove everything but the source)
+      -# go to top level indri directory.
+      -# run <tt>make clean</tt> (or gmake clean)
+
+  - To install the indri library and applications.
+      -# go to top level indri directory.
+      -# configure indri
+      -# run <tt>make</tt> (or gmake)
+      -# run <tt>make install</tt> (or gmake install)
+
+<p>The indri include files will be installed in
+<install-directory>/include/indri and <install-directory>/include/lemur.
+The indri library will be installed in
+<install-directory>/lib/libindri.a, and the applications will be
+installed in <install-directory>/bin. 
+
+<p> Documentation will be installed in
+<install-directory>/share/indri/doc. The file index.html points into the
+doxygen generated documentation. The file <install-directory>/share/indri/IndriQueryLanguage.html provides
+a more complete description of the indri query language.
+
+<p> If configured with --enable-java, documentation
+for the Indri JNI will be installed in
+<install-directory>/share/indri/JNIdoc. The file index.html points into the
+javadoc generated documentation.
+
+<p>If configured with --enable-java,
+the shared library will be installed in
+<install-directory>/lib/libindri_jni.so and the java class files will be
+installed in <install-directory>/share/indri/indri.jar. You will need to
+add <install-directory>/lib to your LD_LIBRARY_PATH and add
+<install-directory>/share/indri/indri.jar to your CLASSPATH to use the
+JNI interface to indri.
+<p> Two additional jar files are installed. RetUI.jar provides a basic
+document retrieval GUI for interactive queries. IndexUI.jar provides a
+basic collection indexing GUI for building an indri repository. Both are
+installed in <install-directory>/share/indri and can be run with 
+<br>
+<pre>
+java -jar &lt;jarfilename&gt;
+</pre>
+
+<p>If configured with --enable-php,
+the shared library will be installed in
+<install-directory>/lib/libindri_php.so. You will need to manually
+install it in the correct extensions directory for your php
+configuration. 
+
+<p>If configured with --enable-csharp,
+the shared library will be installed in
+&lt;install-directory&gt;/lib/libindri_csharp.so. The C# wrapper classes
+assembly will be installed  in &lt;install-directory&gt;/lib/IndriCsharp.dll
+This assembly should be referenced by your C# program.
+
+  \section program  Programming with the indri library
+
+To build an application using the indri library:
+
+      -# follow the instructions above for installing indri.
+      -# Copy <install-directory>/share/indri/Makefile.app to the directory
+         with your application's source code. Edit the file  
+	 and fill in values for
+	- APP -- name for your application. Source should be in $(APP).cpp
+        - OBJ -- list of additional object files needed to build 
+	  your application.
+      -# use <tt>make -f Makefile.app</tt> to build your application.
+
+ */

@@ -1,0 +1,12 @@
+/media/StorageData1/MutationFaultLocalization/SubjectPrograms/Closure/79/src/main/java/com/google/javascript/jscomp/sourcemap/FilePosition.java
+/media/StorageData1/MutationFaultLocalization/SubjectPrograms/Closure/79/src/main/java/com/google/javascript/jscomp/sourcemap/SourceMapGenerator.java
+/media/StorageData1/MutationFaultLocalization/SubjectPrograms/Closure/79/src/main/java/com/google/javascript/jscomp/sourcemap/SourceMapGeneratorV1.java
+/media/StorageData1/MutationFaultLocalization/SubjectPrograms/Closure/79/src/main/java/com/google/javascript/jscomp/sourcemap/SourceMapGeneratorV2.java
+/media/StorageData1/MutationFaultLocalization/SubjectPrograms/Closure/79/src/main/java/com/google/javascript/jscomp/sourcemap/SourceMapSection.java
+/media/StorageData1/MutationFaultLocalization/SubjectPrograms/Closure/79/src/main/java/com/google/javascript/jscomp/sourcemap/Util.java
+/media/StorageData1/MutationFaultLocalization/SubjectPrograms/Closure/79/src/main/java/com/google/javascript/jscomp/sourcemap/FilePosition.java
+/media/StorageData1/MutationFaultLocalization/SubjectPrograms/Closure/79/src/main/java/com/google/javascript/jscomp/sourcemap/SourceMapGenerator.java
+/media/StorageData1/MutationFaultLocalization/SubjectPrograms/Closure/79/src/main/java/com/google/javascript/jscomp/sourcemap/SourceMapGeneratorV1.java
+/media/StorageData1/MutationFaultLocalization/SubjectPrograms/Closure/79/src/main/java/com/google/javascript/jscomp/sourcemap/SourceMapGeneratorV2.java
+/media/StorageData1/MutationFaultLocalization/SubjectPrograms/Closure/79/src/main/java/com/google/javascript/jscomp/sourcemap/SourceMapSection.java
+/media/StorageData1/MutationFaultLocalization/SubjectPrograms/Closure/79/src/main/java/com/google/javascript/jscomp/sourcemap/Util.java

@@ -1,0 +1,566 @@
+<HTML>
+<TITLE>
+Indri Query Language
+</TITLE>
+<BODY>
+<CENTER><H2>Indri Query Language</H2></CENTER>
+
+<h3>Contents</h3>
+
+	<ol>
+		<li><a href="#intro">Introduction</a> </li>
+		<li><a href="#grammar">Indri Query Language Grammar</a></li>
+		<li><a href="#prox">Terms / Proximity</a></li>
+		<li><a href="#belief">Combining Beliefs</a></li>
+		<li><a href="#filter">Filter Operators</a></li>
+
+		<li><a href="#numeric">Numeric / Date Field Operators</a></li>
+		<li><a href="#prior">Document Priors</a></li>
+		<li><a href="#applications">Applications</a></li>
+	</ol>
+
+	<!-- end page table of contents -->
+
+	<hr />
+
+	<!-- begin main -->
+
+	<p><span class="notetext">Note: many thanks to <a href="http://ciir.cs.umass.edu/~metzler/" target="_blank">Don Metzler</a> for this information.</span></p>
+
+	<h3 id="intro">1. Introduction</h3>
+	<p>
+	The Indri query language, based on the InQuery query language, was designed to be robust. It can handle both
+	simple keyword queries and extremely complex queries. Such a query language sets Indri apart from many other
+	available search engines. It allows complex phrase matching, synonyms, weighted expressions, Boolean filtering,
+	numeric (and dated) fields, and the extensive use of document structure (fields), among others.
+	</p>
+
+	<p>
+	Although Indri handles unstructured documents, many of the query language features make use of structured (tagged)
+	documents. Consider the following document: <br />
+	<pre>
+	&lt;html&gt;
+	&lt;head&gt;
+	&lt;title>Department Descriptions&lt;/title&gt;
+
+	&lt;/head&gt;
+	&lt;body&gt;
+	The following list describes ...
+	&lt;h1>Agriculture&lt;/h1&gt; ...
+	&lt;h1>Chemistry&lt;/h1&gt; ...
+	&lt;h1>Computer Science&lt;/h1&gt; ...
+
+	&lt;h1>Electrical Engineering&lt;/h1&gt; ...
+	&lt;/body&gt;
+
+	&lt;/html&gt;
+	</pre>
+	<br />
+	In Indri, a <i><b>document</b></i> is viewed as a sequence of text that may contain arbitrary tags. In the example
+	above, the document consists of text marked up with HTML tags.
+	</p>
+	<p>
+	For each tag type <tt>T</tt> within a document (i.e. <tt>title</tt>, <tt>body</tt>, <tt>h1</tt>, etc), we define the <i><b>context</b></i> of <tt>T</tt> to be all of the text and tags that appear within tags of type <tt>T</tt>. In the example above, all of the text and tags appearing between <tt>&lt;body&gt;</tt> and <tt>&lt;/body&gt;</tt> tags defines the body context. A single context is generated for each unique tag name. Therefore, a context defines a subdocument. Note that because of nested tags certain word occurrences may appear in many contexts. It is also the case that there may be nested contexts. For example, within the <tt>&lt;body&gt;</tt> context there is a nested <tt>&lt;h1&gt;</tt> context made up of all of the text and tags that appear within the body context and within <tt>&lt;h1&gt;</tt> and <tt>&lt;/h1&gt;</tt> tags. Here are the tags for the <tt>title</tt>, <tt>h1</tt>, and <tt>body</tt> contexts:
+	</p>
+
+	<p>
+	<tt>title</tt> context:
+	<pre>
+	&lt;title>Department Descriptions&lt;/title&gt;
+	</pre>
+	</p>
+
+	<p>
+	<tt>h1</tt> context:
+	<pre>
+	&lt;h1>Agriculture&lt;/h1&gt;
+	&lt;h1>Chemistry&lt;/h1&gt; ...
+	&lt;h1>Computer Science&lt;/h1&gt; ...
+	&lt;h1>Electrical Engineering&lt;/h1&gt; ...
+	</pre>
+
+	</p>
+
+	<p>
+	<tt>body</tt> context:
+	<pre>
+	&lt;body&gt;
+	The following list describes ...
+	&lt;h1>Agriculture&lt;/h1&gt; ...
+	&lt;h1>Chemistry&lt;/h1&gt; ...
+
+	&lt;h1>Computer Science&lt;/h1&gt; ...
+	&lt;h1>Electrical Engineering&lt;/h1&gt; ...
+	&lt;/body&gt;
+
+	</pre>
+	</p>
+
+	<p>
+	Finally, each context is made up of one or more <i><b>extents</b></i>. An extent is a sequence of text that appear within a single begin/end tag pair of the same type as the context. For the example above, in the <tt>&lt;h1&gt;</tt> context, there are extents "<tt>&lt;h1&gt;</tt>agriculture<tt>&lt;/h1&gt;</tt>", "<tt>&lt;h1&gt;</tt>chemistry<tt>&lt;h1&gt;</tt>", etc.  Both the title and body contexts contain only a single extent because there is only a single pair of <tt>&lt;title&gt;</tt> ... <tt>&lt;/title&gt;</tt> and  <tt>&lt;body&gt;</tt> ...  <tt>&lt;/body&gt;</tt> tags, respectively. The number of extents for a given tag type <tt>T</tt> is determined by the number of sequences of the form:  <tt>&lt;T&gt;</tt> text  <tt>&lt;/T&gt;</tt> that occur within the document.
+	</p>
+
+
+	<h3 id="grammar">2. Indri Query Language Grammar</h3>
+	<p>
+	<pre>
+	query		:=	( beliefOp )+
+
+	beliefOp	:=	"#weight" ( extentRestrict )? weightedList
+			|	"#combine" ( extentRestrict )? unweightedList
+			|	"#or" ( extentRestrict )? unweightedList
+			|	"#not" ( extentRestrict )? '(' beliefOp ')'
+			|	"#wand" ( extentRestrict )? weightedList
+			|	"#wsum" ( extentRestrict )? weightedList
+			|	"#max" ( extentRestrict )? unweightedList
+			|	"#prior" '(' FIELD ')'
+			|	"#filrej" '(' unscoredTerm beliefOp ')'
+			|	"#filreq" '(' unscoredTerm beliefOp ')'
+			|	termOp ( '.' fieldList )? ( '.' '(' fieldList ')' )?
+
+	termOp		:=	( "#od" POS_INTEGER | "#od" | '#' POS_INTEGER  ) '(' ( unscoredTerm )+ ')'
+			|	( "#uw" POS_INTEGER | "#uw" ) '(' ( unscoredTerm )+ ')'
+			|	"#band" '(' ( unscoredTerm )+ ')'
+			|	"#date:before" '(' date ')'
+			|	"#date:after" '(' date ')'
+			|	"#date:between" '(' date ',' date ')'
+			|	"<" ( unscoredTerm )+ ">"
+			|	"{" ( unscoredTerm )+ "}"
+			|	"#syn" '(' ( unscoredTerm )+ ')'
+			|	"#wsyn" '(' ( weight unscoredTerm )+ ')'
+			|	"#any" ':' TERM
+			|	"#less" '(' TERM integer ')'
+			|	"#greater" '(' TERM integer ')'
+			|	"#between" '(' TERM integer integer ')'
+			|	"#equals" '(' TERM integer ')'
+			|	"#base64" '(' ( "\t" | " " )* ( BASE64_CHAR )+ ( "\t" | " " )* ')'
+			|	"#base64quote" '(' ( '\t' | ' ' )* ( BASE64_CHAR )+ ( '\t' | ' ' )* ')'
+			|	'"' text '"'
+			|	POS_INTEGER
+			|	POS_FLOAT
+			|	TERM
+
+	extentRestrict	:=	'[' "passage" POS_INTEGER ':' POS_INTEGER ']'
+			|	'[' FIELD ']'
+
+	weightedList	:=	'(' ( weight beliefOp )+ ')'
+
+	unweightedList	:=	'(' ( beliefOp )+ ')'
+
+	unscoredTerm	:=	termOp ( '.' fieldList )?
+
+	fieldList	:=	FIELD ( ',' FIELD )*
+
+	date		:=	POS_INTEGER '/' TERM '/' POS_INTEGER
+			|	POS_INTEGER TERM POS_INTEGER
+			|	TERM
+
+	integer		:=	POS_INTEGER
+			|	NEG_INTEGER
+
+	weight		:=	POS_FLOAT
+			|	POS_INTEGER
+
+	TERM		:=	( '0'..'9' )+ ('a'..'z' | 'A'..'Z' | '-' | '_')
+			|	TEXT_TERM
+
+	FIELD		:=	TEXT_TERM
+
+	TEXT_TERM	:=	( '\u0080'..'\u00ff' | ('a'..'z' | 'A'..'Z' | '0'..'9' | '-' | '_') )+
+
+	POS_INTEGER	:=	( '0'..'9' )+
+	NEG_INTEGER	:=	'-' ( '0'..'9' )+
+	POS_FLOAT	:=	( '0'..'9' )+ '.' ( '0'..'9' )*
+	BASE64_CHAR	:=	('a'..'z' | 'A'..'Z' | '0'..'9' | '+' | '/')
+	</pre>
+	</p>
+
+	<h3 id="prox">3. Terms / Proximity</h3>
+
+	<p>
+	Terms are the basic building blocks of Indri queries. Terms come in the form of single term, ordered and
+	unordered phrases, synonyms, among others. In addition, there are a number of options that allow you to
+	specify if a term should appear within a certain field, or if it should be scored within a given context.
+	</p>
+
+	<h4>Terms:</h4>
+	<p>
+	<ul>
+		<li>term -- stemmed / normalized term</li>
+
+		<li>&quot;term&quot; -- unstemmed / unnormalized term</li>
+		<li>#base64( ... ) -- converts from base64 -> ascii and then stems and normalizes. useful for including non-parsable terms in a query</li>
+		<li>#base64quote( ... ) -- same as #base64 except the the ascii term is unstemmed and unnormalized</li>
+	</ul>
+	</p>
+	<p>
+
+	<i>Examples:</i>
+	<ul>
+		<li>dogs</li>
+		<li>&quot;NASA&quot;</li>
+		<li>#base64(Wyh2Lm4ucC5hLnIucy5hLmIubC5lLild) -- equivalent to query term [(u.n.p.a.r.s.a.b.l.e.)]</li>
+	</ul>
+	</p>
+
+	<h4>Proximity terms:</h4>
+	<p>
+	<ul>
+		<li>#odN( ... ) -- ordered window -- terms must appear ordered, with at most N-1 terms between each</li>
+		<li>#N( ... ) -- same as #odN</li>
+		<li>#od( ... ) -- unlimited unordered window -- all terms must appear ordered anywhere within current context</li>
+
+		<li>#uwN( ... ) unordered window -- all terms must appear within window of length N in any order</li>
+		<li>#uw( ... ) -- unlimited unordered window -- all terms must appear within current context in any order</li>
+	</ul>
+	</p>
+	<p>
+	<i>Examples:</i>
+	<ul>
+
+		<li>#1(white house) -- matches &quot;white house&quot; as an exact phrase</li>
+		<li>#2(white house) -- matches &quot;white * house&quot; (where * is any word or null)</li>
+		<li>#uw2(white house) -- matches &quot;white house&quot; and &quot;house white&quot;</li>
+
+	</ul>
+	</p>
+
+	<h4>Synonyms:</h4>
+	<p>
+	<ul>
+		<li>#syn( ... )</li>
+		<li>{ ... }</li>
+
+		<li>&lt; ... &gt;</li>
+		<li>#wsyn( ... )</li>
+	</ul>
+	</p>
+
+	<p>
+	The first three expressions are equivalent. They each treat all of the expressions listed as synonyms. The #wsyn
+	operator treats the terms as synonyms, but allows weights to be assigned to each term.
+	</p>
+
+	<p>
+	<i>Examples:</i>
+	<ul>
+		<li>#syn( #1(united states) #1(united states of america) )</li>
+		<li>{dog canine}</li>
+		<li>&lt;#1(light bulb) lightbulb&gt;</li>
+
+		<li>#wsyn( 1.0 donald 0.8 don 0.5 donnie 0.2 donny )</li>
+	</ul>
+	NOTE: The arguments given to this operator can only be term/proximity expressions.
+	</p>
+
+	<h4>&quot;Any&quot; operator:</h4>
+	<p>
+	<ul>
+
+		<li>#any -- used to match extent types</li>
+	</ul>
+	</p>
+	<p>
+	<i>Examples:</i>
+	<ul>
+		<li>#any:PERSON -- matches any occurence of a PERSON extent</li>
+
+		<li>#1(napolean died in #any:DATE) -- matches exact phrases of the form: &quot;napolean died in &lt;date&gt;...&lt;/date&gt;&quot;</li>
+	</ul>
+	</p>
+
+	<h4>Field restriction / evaluation:</h4>
+	<p>
+
+	<ul>
+	<li>expression.f1,,...,fN(c1,...,cN) -- matches when the expression appears
+	in field f1 AND f2 AND ... AND fN and evaluates the expression using the
+	language model defined by the concatenation of contexts c1...cN within the
+	document.</li>
+	</ul>
+	</p>
+	<p>
+	<i>Examples:</i>
+	<ul>
+	<li>dog.title -- matches the term dog appearing in a title extent (uses
+	document language model)</li>
+
+	<li>#1(trevor strohman).person -- matches the phrase &quot;trevor strohman&quot; when it
+	appears in a person extent (uses document language model)</li>
+	<li>dog.(title) -- evaluates the term based on the title language model for
+	the document</li>
+	<li>#1(trevor strohman).person(header) -- builds a language model from all of
+	the &quot;header&quot; text in the document and evaluates #1(trevor strohman).person
+	in that context (matches only the exact phrase appearing within a person
+	extent within the header context)</li>
+	</ul>
+
+	</p>
+
+	<h3 id="belief">4. Combining Beliefs</h3>
+
+	<p>
+	Belief operators allow you to combine beliefs (scores) about terms, phrases, etc. There are both unweighted
+	and weighted belief operators. With the weighted operators, you can assign varying weights to certain
+	expressions. This allows you to control how much of an impact each expression within your query has on the
+	final score.
+	</p>
+
+	<h4>Belief operators:</h4>
+	<p>
+
+	<ul>
+		<li>#combine</li>
+		<li>#weight</li>
+		<li>#not</li>
+		<li>#max</li>
+		<li>#or</li>
+
+		<li>#band (boolean and)</li>
+		<li>#wsum</li>
+		<li>#wand (weighted and)</li>
+	</ul>
+	</p>
+	<p>
+	<i>Examples:</i>
+
+	<ul>
+		<li>#combine( &lt;dog canine&gt; training )</li>
+		<li>#combine( #1(white house) &lt;#1(president bush) #1(george bush)&gt; )</li>
+		<li>#weight( 1.0 #1(white house) 2.0 #1(easter egg hunt) )</li>
+
+	</ul>
+	</p>
+	<p>
+	NOTE: If you are unsure which belief operator to use, it always &quot;safest&quot; to default to
+	using the #combine or #weight operator. These operators are often the best choice for
+	combining evidence. NEVER use #wsum or #wand unless you really know what you're doing!
+	</p>
+
+	<h4>Extent / Passage retrieval:</h4>
+	<p>
+
+	<ul>
+		<li>
+			#beliefop[field]( query ) -- evaluates #beliefop( query ) for all extents
+			of type &quot;field&quot; in the document and returns a score for each. The language
+			model used to evaluate the query is formed from the text of the extent.
+		</li>
+		<li>
+			#beliefop[passageWIDTH:INC]( query ) -- evaluates #beliefop( query ) for every
+			fixed length passage of length WIDTH terms. The passage window is slid over the text
+			in increments of INC terms. The language model used to evaluate the query is formed
+			from the text within the current passage.
+		</li>
+	</ul>
+
+	</p>
+	<p>
+	<i>Example:</i>
+	<ul>
+		<li>
+			#combine[sentence]( #1(napolean died in #any:DATE ) ) -- returns a scored
+			list of sentence extents that match the given query
+		</li>
+		<li>
+			#combine[passage100:50]( #1(napolean died in #any:DATE ) ) -- returns a scored
+			list of passages (of length 100) that match the given query.
+		</li>
+
+	</ul>
+	</p>
+
+	<h3 id="filter">5. Filter Operators</h3>
+
+	<p>
+	Filter operators allow you to score only a subset of an entire collection by filtering out those documents
+	that actually get scored.
+	</p>
+
+	<h4>Filter operators:</h4>
+
+	<p>
+	<ul>
+		<li>#filreq -- filter require</li>
+		<li>#filrej -- filter reject</li>
+	</ul>
+	</p>
+	<p>
+	<i>Examples:</i>
+
+	<ul>
+		<li>
+			#filreq( sheep #combine(dolly cloning) ) -- only consider those documents matching the query "sheep" and rank
+			them according to the query #combine(dolly cloning)
+		</li>
+		<li>
+			#filrej( parton #combine(dolly cloning) ) -- only consider those documents NOT matching the query "parton" and rank them according to the query #combine(dolly cloning)
+		</li>
+	</ul><br />
+	NOTE: first argument must always be a term/proximity expression
+	</p>
+
+	<h3 id="numeric">6. Numeric / Date Field Operators</h3>
+	<p>
+	Numeric and date field operators provide a number of facilities for matching different criteria. These operators
+	are very useful when used in combination with the filter operators.
+	</p>
+
+	<h4>General numeric operators:</h4>
+	<p>
+	<ul>
+
+		<li>#less( F N ) -- matches numeric field extents of type F if value &lt; N</li>
+		<li>#greater( F N ) -- matches numeric field extents of type F if value &gt; N</li>
+		<li>#between( F N_low N_high ) -- matches numeric field extents of type F if N_low &le; value &le; N_high</li>
+
+		<li>#equals( F N ) -- matches numeric field extents of type F if value == N</li>
+	</ul>
+	</p>
+
+	<h4>Date operators:</h4>
+	<p>
+	<ul>
+		<li>#date:after( D ) -- matches numeric &quot;date&quot; extents if date is after D</li>
+
+		<li>#date:before( D ) -- matches numeric &quot;date&quot; extents if date is before D</li>
+		<li>#date:between( D_low, D_high ) -- matches numeric &quot;date&quot; extents if D_low &le; date &le; D_high</li>
+	</ul>
+
+	</p>
+
+	<p>
+	<i>Acceptable date formats:</i>
+	<ul>
+		<li>11 january 2004</li>
+		<li>11-JAN-04</li>
+		<li>11-JAN-2004</li>
+
+		<li>January 11 2004</li>
+		<li>01/11/04 (MM/DD/YY)</li>
+		<li>01/11/2004 (MM/DD/YYYY)</li>
+	</ul>
+	</p>
+	<p>
+	<i>Examples:</i>
+
+	<ul>
+	<li>
+		#filreq(#less(READINGLEVEL 10) george washington) -- if each document in a collection contained a
+		numeric tag that specified the reading level of the document, then this query will only retrieve
+		documents that have a reading level below grade 10 and documents will be ranked according to the
+		query &quot;george washington&quot;.
+	</li>
+	<li>
+		#combine( european history #date:between( 01/01/1800, 01/01/1900 ) ) -- such a query may be
+		constructed to find information about 19th century european history, as this query will find
+		pages that discuss &quot;european history&quot; and contain 19th century dates.
+	</li>
+
+	</ul>
+	</p>
+	<p>
+	NOTE: The general numeric operators only work on indexed numeric fields, whereas the date
+	operators are only applicable to a specially indexed numeric field named "date". See the
+	indexing documentation for more on numeric fields.
+	</p>
+
+	<h3 id="prior">7. Document Priors</h3>
+
+	<p>
+	Document priors allow you impose a &quot;prior probability&quot; over the documents in a collection.
+	</p>
+
+	<h4>Prior</h4>
+	<p>
+	<ul>
+		<li>#prior( NAME ) -- creates the document prior specified by the name given</li>
+	</ul>
+	</p>
+
+	<p>
+
+	<i>Example:</i>
+	<ul>
+		<li>
+			#combine(#prior(RECENT) global warming) -- we might create a prior named RECENT to be used to
+			give greater weight to documents that were published more recently.
+		</li>
+	</ul>
+	</p>
+
+	<h3 id="applications">8. Applications</h3>
+
+	<p>
+	Here we list suggested uses of the language for several common information retrieval tasks.
+	</p>
+
+	<h4>Ad Hoc Retrieval (Query Likelihood)</h4>
+	<p>
+	Ad hoc retrieval is the standard information retrieval task of finding documents that are topically
+	relevant to a given information need (query). One common probabilistic approach to ad hoc retrieval
+	is the query likelihood retrieval paradigm from language modeling. It is very simple to construct an
+	Indri query that ranks documents the same as query likelihood. For the query, &quot;literacy rates africa&quot;,
+	we construct the following Indri query:
+	</p>
+
+	<p>
+	<pre>
+	#combine( literacy rates africa )
+	</pre>
+	<br />
+	This returns a ranked list that is exactly equivalent to the query likelihood ranking (under the given
+	smoothing conditions).
+	</p>
+
+	<h4>Pseudo-Relevance Feedback / Query Expansion</h4>
+
+	<p>
+	Both pseudo-relevance feedback and query expansion methods typically begin with some intial query, do some
+	processing, and then return a list of expansion terms. The original query is then augmented with the
+	expansion terms and rerun. Given the original query &quot;hubble telescope repairs&quot; and the expansion terms
+	&quot;universe&quot;, &quot;system&quot;, &quot;mission&quot;, &quot;search&quot;, &quot;galaxies&quot; we can then
+	construct the following Indri query:
+	</p>
+
+	<p>
+	<pre>
+	#weight( 0.75 #combine ( hubble telescope achievements )
+		 0.25 #combine ( universe system mission search galaxies ) )
+	</pre>
+	<br />
+	This is how Indri's built-in query expansion method formulates expanded queries. We see that the query is
+	made up of two parts: the original query and the expanded query. The two parts are then combined via a
+	#weight to appropriately weight the original and expanded parts of the query.
+	</p>
+
+	<h4>Named Page Finding / Homepage Finding</h4>
+	<p>
+
+	Named page finding and homepage finding are examples of known-item search. That is, the user knows some
+	page exists, and is attempting to find it. One popular approach to known-item search is to use a mixture
+	of context language models. This can easily be expressed in the Indri query language. For example, for the
+	query &quot;bbc news&quot;, the following query would be constructed:
+	<p>
+	<pre>
+	#combine( #wsum( 5.0 bbc.(title) 3.0 bbc.(anchor) 1.0 bbc )
+		  #wsum( 5.0 news.(title) 3.0 news.(anchor) 1.0 news ) )
+	</pre>
+	<br />
+	For each term in the query, the #wsum operator constructs a mixture model from the
+	<tt>title</tt>, <tt>anchor</tt>, and whole document context language models and weights each model appropriately.
+	The scores for the two terms are then #combined together.
+	</p>
+
+	<!-- end main -->
+
+	<hr />
+
+Copyright 2006, <a href="http://www.lemurproject.org/" target="_blank">The Lemur Project</a>.<BR>
+Last updated April 21, 2006.
+</body>
+</html>
+
+
+</BODY>
+</HTML>

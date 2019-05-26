@@ -1,0 +1,7 @@
+Name: lemurproject/indri/ui
+Main-Class: lemurproject.indri.ui.IndexUI
+Specification-Title:  Index UI
+Specification-Vendor: Lemur Project
+Specification-Version: 0.6
+Package-Title: lemurproject.indri.ui
+Package-Vendor: Lemur Project

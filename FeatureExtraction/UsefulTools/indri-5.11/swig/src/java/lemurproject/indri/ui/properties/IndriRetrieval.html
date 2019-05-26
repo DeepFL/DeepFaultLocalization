@@ -1,0 +1,118 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Indri Retrieval UI Help</title>
+</head>
+<body>
+<h1>Indri Retrieval UI Help</h1>
+<h2>Getting Started</h2>
+<p>RetUI is a GUI based indri retrieval application. After opening an
+index or index server, enter your query in the "Enter your query" field
+and either click Search or press enter to run your query. You can change
+the number of documents returned in the "Number of documents" field. The
+retrieved documents will be listed in the lower table.
+</p>
+<p> The "Database(s)" list shows all open indexes and index servers. If
+you want to remove an index or server, select it in the list (left click
+with your mouse) and then select "Remove Selected Index" from the File
+menu.
+</p>
+<p> Selecting a document (left click with the mouse) in the lower table
+will raise the document display window. The document display window
+contains two panes. The top displays the query tree, the bottom displays
+the document text. Search terms from the query are highlighted in red in
+the document text. Initially, all matches from the query are
+highlighted. Selecting different nodes within the query tree will update
+the highlighting to reflect the selected node only. 
+</p>
+<p>
+If you receive a status message of the form "Out of Memory. Unable
+to open document" when selecting a document from the table, you will
+need to manually run java on the RetUI.jar file with addtional arguments
+to increase the memory available to java. The java virtual machine can
+run out of available memory when retrieving the text of large
+(multi-megabyte) documents. From a command prompt window,
+run:<br>
+<tt>javaw -Xmx512M -jar "C:\Program Files\Indri\lib\RetUI.jar"</tt>
+<br>
+where -Xmx specifies the maximum memory for java to use, 512 megabytes
+in the above example. If javaw is not found on your path, you will need
+to have windows search for javaw.exe. If you installed indri in a
+different location from the default, adjust the pathname to the jar file accordingly.
+</p> 
+<p> The document display window provides a File menu with the following
+items: </p>
+<dl>
+  <dt><b>View as HTML<br>
+    </b></dt>
+  <dd>Pops up a new window with the current document text rendered as
+  HTML. Note that hyperlinks can not be followed in this view. If the
+  current document does not contain HTML markup, the view will be the
+  plain text with all of the whitespace squeezed. </dd>
+  <dt><b>View Original<br>
+    </b></dt>
+  <dd>If your computer is running Windows, and if the current document
+  was indexed from a local file on your computer, and it is a Word
+  (doc), PowerPoint (ppt), or Adobe PDF (pdf) format document, the
+  original document can be viewed with the corresponding program, if it
+  is installed on your system. The
+  program will remain running, even if you exit the Retrieval UI.</dd>
+</dl>
+
+<p> Selecting the "Clear" button will clear the query, document list,
+and document display window.
+</p>
+
+<p> Selecting the "Show Scores" button will enable display of query
+scores in the results table. The button will then change to "Hide
+Scores". Selecting "Hide Scores" will disable the display of query
+scores in the results table.
+</p>
+
+<h3>Menus</h3>
+<p>RetUI has two menus, described below.
+</p>
+<h4>File Menu</h4>
+<dl>
+  <dt><b>Add Index<br>
+    </b></dt>
+  <dd>Adds a local index. </dd>
+  <dt><b>Add Server<br>
+    </b></dt>
+  <dd>Adds an indrid server running on some host.</dd>
+  <dt><b>Remove Selected Index<br>
+    </b></dt>
+  <dd>Remove an index or server from the set of open indexes and
+servers.<br>
+  </dd>
+  <dt><b>Quit</b></dt>
+  <dd>Exits RetUI<br>
+  </dd>
+</dl>
+<h4>Help Menu</h4>
+<dl>
+  <dt><b>Help</b></dt>
+  <dd>Opens a window to view this help file. Any
+hyperlinks in this file will be opened in a separate window within a
+second window. </dd>
+  <dt><b>About</b></dt>
+  <dd>Displays the About Dialog.</dd>
+</dl>
+<br>
+<hr>
+<center>
+<table border="0" cellpadding="5" width="650">
+  <tbody>
+    <tr>
+          <td align="right" valign="middle"> <a
+ href="http://ciir.cs.umass.edu/"> <img
+ src="http://ciir.cs.umass.edu/images/ciirlogo1.gif" border="0"></a> </td>
+          <td align="left" valign="middle"> <a
+ href="http://www.lti.cs.cmu.edu"> <img
+ src="http://www.cs.cmu.edu/%7Elemur/ltilogo.gif" border="0"></a> </td>
+    </tr>
+  </tbody>
+</table>
+</center>
+</body>
+</html>

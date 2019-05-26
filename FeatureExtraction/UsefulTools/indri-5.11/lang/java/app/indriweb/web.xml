@@ -1,0 +1,24 @@
+
+<Context path="/indriweb" docBase="indriweb" debug="0" privileged="true">
+  <Environment name="index.db" type="java.lang.String"
+               value="jdbc:mysql://localhost/db" />
+  <Environment name="index.dbuser" type="java.lang.String"
+               value="username" />
+  <Environment name="index.dbpassword" type="java.lang.String"
+               value="password" />
+  <Environment name="index.indri" type="java.lang.String"
+               value="indexPath" />
+  <Environment name="rerankCount" type="java.lang.Integer"
+               value="20" />
+  <Environment name="resultCount" type="java.lang.Integer"
+               value="10" />
+  <Environment name="rerank" type="java.lang.Boolean"
+               value="true" />
+  <Environment name="judge" type="java.lang.Boolean"
+               value="false" />
+  <Environment name="preformatted" type="java.lang.Boolean"
+               value="false" />
+  <Environment name="collection" type="java.lang.String"
+               value="This is the name of the collection" />
+</Context>
+

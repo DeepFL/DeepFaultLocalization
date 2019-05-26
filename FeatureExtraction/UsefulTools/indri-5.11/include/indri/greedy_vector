@@ -1,0 +1,318 @@
+/*==========================================================================
+ * Copyright (c) 2004 University of Massachusetts.  All Rights Reserved.
+ *
+ * Use of the Lemur Toolkit for Language Modeling and Information Retrieval
+ * is subject to the terms of the software license set forth in the LICENSE
+ * file included with this software, and also available at
+ * http://www.lemurproject.org/license.html
+ *
+ *==========================================================================
+ */
+
+
+//
+// greedy_vector
+//
+// A stripped-down vector implementation that maintains
+// a stack buffer, and never shrinks the size of its
+// buffers until its destructor is called.
+//
+// greedy_vector is supposed to be the C++ equivalent of
+// a static stack buffer; it's a little wasteful with space
+// but the payoff is improved speed.  Unlike the stack buffer,
+// though, this one will grow dynamically if you end up
+// needing that.
+//
+// This is currently missing some assign() and insert()
+// functionality, because I rarely use those.
+//
+// 30 January 2004 -- tds
+//
+
+#ifndef INDRI_GREEDY_VECTOR
+#define INDRI_GREEDY_VECTOR
+
+#include <assert.h>
+#include "lemur/lemur-platform.h"
+#include "lemur/lemur-compat.hpp"
+#include <stdlib.h>
+#include <iostream>
+#include <stdexcept>
+namespace indri
+{
+  namespace utility
+  {
+    
+    template<typename _Type, int _Count = 16>
+    class greedy_vector {
+    private:
+      typedef greedy_vector<_Type, _Count> my_type;
+
+      LEMUR_PREALIGN char _stack[ sizeof(_Type) * _Count ] LEMUR_POSTALIGN;
+      _Type* _array;
+      size_t _size;
+      size_t _space;
+
+      void _allocate( size_t newSpace ) {
+        assert( newSpace > _space );
+        _Type* newBuffer = (_Type*) malloc( newSpace * sizeof(_Type) );
+        if (newBuffer == NULL) throw new std::bad_alloc();
+        if( _size ) {
+          // copy to the new buffer, destroying the old copy as we go
+          for( size_t i=0; i<_size; i++ ) {
+            new(&newBuffer[i]) _Type(_array[i]);
+            _array[i].~_Type();
+          }
+        }
+
+        if( _array != (_Type*) _stack )
+          free( _array );
+
+        _array = newBuffer;
+        _space = newSpace;
+      }
+
+      void _more_space() {
+        _allocate( _space * 2 );
+      }
+
+      void _grow( size_t newSize, const _Type& prototype ) {
+        assert( newSize >= _size );
+
+        while( _space < newSize )
+          _more_space();
+
+        for( ; _size < newSize; _size++ ) {
+          new(&_array[_size]) _Type(prototype);
+        }
+      }
+
+      template<typename _Iter>
+      void _copy( _Type* start, _Iter other, _Iter otherEnd ) {
+        for( _Type* current = start; other != otherEnd; current++, other++ ) {
+          new(current) _Type(*other);
+        }
+      }
+
+      void _shrink( size_t newSize ) {
+        assert( newSize <= _size );
+        erase( begin() + newSize, end() );
+      }
+
+      void _subscript_gripe() {
+        throw std::out_of_range( "greedy_vector<T>: subscript too big" );
+      }
+
+    public:
+      typedef _Type* iterator;
+      typedef const _Type* const_iterator;
+      typedef _Type& reference;
+      typedef const _Type& const_reference;
+
+      greedy_vector() : 
+        _array( (_Type*) _stack),
+        _size(0),
+        _space( _Count )
+      {
+      }
+
+      template<typename _VectorType>
+      greedy_vector( const _VectorType& other ) :
+        _array( (_Type*) _stack),
+        _size(0),
+        _space( _Count ) 
+      {
+        assign( other.begin(), other.end() );
+      }
+  
+      greedy_vector( const my_type& other ) :
+        _array( (_Type*) _stack),
+        _size(0),
+        _space( _Count ) 
+      {
+        assign( other.begin(), other.end() );
+      }
+
+      explicit greedy_vector( size_t storageCount ) :
+        _array( (_Type*) _stack),
+        _size(0),
+        _space( _Count )
+      {
+        if( _space < storageCount )
+          _allocate( storageCount );
+      }
+  
+      ~greedy_vector() {
+        for( size_t i=0; i<_size; i++ ) {
+          _array[i].~_Type();
+        }
+        if( _array != (_Type*) _stack ) {
+          free( _array );
+        }
+      }
+  
+      inline size_t size() const {
+        return _size;
+      }
+
+      size_t capacity() const {
+        return _space;
+      }
+
+      void reserve( size_t space ) {
+        if( space > _space )
+          _allocate( space );
+      }
+
+      void resize( size_t newSize, const _Type &prototype ) {
+        if( newSize >= _size ) {
+          _grow(newSize, prototype);
+        } else {
+          _shrink(newSize);
+        }
+      }
+
+      void resize( size_t newSize ) {
+        resize( newSize, _Type() );  
+      }
+
+      inline void push_back( const _Type& object ) {
+        if( _size == _space )
+          _more_space();
+
+        new(&_array[_size]) _Type(object);
+        _size++;
+      }
+
+      inline const_iterator begin() const {
+        return _array;
+      }
+
+      inline const_iterator end() const {
+        return _array + _size;
+      }
+
+      inline iterator begin() {
+        return _array;
+      }
+
+      inline iterator end() {
+        return _array + _size;
+      }
+
+      _Type& operator[] ( size_t index ) {
+        assert( index >= 0 );
+        assert( index < _size );
+
+        return *(_array + index);
+      }
+
+      inline const _Type& operator[] ( size_t index ) const {
+        assert( index >= 0 );
+        assert( index < _size );
+
+        return *(_array + index);
+      }
+
+      reference at( size_t index ) {
+        if( index >= _size )
+          _subscript_gripe();
+        return *(_array + index);
+      }
+
+      const_reference at( size_t index ) const {
+        if( index >= _size )
+          _subscript_gripe();
+        return *(_array + index);
+      }
+  
+      inline reference front() {
+        return *(begin());
+      }
+  
+      inline reference back() {
+        return *(end()-1);
+      }
+  
+      inline const_reference front() const {
+        return *(begin());
+      }
+
+      inline const_reference back() const {
+        return *(end()-1);
+      }
+  
+      template<typename _Iter>
+      void append( const _Iter otherBegin, const _Iter otherEnd ) {
+        assert( otherEnd - otherBegin >= 0 );
+  
+        while( _size + size_t(otherEnd - otherBegin) > _space )
+          _more_space();
+
+        _copy( _array + _size, otherBegin, otherEnd );
+        _size += size_t(otherEnd - otherBegin);
+      }
+  
+      template<typename _Iter>
+      void assign( const _Iter otherBegin, const _Iter otherEnd ) {
+        assert( otherEnd - otherBegin >= 0 );
+
+        clear();
+        while( _size + size_t(otherEnd - otherBegin) > _space )
+          _more_space();
+
+        _copy( _array, otherBegin, otherEnd );
+        _size = otherEnd - otherBegin;
+      }
+
+      my_type& operator= ( const my_type& other ) {
+        assign( other.begin(), other.end() );
+        return *this;
+      }
+  
+      template<typename _VectorType>
+      my_type& operator= ( const _VectorType& other ) {
+        assign( other.begin(), other.end() );
+        return *this;
+      }
+
+      void erase( iterator spot ) {
+        erase( spot, spot+1 );
+      }
+
+      void erase( iterator start, iterator finish ) {
+        size_t count = size_t(finish - start);
+
+        assert( finish <= end() );
+        assert( start >= _array );
+        assert( (finish - start) >= 0 );  
+
+        if( start == finish )
+          return;
+
+        iterator in;
+        iterator out;
+
+        // move what's left
+        for( in = start, out=finish; out != end(); in++, out++ ) {
+          in->~_Type();
+          new(in) _Type(*out);
+        }
+
+        // delete the remaining stuff
+        for( out = end() - count; out != end(); out++ ) {
+          out->~_Type();
+        }
+
+        // update size
+        _size -= count;
+      }
+
+      void clear() {
+        erase( begin(), end() );
+      }
+    };
+  }
+}
+
+#endif // INDRI_GREEDY_VECTOR

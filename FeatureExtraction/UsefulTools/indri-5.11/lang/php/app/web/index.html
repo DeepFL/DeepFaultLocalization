@@ -1,0 +1,45 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<?php include(indrihelpers) ?>
+
+<head>
+<title>Indri search</title>
+<link rel="stylesheet" type="text/css" href="http://ciir.cs.umass.edu/~strohman/indri/style.css" title="stylesheet" />
+</head>
+<body>
+
+<div id="content">
+  <div id="header">
+    <a href="http://www.lemurproject.org/indri-1.0"><h1>INDRI</h1></a>
+    <h2>Language modeling meets inference networks</h2>
+  </div>
+
+  <form action=query.php method=post>
+<table border=0>
+<tr><td>Index: </td><td><select name="index">
+<option value="/usr/ind6/tmp1/tmp1/tmp1/indri/strohman/trectagged" SELECTED>Identifinder</option>
+<option value="None">None</option>
+<option value="/usr/ind1/tmp2/dfisher/src/indri/data/index/ap89">AP89</option>
+<option value="/usr/ind1/tmp2/dfisher/src/indri/data/index/trec9">TREC9 QA</option>
+</select>
+</td></tr>
+<tr><td>Server: </td><td><select name="server">
+<option value="None" SELECTED >None</option>
+<option value="indri4.cs.umass.edu:16000">GOV2 fields</option>
+</select>
+</td></tr>
+
+<tr><td>Query: </td><td> <input type=text name="query" SIZE="100"></td></tr>
+</table>
+<br>
+<input type=submit value=query>
+</form>
+
+  <div id="footer">
+    <a href="http://ciir.cs.umass.edu/"><img src="http://ciir.cs.umass.edu/images/ciirlogo.gif" alt="CIIR @ UMass" /></a>
+  </div> <!-- footer -->
+</div> <!-- content -->
+
+</body>
+</html>
+

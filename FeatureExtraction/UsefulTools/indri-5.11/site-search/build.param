@@ -1,0 +1,20 @@
+<parameters>
+<index>/home/harding/Desktop/CIIR/Releases/DEC2016/indri/trunk/site-search/crawl/index/crawl</index>
+<corpus>
+   <path>/home/harding/Desktop/CIIR/Releases/DEC2016/indri/trunk/site-search/crawl/corpus</path>
+   <class>trecweb</class>
+   <inlink>/home/harding/Desktop/CIIR/Releases/DEC2016/indri/trunk/site-search/crawl/linkz/sorted</inlink>
+   <metadata>
+      <forward>url</forward>
+      <forward>title</forward>
+   </metadata>
+</corpus>
+<stemmer>krovetz</stemmer>
+<field><name>inlink</name></field>
+<field><name>mainbody</name></field>
+<field><name>heading</name></field>
+<field><name>title</name></field>
+<field><name>a</name></field>
+<field><name>absolute-url</name></field>
+<field><name>relative-url</name></field>
+</parameters>

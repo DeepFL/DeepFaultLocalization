@@ -1,0 +1,242 @@
+/*
+ * Stylesheet for Indri website
+ * Based in part on the BibDesk website, and a rough design from
+ * http://www.inknoise.com/experimental/layoutomatic.php
+ */
+
+
+#content {
+  width: 650px;
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid gray;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 10pt;    
+  font-family: Helvetica, sans-serif;
+}
+
+#content td {
+ padding: 2px 5px;
+}
+
+#content h1, h2, h3, h4 {
+  font-family: Helvetica, sans-serif;
+}
+
+#query {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+#header {
+  padding:  20px;
+  margin-bottom: 5px;
+/*  background-color: rgb( 92, 115, 184);*/
+  font-family: Helvetica, sans-serif;
+  /* indri image */
+/*  background-image: url(http://indri6.cs.umass.edu/~dfisher/cs-crawl-linkz/images/indri.png);
+*/
+
+/*  background-image: url(../images/indri.png); */
+  background-image: url(../images/indri-blue.png);
+  background-position:100%;
+
+/* lemur image */
+/*
+  background-image: url(../images/lemur_logo_32.gif);
+  background-position:100%;
+*/
+  text-align: center;
+  background-repeat: no-repeat;
+
+}
+
+#header h1 {
+/*  color: white;*/
+  font-family: Helvetica, sans-serif;
+  font-size: 1em;
+  font-weight: bold;
+  margin: 0;
+}
+
+#header h2 {
+/*  color: white;*/
+  font-family: Helvetica, sans-serif;
+  font-weight: bold;
+  font-size: 1em;
+  margin: 0;
+}
+
+#header h3 {
+/*  color: white;*/
+  font-family: Helvetica, sans-serif;
+  font-weight: bold;
+  font-size: 1em;
+  margin: 0;
+}
+
+#header h4 {
+/*  color: white;*/
+  font-family: Helvetica, sans-serif;
+  font-weight: bold;
+  font-size: 1em;
+  margin: 0;
+}
+
+
+#description {
+  padding: 15px;
+  margin-right: 215px;
+  background-color: white;
+  font-family: Helvetica, sans-serif;
+}
+
+#actions {
+  float: right;
+  width: 250px;
+  margin: 10px;
+  padding: 0 0 0 20px;
+  height: 100%;
+  background-color: rgb(235, 235, 235);
+  font-family: Helvetica, sans-serif;
+}
+
+#actions h1, h2, h3, h4 {
+  font-family: Helvetica, sans-serif;
+}
+
+#actions a {
+  text-decoration: none;
+}
+
+#actions ul {
+  list-style-type: none;
+}
+
+#actions li {
+  margin: 0  0 7px 0;
+}
+
+#footer {
+  clear: both;
+  font-size: 10pt;
+  font-family: Helvetica, sans-serif;
+  text-align: right;
+}
+
+#footer img {
+  float: right;
+  border-style: none;
+}
+
+#header img {
+  border-style: none;
+  float: left;
+}
+/*
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+#actions a:hover {
+  text-decoration: underline;
+}
+*/
+#header a {
+/*  color: white;*/
+  text-decoration: none;
+}
+
+#header h1:first-letter {
+  font-size: 1em;
+}
+
+#searchboxquery {
+  margin-top: 14px;
+  margin-bottom: 5px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+#searchbox {
+  border: 1px solid #36c;
+  background-color: rgb( 229, 236, 249);
+}
+
+#indentedresult {
+  padding-left: 40px;
+}
+
+#resultbanner {
+  border: 1px solid #36c;
+  background-color: rgb( 229, 236, 249);
+}
+#indentedresult a {
+   color: rgb(12, 133, 12);
+}
+
+#indresulttitle a {
+   color: blue;
+}
+
+#result a {
+  color: rgb(12, 133, 12);
+/*  color: gray;*/
+}
+
+#snippet {
+  font-size: 1.0em;
+}
+
+#expandedquery {
+   font-size: 1em;
+   font-weight: bold;
+/*   color: gray;*/
+}
+
+#resulttitle {
+  font-size: 1.2em;
+/*  font-weight: bold;*/
+  margin-top: 15px;
+/*  margin-bottom: 5px;*/
+  margin-bottom: 0px;
+}
+
+#resulttitle a {
+  color: blue;
+}
+
+/* cachedlink */
+#cachedlink a {
+  color: rgb(122, 122, 205);
+}
+
+/* more results */
+#morelink a {
+  color: rgb(122, 122, 205);
+}
+
+#indresulttitle {
+  font-size: 1.1em;
+/*  font-weight: bold;*/
+  margin-top: 5px;
+  margin-bottom: 0px;
+}
+
+#url {
+  color: rgb(12, 133, 12);
+/*  color: gray;*/
+  font-family: Helvetica, sans-serif;
+  font-size: 1em;
+  /*font-weight: bold;*/
+  margin: 0;   
+}

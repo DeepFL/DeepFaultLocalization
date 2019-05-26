@@ -1,0 +1,71 @@
+{%LemurSearchSetTitle("Lemur Search")%}
+
+<html>
+	<head>
+		<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+		<title>{%LemurSearchTitle%}</title>
+	</head>
+	<body>
+		<center>
+
+		<!-- header (logo and search box) -->
+
+		<table border="0">
+			<tr>
+				<td><img src="lemur150.gif" alt="Lemur Project Logo" height="119px" width="150px"></td>
+				<td width="15px">&nbsp;</td>
+				<td align=center valign=center>
+					<font size="+2" color=#0000FF><strong>{%LemurSearchTitle%}</strong></font></br>
+					{%LemurSearchBox("100%")%}
+				</td>
+				<td width="15px">&nbsp;</td>
+				<td valign=center>
+					<ul>
+						<li><a href="help-qry.html">Query language help</a></li>
+						<li><a href="help-db.html">Documents in database</a></li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+		</center>
+
+		<!-- end header -->
+
+		<!-- status bar (queried for... number of results... etc.) -->
+
+		<table border="0" width="100%" bgcolor="#0000FF" cellpadding="1" cellspacing="0">
+			<tr>
+				<td nowrap align=left><font color="#FFFFFF">Searched for: <strong>{%LemurSearchQueryTerms%}</strong></font></td>
+				<td nowrap align=right><font color="#FFFFFF">Results <strong>{%LemurSearchResultsStartNum%}</strong> - <strong>{%LemurSearchResultsEndNum%}</strong> of <strong>{%LemurSearchResultsTotalNum%}</strong> matches</font></td>
+			</tr>
+		</table>
+
+		<!-- end status bar -->
+
+		<!-- begin search results -->
+
+		{%LemurSearchResults%}
+
+		<!-- end search results -->
+
+		<!-- next / previous pages -->
+
+		<center>
+			&nbsp;</br>
+			{%LemurSearchResultsPreviousPage()%} {%LemurSearchResultPageNumbers()%} {%LemurSearchResultsNextPage()%}</br>
+			&nbsp;</br>
+		</center>
+
+		<!-- end next / previous pages -->
+
+		<!-- footer -->
+
+		<center>
+			<font size="-1">
+				&copy;2006 The Lemur Project.  Powered by the <a href="http://www.lemurproject.org/" target="_blank">Lemur Toolkit</a>.  Search engine last updated {%LemurSearchCompileDate%}, Version {%LemurSearchVersion%}.  Contact <a href="">[Contact Information Here]</a> for more information.
+			</font>
+		</center>
+
+		<!-- end footer -->
+	</body>
+</html>

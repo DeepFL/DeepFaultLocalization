@@ -1,0 +1,7 @@
+{
+	if( $0 ~ /INDRI_DISTRIBUTION/ )
+		printf "#define INDRI_DISTRIBUTION \"Indri development release (%s)\"\n", stamp
+	else
+		print $0
+}
+

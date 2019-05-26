@@ -1,0 +1,20 @@
+div.window2 {
+	font-size:12px;
+	font-family:arial,helvetica;
+        border-width:1px;
+        border-style:solid;
+        border-color:white;
+        overflow:auto;
+}
+div.table {
+	font-size:12px;
+	font-family:arial,helvetica;
+}
+div.example {
+	font-size:12px;
+	font-family:arial,helvetica;
+        border-width:1px;
+        border-style:solid;
+        border-color:white;
+        overflow:auto;
+}

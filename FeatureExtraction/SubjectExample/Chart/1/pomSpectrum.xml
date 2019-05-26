@@ -1,0 +1,118 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.jfree</groupId>
+  <artifactId>jfreechart2</artifactId>
+  <packaging>jar</packaging>
+  <version>2.0-pre1</version>
+  <name>JFreeChart2</name>
+  <url>http://www.jfree.org/jfreechart/index.html</url>
+
+  <build>
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+      </resource>
+    </resources>
+    <plugins>
+    <plugin>
+                <groupId>org.pitest</groupId>
+                <artifactId>pitest-maven</artifactId>
+                <version>1.1.5-SNAPSHOT_TestCoverLineNumber</version>
+                <configuration>
+                    <targetClasses>
+                        <param>org.jfree.*</param>
+                    </targetClasses>
+                   <targetTests>
+ <param>*PackageTests</param>
+</targetTests>
+<threads>4</threads>
+                        <mutators>
+                                <mutator>ALL</mutator>
+                        </mutators>
+                        <outputFormats>
+                        <param>XML</param>
+                        <param>html</param>
+                        </outputFormats>
+                    <!--excludedMethods>
+                        <param>equals</param>
+                        <param>hashCode</param>
+                    </excludedMethods-->
+                </configuration>
+            </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.2</version>
+        <configuration>
+          <!-- 1.8 is required to compile the JavaFX support. -->
+          <source>1.7</source>
+          <target>1.7</target>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <version>2.2.1</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>2.18.1</version>
+        <configuration>
+         <includes>
+      <include>**/*PackageTests.java</include>
+    </includes>
+          <!-- this is here to prevent exceptions being thrown with no message -->
+          <!-- or stack trace, which can happen on oracle JVMs after a while   -->
+          <argLine>-XX:-OmitStackTraceInFastThrow</argLine>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>2.9</version>
+        <configuration>
+          <overview>src/main/java/overview.html</overview>
+          <docfilessubdirs>true</docfilessubdirs>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+  <properties>
+     <project.build.outputEncoding>UTF-8</project.build.outputEncoding>
+     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+  </properties>
+
+  <dependencies>
+<dependency>
+    <groupId>commons-codec</groupId>
+    <artifactId>commons-codec</artifactId>
+    <version>1.9</version>
+</dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.12</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>servlet-api</artifactId>
+      <version>2.5</version>
+      <scope>provided</scope>
+    </dependency>
+  </dependencies>
+
+</project>

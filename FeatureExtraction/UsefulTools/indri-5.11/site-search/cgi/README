@@ -1,0 +1,104 @@
+LemurCGI
+(C) 2006 - The Lemur Toolkit (www.lemurproject.org)
+Version 5.0
+March 4th, 2006
+
+This is the LemurCGI package.
+
+----------------------
+
+To build from the makefiles (typically for Linux or Mac OS X):
+1) Run "./configure -with-lemur=[LEMUR_INSTALL_DIRECTORY]"
+   where [LEMUR_INSTALL_DIRECTORY] is the path to your local
+   Lemur Toolkit installation (/usr/local/lemur by default)
+
+2) Run "make".
+
+3) Copy all the contents of the ./bin folder to the location accessible via
+   your webserver. Be sure that your webserver configuration will allow
+   executables to be run. Consult your webserver documentation or system
+   administator if you are uncertain how to ensure this.
+
+----------------------
+   
+To build from Microsoft Visual C++ .NET 2003 (Version 7.1):
+
+1) Open the file "Lemur.sln" in your compiler.
+
+2) Right-click on the LemurCGI project and open the "Properties" dialog box.
+
+3) Under "C/C++ / General", set the additional include directories to
+   reference the include directories where you have your copy of the Lemur
+   Toolkit installed
+   
+4) Under "Linker / General", set the additional library directories to
+   reference your compiled static libraries for the Lemur Toolkit.
+   
+5) Press "OK" to exit the properties dialog.
+
+6) Press Ctrl-Shift-B (Build Solution) and allow the project to build.
+
+7) Copy the created executable (LemurCGI.exe, typically found in your
+   ./Debug folder, or ./Release if built in release mode) along with the
+   entire contents of the ./bin folder  to the location accessible via
+   your webserver. Be sure that your webserver configuration will allow
+   executables to be run. Consult your webserver documentation or system
+   administator if you are uncertain how to ensure this.
+
+----------------------   
+
+Before the initial execution, edit the "lemur.config" file (which should stay
+in the same directory as lemur.cgi) to reflect your configuration. 
+
+See the ./bin/lemur.config file for an example configuration.
+
+The configuration file is a well-formed XML file with the opening tag
+<lemurconfig>. There are two required elements within the configuration file:
+
+<templatepath>: this should reflect the path (either relative or absolute) to
+                the template files.
+
+<indexes>: this section contains information about what indexes are available,
+           and can contain as many indexes as needed. For each <index> item,
+           there should be two elements. First, a <path> element must be set
+           pointing at where the index is located. Secondly (and optionally),
+           a <description> tag can be set to be a description of the pointed
+           index.
+
+           optionally, for an <index> item, you can specify an additional 
+           parameter <queryserver> to specify the host and port of an Indri
+           Daemon server to call to processes queries. For example:
+           <queryserver>127.0.0.1:8900</queryserver> 
+           would call the Indri Daemon on the local host at port 8900. Note
+           that this will only affect queries. Any other data (cached versions
+           of documents, corpus statistics, etc.) will still be gathered from
+           the index <path>.
+           
+There is also an optional element <rootpaths> that defines if the original
+path in the search result exists, then to strip it out of the URL. This is
+most useful for enabling a site-search capability where there are locally 
+mirrored versions of the indexed web pages. For example, if your local cache
+of your website is at "/var/cache/mirrored_site/", if you do not have the
+LemurCGI set to strip paths, the original URLs displayed would include the
+prefix "/var/cache/mirrored_site/" in front of every result.
+
+Also, there is an element, <supportanchortext> that can be set to true to
+also include support for retrieval of inlinks if you have used the 
+harvestlinks program to gather these from your corpus.
+
+The element <duplicateresultattribute> can be used to set the attribute that 
+is used to check search results for duplicate records.  If the element is not 
+present, or has an empty value, no duplicate checking is performed.  The value 
+'docno' (without quotes) can be used for external document id. The value 'url' 
+can be used, if the url meta data is present in the index. 
+
+If you wish to use the default HTML templates, no modifications are
+necessary, but if you want to modify the HTML templates for your own uses,
+be sure to read the "README_Templates.txt" file for instructions on
+available commands that you can use within the templates.
+  
+See the file LICENSE in this same directory for the terms of
+redistribution and use. If you have any questions, please send email
+to license@lemurproject.org.
+
+For more information about the Lemur Toolkit, visit www.lemurproject.org

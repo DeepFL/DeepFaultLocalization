@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8"?><crawl-order xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="heritrix_settings.xsd">
+  <meta>
+    <name>Indri-sitesearch</name>
+    <description>full crawl of seeds with trecweb format output</description>
+    <operator>Indri</operator>
+    <organization>lemurproject.org</organization>
+    <audience>Lemur Project</audience>
+    <date>20060406174942</date>
+  </meta>
+  <controller>
+    <string name="settings-directory">settings</string>
+    <string name="disk-path"></string>
+    <string name="logs-path">logs</string>
+    <string name="checkpoints-path">checkpoints</string>
+    <string name="state-path">state</string>
+    <string name="scratch-path">scratch</string>
+    <long name="max-bytes-download">0</long>
+    <long name="max-document-download">0</long>
+    <long name="max-time-sec">0</long>
+    <integer name="max-toe-threads">50</integer>
+    <integer name="recorder-out-buffer-bytes">4096</integer>
+    <integer name="recorder-in-buffer-bytes">65536</integer>
+    <integer name="bdb-cache-percent">0</integer>
+    <newObject name="scope" class="org.archive.crawler.scope.DomainScope">
+      <boolean name="enabled">true</boolean>
+      <string name="seedsfile">seeds.txt</string>
+      <boolean name="reread-seeds-on-config">true</boolean>
+      <integer name="max-link-hops">25</integer>
+      <integer name="max-trans-hops">5</integer>
+      <newObject name="exclude-filter" class="org.archive.crawler.filter.OrFilter">
+        <boolean name="enabled">true</boolean>
+        <boolean name="if-matches-return">true</boolean>
+        <map name="filters">
+          <newObject name="pathdepth" class="org.archive.crawler.filter.PathDepthFilter">
+            <boolean name="enabled">true</boolean>
+            <integer name="max-path-depth">20</integer>
+            <boolean name="path-less-or-equal-return">false</boolean>
+          </newObject>
+          <newObject name="pathologicalpath" class="org.archive.crawler.filter.PathologicalPathFilter">
+            <boolean name="enabled">true</boolean>
+            <integer name="repetitions">3</integer>
+          </newObject>
+          <newObject name="excludepath" class="org.archive.crawler.filter.SurtPrefixFilter">
+            <boolean name="enabled">true</boolean>
+            <boolean name="if-match-return">true</boolean>
+            <string name="surts-source-file">excluded_hosts</string>
+          </newObject>
+          <newObject name="filetype" class="org.archive.crawler.filter.URIRegExpFilter">
+            <boolean name="enabled">true</boolean>
+            <boolean name="if-match-return">true</boolean>
+            <string name="regexp">.*(?i)\.(a|ai|aif|aifc|aiff|arc|asc|asf|avi|bas|bcpio|bdf|bin|bmp|bz2|c|cc|cdf|cgi|cgm|cl|class|com|cpio|cpp?|cpt|csh|css|cxx|dat|dcr|dft|dgz|dif|dir|djv|djvu|dll|dmg|dms|dtd|dv|dvi|dvz|dxr|el|elf|eps|etx|exe|ez|for|gif|gram|grxml|gtar|gz|h|hdf|hqx|ice|ico|ics|ief|ifb|iges|igs|iso|jar|java|jnlp|jp2|jpe|jpeg|jpg|js|kar|latex|lcv|lha|lisp|log|lsp|ltv|lzh|lzv|m|m3u|mac|man|mat|mathml|me|mesh|mid|midi|mif|mov|movie|mp2|mp2v|mp3|mp4|mpe|mpeg|mpg|mpga|ms|msh|mso|mxu|nc|o|oda|ogg|pas|pbm|pct|pdb|pgm|pgn|pgz|pic|pict|png|pnm|pnt|pntg|ppm|ppt|prc|ps|psz|py|qt|qti|qtif|ra|ram|ras|raw|rdf|rgb|rm|roff|rpm|rtf|rtx|s|scm|sea|sgz|sh|shar|shr|shz|silo|sit|skd|skm|skp|skt|smi|smil|sml|snd|so|spl|src|srpm|sv4cpio|sv4crc|svg|swf|t|tar|tcl|tex|texi|texinfo|tgz|tif|tiff|tr|tsv|txz|ustar|vcd|vrml|vxml|wav|wbmp|wbxml|wml|wmlc|wmls|wmlsc|wmf|wmv|wrl|xbm|xht|xls|xpm|xsl|xslt|xwd|xyz|z|zip|zoo)$</string>
+          </newObject>
+          <newObject name="wiki" class="org.archive.crawler.filter.URIRegExpFilter">
+            <boolean name="enabled">true</boolean>
+            <boolean name="if-match-return">true</boolean>
+            <string name="regexp">.*(?i)((action=edit)|(action=diff)|(action=search)|(action=print)|(do=)|(skin=)|(rev=)|(title=Special)|(/twiki/rdiff/)|(/twiki/oops/)|(/twiki/search/)|(/twiki/edit/)|(/twiki/attach/)|(/twiki/rename/)).*$</string>
+          </newObject>
+          <newObject name="listing" class="org.archive.crawler.filter.URIRegExpFilter">
+            <boolean name="enabled">true</boolean>
+            <boolean name="if-match-return">true</boolean>
+            <string name="regexp">.*(?i)/\?[NDMS]=[AD]$</string>
+          </newObject>
+          <newObject name="indexdir" class="org.archive.crawler.filter.URIRegExpFilter">
+            <boolean name="enabled">true</boolean>
+            <boolean name="if-match-return">true</boolean>
+            <string name="regexp">.*(?i)/%7e[^/]+/index\.html/.*$</string>
+          </newObject>
+        </map>
+      </newObject>
+      <newObject name="force-accept-filter" class="org.archive.crawler.filter.OrFilter">
+        <boolean name="enabled">true</boolean>
+        <boolean name="if-matches-return">true</boolean>
+        <map name="filters">
+        </map>
+      </newObject>
+      <newObject name="additionalScopeFocus" class="org.archive.crawler.filter.FilePatternFilter">
+        <boolean name="enabled">false</boolean>
+        <boolean name="if-match-return">true</boolean>
+        <string name="use-default-patterns">Miscellaneous</string>
+        <string name="regexp"></string>
+      </newObject>
+      <newObject name="transitiveFilter" class="org.archive.crawler.filter.TransclusionFilter">
+        <boolean name="enabled">true</boolean>
+        <integer name="max-speculative-hops">1</integer>
+        <integer name="max-referral-hops">-1</integer>
+        <integer name="max-embed-hops">-1</integer>
+      </newObject>
+    </newObject>
+    <map name="http-headers">
+      <string name="user-agent">Mozilla/5.0 (compatible; heritrix/1.6.0 +http://www.lemurproject.org)</string>
+      <string name="from">info@lemurproject.org</string>
+    </map>
+    <newObject name="robots-honoring-policy" class="org.archive.crawler.datamodel.RobotsHonoringPolicy">
+      <string name="type">classic</string>
+      <boolean name="masquerade">false</boolean>
+      <text name="custom-robots"></text>
+      <stringList name="user-agents">
+      </stringList>
+    </newObject>
+    <newObject name="frontier" class="org.archive.crawler.frontier.BdbFrontier">
+      <float name="delay-factor">4.0</float>
+      <integer name="max-delay-ms">20000</integer>
+      <integer name="min-delay-ms">500</integer>
+      <integer name="max-retries">10</integer>
+      <long name="retry-delay-seconds">30</long>
+      <integer name="preference-embed-hops">1</integer>
+      <integer name="total-bandwidth-usage-KB-sec">0</integer>
+      <integer name="max-per-host-bandwidth-usage-KB-sec">0</integer>
+      <string name="queue-assignment-policy">org.archive.crawler.frontier.HostnameQueueAssignmentPolicy</string>
+      <string name="force-queue-assignment"></string>
+      <boolean name="pause-at-start">false</boolean>
+      <boolean name="pause-at-finish">false</boolean>
+      <boolean name="recovery-log-enabled">true</boolean>
+      <boolean name="hold-queues">true</boolean>
+      <integer name="balance-replenish-amount">3000</integer>
+      <integer name="error-penalty-amount">100</integer>
+      <long name="queue-total-budget">-1</long>
+      <string name="cost-policy">org.archive.crawler.frontier.UnitCostAssignmentPolicy</string>
+      <long name="snooze-deactivate-ms">300000</long>
+      <string name="uri-included-structure">org.archive.crawler.util.BdbUriUniqFilter</string>
+    </newObject>
+    <map name="uri-canonicalization-rules">
+      <newObject name="Lowercase" class="org.archive.crawler.url.canonicalize.LowercaseRule">
+        <boolean name="enabled">true</boolean>
+      </newObject>
+      <newObject name="Userinfo" class="org.archive.crawler.url.canonicalize.StripUserinfoRule">
+        <boolean name="enabled">true</boolean>
+      </newObject>
+      <newObject name="WWW" class="org.archive.crawler.url.canonicalize.StripWWWRule">
+        <boolean name="enabled">true</boolean>
+      </newObject>
+      <newObject name="SessionIDs" class="org.archive.crawler.url.canonicalize.StripSessionIDs">
+        <boolean name="enabled">true</boolean>
+      </newObject>
+      <newObject name="QueryStrPrefix" class="org.archive.crawler.url.canonicalize.FixupQueryStr">
+        <boolean name="enabled">true</boolean>
+      </newObject>
+      <newObject name="normalize" class="org.archive.crawler.url.canonicalize.RegexRule">
+        <boolean name="enabled">true</boolean>
+        <string name="matching-regex">^([^~]*)~([^~]*)$</string>
+        <string name="format">${1}%7e${2}</string>
+        <string name="comment">Replace ~ with %7e</string>
+      </newObject>
+    </map>
+    <map name="pre-fetch-processors">
+      <newObject name="Preselector" class="org.archive.crawler.prefetch.Preselector">
+        <boolean name="enabled">true</boolean>
+        <map name="filters">
+        </map>
+        <boolean name="override-logger">false</boolean>
+        <boolean name="recheck-scope">true</boolean>
+        <boolean name="block-all">false</boolean>
+        <string name="block-by-regexp"></string>
+      </newObject>
+      <newObject name="Preprocessor" class="org.archive.crawler.prefetch.PreconditionEnforcer">
+        <boolean name="enabled">true</boolean>
+        <map name="filters">
+        </map>
+        <integer name="ip-validity-duration-seconds">21600</integer>
+        <integer name="robot-validity-duration-seconds">86400</integer>
+        <boolean name="calculate-robots-only">false</boolean>
+      </newObject>
+    </map>
+    <map name="fetch-processors">
+      <newObject name="DNS" class="org.archive.crawler.fetcher.FetchDNS">
+        <boolean name="enabled">true</boolean>
+        <map name="filters">
+        </map>
+        <boolean name="accept-non-dns-resolves">false</boolean>
+      </newObject>
+      <newObject name="HTTP" class="org.archive.crawler.fetcher.FetchHTTP">
+        <boolean name="enabled">true</boolean>
+        <map name="filters">
+        </map>
+        <map name="midfetch-filters">
+          <newObject name="type-filter" class="org.archive.crawler.filter.ContentTypeRegExpFilter">
+            <boolean name="enabled">true</boolean>
+            <boolean name="if-match-return">true</boolean>
+            <string name="regexp">(?i)^\s*((text/)|(application/pdf)|(application/msword)).*$</string>
+          </newObject>
+        </map>
+        <integer name="timeout-seconds">1200</integer>
+        <integer name="sotimeout-ms">20000</integer>
+        <long name="max-length-bytes">0</long>
+        <boolean name="ignore-cookies">false</boolean>
+        <boolean name="use-bdb-for-cookies">true</boolean>
+        <string name="load-cookies-from-file"></string>
+        <string name="save-cookies-to-file"></string>
+        <string name="trust-level">open</string>
+        <stringList name="accept-headers">
+        </stringList>
+        <string name="http-proxy-host"></string>
+        <string name="http-proxy-port"></string>
+        <string name="default-encoding">ISO-8859-1</string>
+        <boolean name="send-connection-close">true</boolean>
+        <boolean name="send-referer">true</boolean>
+        <boolean name="send-range">false</boolean>
+      </newObject>
+    </map>
+    <map name="extract-processors">
+      <newObject name="ExtractorHTTP" class="org.archive.crawler.extractor.ExtractorHTTP">
+        <boolean name="enabled">true</boolean>
+        <map name="filters">
+        </map>
+      </newObject>
+      <newObject name="ExtractorHTML" class="org.archive.crawler.extractor.ExtractorHTML">
+        <boolean name="enabled">true</boolean>
+        <map name="filters">
+        </map>
+        <boolean name="treat-frames-as-embed-links">true</boolean>
+        <boolean name="ignore-form-action-urls">false</boolean>
+      </newObject>
+      <newObject name="ExtractorCSS" class="org.archive.crawler.extractor.ExtractorCSS">
+        <boolean name="enabled">true</boolean>
+        <map name="filters">
+        </map>
+      </newObject>
+      <newObject name="ExtractorJS" class="org.archive.crawler.extractor.ExtractorJS">
+        <boolean name="enabled">true</boolean>
+        <map name="filters">
+        </map>
+      </newObject>
+      <newObject name="ExtractorSWF" class="org.archive.crawler.extractor.ExtractorSWF">
+        <boolean name="enabled">false</boolean>
+        <map name="filters">
+        </map>
+      </newObject>
+    </map>
+    <map name="write-processors">
+      <newObject name="TrecWebWriter" class="org.archive.crawler.writer.TrecWebWriterProcessor">
+        <boolean name="enabled">true</boolean>
+        <map name="filters">
+        </map>
+        <string name="path">corpus</string>
+        <string name="basename">crawl</string>
+      </newObject>
+    </map>
+    <map name="post-processors">
+      <newObject name="Updater" class="org.archive.crawler.postprocessor.CrawlStateUpdater">
+        <boolean name="enabled">true</boolean>
+        <map name="filters">
+        </map>
+      </newObject>
+      <newObject name="LinksScoper" class="org.archive.crawler.postprocessor.LinksScoper">
+        <boolean name="enabled">true</boolean>
+        <map name="filters">
+        </map>
+        <boolean name="override-logger">false</boolean>
+        <boolean name="seed-redirects-new-seed">true</boolean>
+        <map name="scope-rejected-url-filters">
+        </map>
+      </newObject>
+      <newObject name="Scheduler" class="org.archive.crawler.postprocessor.FrontierScheduler">
+        <boolean name="enabled">true</boolean>
+        <map name="filters">
+        </map>
+      </newObject>
+    </map>
+    <map name="loggers">
+      <newObject name="crawl-statistics" class="org.archive.crawler.admin.StatisticsTracker">
+        <integer name="interval-seconds">20</integer>
+      </newObject>
+    </map>
+    <string name="recover-path"></string>
+    <boolean name="checkpoint-copy-bdbje-logs">true</boolean>
+    <boolean name="recover-retain-failures">false</boolean>
+    <newObject name="credential-store" class="org.archive.crawler.datamodel.CredentialStore">
+      <map name="credentials">
+      </map>
+    </newObject>
+  </controller>
+</crawl-order>

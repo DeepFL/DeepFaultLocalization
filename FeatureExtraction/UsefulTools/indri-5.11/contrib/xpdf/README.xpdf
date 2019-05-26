@@ -1,0 +1,18 @@
+The Lemur Toolkit makes use of a modified version of Xpdf. Modifications
+are described below.
+ 
+The Xpdf software and documentation are
+copyright 1996-2005 Glyph & Cog, LLC.
+
+WWW: http://www.foolabs.com/xpdf/
+
+The PDF data structures, operators, and specification are
+copyright 1985-2004 Adobe Systems Inc.
+
+09/17/2004 -- dmf
+
+To enable linking xpdf's Parser class in applications that also require
+the Lemur Parser class, the xpdf Parser class (as defined in
+include/Parser.h) has been placed inside the namespace xpdf. All uses of
+Parser in the xpdf source files have been updated to use xpdf::Parser.
+
