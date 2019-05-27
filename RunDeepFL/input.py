@@ -84,7 +84,16 @@ class DataSet(object):
         	self._index_in_epoch=batch_size
         end=self._index_in_epoch
         return self._instances[start:end],self._labels[start:end],self._groups[start:end]
-        
+
+'''
+read from train and test files
+@param train_file(string): path of training instance data
+@param train_label_file(string): path of training data labels
+@param test_file(string):path of test instance data
+@param test_label_file(string): path of test data labels
+@param group_file(string): group file for pairwise loss function
+@return an object of DataSets
+'''     
 def read_data_sets(train_file,train_label_file,test_file, test_label_file, group_file):
 	class DataSets(object):
 		pass
@@ -118,7 +127,12 @@ def read_data_sets(train_file,train_label_file,test_file, test_label_file, group
 	data_sets.test=DataSet(test_instances,test_labels)
 	return data_sets
 
-# min-max normalization
+'''
+min-max normalization for training instance and test instance
+@param train_instances: training instance data
+@param test_instances: test instance data
+@return nomalized training and test instances
+'''  
 def normalize(train_instances,test_instances):
         #train_size=train_instances.shape[0]
         train_min=train_instances.min(0)
@@ -130,29 +144,3 @@ def normalize(train_instances,test_instances):
         #comb=(comb-comb.min(0))/(comb.max(0)-comb.min(0))
         #return comb[0:train_size,:],comb[train_size:,:]
 
-# test normalize() method
-def testNormalize():
-        a=numpy.arange(15).reshape(-1,5)
-        b=numpy.arange(15,25).reshape(-1,5)
-        a=a.astype(numpy.float32)
-        b=b.astype(numpy.float32)
-        a,b=normalize(a,b)
-        print(a)
-        print(b)
-
-#test read_data_sets() method
-def testReadDataSets():
-        dir='/media/StorageData1/MutationFaultLocalization/LearningRankData/NfolderData/Deep/All25Features/SpectTIRMetricM/Time/1/'
-        datasets=read_data_sets(dir+'Train.csv',dir+'TrainLabel.csv',dir+'Test.csv',dir+'TestLabel.csv')
-        print(datasets.train.pos_instance_ratio())
-        print(datasets.test.pos_instance_ratio())
-
-# test
-#testReadDataSets()
-#train=readFile("/Users/lingmingzhang/Documents/workspace/FLStudy/data/training.txt")
-#print(train.shape)
-#print(label.shape)
-#testNormalize()
-
-#g=readGroup('/home/lixia/XiaLi/ICSE18/DeepLearningData/SpectrumTestJhawkByte/groupfile/Time/1/traidata.txt.group')
-#print(g)
