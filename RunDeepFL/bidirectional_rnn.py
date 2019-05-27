@@ -8,7 +8,10 @@ import time
 from config import *
 import utils as ut 
 '''
-TODO: BY XIA
+Filled zero for different feature groups to make all groups have same dimension
+@param x: A tensor
+@param featureDistribution: dimensions of different feature group
+@return A new tensor
 '''
 def fillMatrix(x,featureDistribution):
     maxGroup=numpy.array(featureDistribution).max()
@@ -64,7 +67,13 @@ def BiRNN(x, weights, biases, n_hidden, n_steps, keep_prob):
     return tf.matmul(outputs[-1], weights['out']) + biases['out']
 
 '''
-TODO: BY XIA
+Birnn trarining process
+@param trainFile,trainLabelFile,testFile,testLabelFile: path of dataset
+@param groupFile: group file for pairwise loss function
+@param suspFile: file name for store results
+@param featureDistribution: dimensions of feature groups
+@param loss: loss function
+@return None
 '''
 def run(trainFile, trainLabelFile, testFile, testLabelFile, groupFile, suspFile, featureDistribution, loss):
     # reset graph                                                                                                                                            
