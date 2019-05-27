@@ -4,7 +4,7 @@ project=$2
 version=$3
 
 # get Spectrum and mutation
-echo "Extracting final spctrum and mutation features......"
+echo "Extracting final spectrum and mutation features......"
 rm -rf $rootPath/FinalFeatures/tempResult/$project/$version/*.txt
 rm -rf $rootPath/FinalFeatures/Spectrum/$project/$version.txt
 rm -rf $rootPath/FinalFeatures/Mutation/$project/$version.txt
