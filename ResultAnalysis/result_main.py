@@ -20,7 +20,7 @@ def main():
 		print("RQ1.csv DONE: you can find it in curret directory ./RQ1.csv")	
 	if RQ_number == "RQ2":		
 		dnns = ['mlp','mlp2','birnn','dfl1','dfl2']
-		libsvm_models = ['TraptJhawkByteIR']
+		libsvm_models = ['LIBSVM']
 		model_name = ['LIBSVM','MLP','MLP2','BiRNN','MLP_DFL(1)','MLP_DFL(2)']
 		models =  libsvm_models + dnns
 		result_matrix = result.read_libsvm(subs,models,libsvm_models)
