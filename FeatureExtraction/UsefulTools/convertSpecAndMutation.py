@@ -35,8 +35,8 @@ for t in mut_techs:
 
 
 root_path = sys.argv[1]
-spec_and_mutation = root_path + "FeatureValues/tempResult/Chart/1/"
-write_path = root_path + "FeatureValues/"
+spec_and_mutation = root_path + "FinalFeatures/tempResult/Chart/1/"
+write_path = root_path + "FinalFeatures/"
 
 write_result(write_path + "/Spectrum/Chart/1.txt",spec_techs)
 write_result(write_path + "/Mutation/Chart/1.txt",mut_final_techs)

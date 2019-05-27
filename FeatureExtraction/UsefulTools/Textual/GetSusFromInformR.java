@@ -11,7 +11,7 @@ public class GetSusFromInformR {
 		String ID = args[0];
 		String Project = args[1];
 		String rootPath = args[2];
-		BufferedReader MF = new BufferedReader(new FileReader(rootPath + "FeatureValues/tempResult/"+Project+"/"+ID+"/Ample.txt"));
+		BufferedReader MF = new BufferedReader(new FileReader(rootPath + "FinalFeatures/tempResult/"+Project+"/"+ID+"/Ample.txt"));
 		String methodsName = MF.readLine();
 		while(methodsName != null){
 			MethodsCoveredbyF.add(methodsName.split(" ")[0]);
@@ -67,7 +67,7 @@ public class GetSusFromInformR {
 			}
 			Resultbr.close();
 			
-			BufferedWriter bw = new BufferedWriter(new FileWriter(rootPath + "FeatureValues/Textual/" + Project + "/" + ID + "/tempResults/"+sixquerys[i]+".txt",true));
+			BufferedWriter bw = new BufferedWriter(new FileWriter(rootPath + "FinalFeatures/Textual/" + Project + "/" + ID + "/tempResults/"+sixquerys[i]+".txt",true));
 			for(String key:mResults.keySet()){
 				Double MaxScore=Collections.max(mResults.get(key));
 			

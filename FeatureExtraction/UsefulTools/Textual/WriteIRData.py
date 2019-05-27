@@ -36,8 +36,8 @@ def main():
     project = sys.argv[1]
     ID = sys.argv[2]
     root_path = sys.argv[3]
-    Susdir = root_path + "FeatureValues/Textual/" + project + "/" + ID + "/tempResults/"
-    Writefile = root_path + "FeatureValues/Textual/" + project + "/" + ID +'.txt'
+    Susdir = root_path + "FinalFeatures/Textual/" + project + "/" + ID + "/tempResults/"
+    Writefile = root_path + "FinalFeatures/Textual/" + project + "/" + ID +'.txt'
     IRquery = ['MtoT','MtoTc','MtoTFS','McltoT','McltoTc','McltoTFS','MmtoT','MmtoTc','MmtoTFS','MvtoT','MvtoTc','MvtoTFS',
 			'McomtoT','McomtoTc','McomtoTFS']    # as 15 IR features
     

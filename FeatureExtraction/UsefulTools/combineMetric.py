@@ -2,8 +2,8 @@ import sys
 from collections import defaultdict
 root_path = sys.argv[1]
 
-source_result = root_path + "/FeatureValues/Complexity/Chart/1source.txt"
-byte_result = root_path + "/FeatureValues/Complexity/Chart/1byte.txt"
+source_result = root_path + "/FinalFeatures/Complexity/Chart/1source.txt"
+byte_result = root_path + "/FinalFeatures/Complexity/Chart/1byte.txt"
 
 source_result_map = defaultdict(str)
 comb_result_map = defaultdict(str)
@@ -20,7 +20,7 @@ with open(byte_result) as br:
 		if method_name in source_result_map:
 			comb_result_map[method_name] = source_result_map[method_name] + vs
 
-comb_result_path = root_path + "/FeatureValues/Complexity/Chart/1.txt"
+comb_result_path = root_path + "/FinalFeatures/Complexity/Chart/1.txt"
 with open(comb_result_path,'a') as cr:
 	for m in comb_result_map:
 		cr.write(m + " ")
