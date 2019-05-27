@@ -208,15 +208,15 @@ def delete_exsisting():
     for (root,dirs,files) in os.walk(result_dir): 
         if "CrossValidation" in root and "10fold" not in root:
             shutil.rmtree(root)
-    for p in subs:
-        full_path = deep_data_dir + "CrossValidation/" + p
-        if os.path.isdir(full_path):
-            shutil.rmtree(full_path)
+    #for p in subs:
+    #    full_path = deep_data_dir + "CrossValidation/" + p
+    #    if os.path.isdir(full_path):
+    #        shutil.rmtree(full_path)
 
 def cross_vali_result():
     resultRoot = result_dir + '/10fold/'
     labelpath = deep_data_dir + 'CrossValidation/10fold/'
-    #delete_exsisting()
+    delete_exsisting()
     
     vers = 10
     for v in range(1,vers + 1):
