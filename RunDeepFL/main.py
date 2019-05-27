@@ -31,8 +31,6 @@ def main():
     l = losses.index(loss)   #get index of loss function
     start_time = time.time()
     susp_path = os.path.join(susp_dir, model + '-' + losses[l])
-    # if model == "rnn":
-    #     myrnn.run(train_path,train_label_path, test_path,test_label_path, group_path, susp_path, featureDistribution, l)
     if model == "birnn":
         birnn.run(train_path,train_label_path, test_path,test_label_path, group_path, susp_path, featureDistribution, l)
     elif model == "mlp":
