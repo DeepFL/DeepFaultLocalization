@@ -247,11 +247,11 @@ def cross_vali_result():
                     wd.write(rank_list[l])
                     wd.write('\n')
                 
-                if ep == 1:
-                    lable_file = newLabel + '/TestLabel.csv'
-                    with open(lable_file,'a') as wd:
-                        wd.write(label_list[l])
-                        wd.write('\n')
+                #if ep == 1:
+                #    lable_file = newLabel + '/TestLabel.csv'
+                #    with open(lable_file,'a') as wd:
+                #        wd.write(label_list[l])
+                #        wd.write('\n')
         
 
 
@@ -295,93 +295,3 @@ def cross_vali_result_with_result():
                         wd.write(label_list[l])
                         wd.write('\n')
 
-'''
-def main():
-    tech = sys.argv[1]   # SpectrumTestJhawkByte
-    
-    DeepDataDir = sys.argv[3]
-
-    for epochnumber in range(55,56,1):
-        print(epochnumber)
-        subs = ['Chart','Lang','Math','Time','Mockito','Closure']
-        vers = [26, 65, 106, 27, 38, 133]
-        # subs=['Chart']
-        # vers=[26]
-
-        #dnns=['mlp','mlp2','birnn','mut-spec-first']
-        #dnns = ['epairwise', 'epairwiseSoftmax','DeepFL'] # origin name of DeepFL is "mut-spec-first"!!
-        #dnns = ['4-features','4-selection-spec','4-selection-mut','4-selection-complex','4-selection-similar']
-        #dnns = ['4-features','7-feature','mut-first','DeepFL']
-        #dnns = ['DeepFL','CrossDeepFL','CrossValForAnalysis']
-        #dnns = ['DeepFL','CrossDeepFL']
-        #dnns = ['CrossValForAnalysis']
-        dnns = ['DeepFL']
-        #dnns = ['mlp','mlp2','birnn','7-feature','DeepFL']
-        #libsvm_results = ['TraptJhawkByteIR']
-
-        #dnns = ['7-feature','7-selection-spec','4-selection-mut','7-selection-complex','7-selection-similar']
-
-        libsvm_results = ['Ochiai','MeOchiai','Multric','Fluccs','Trapt']
-
-        #techsvector =  libsvm_results + dnns
-        techsvector =  dnns
-        #print(techsvector)        
-        
-        #For RQ1,  current 3 libsvm and 4 deeplearning(SpectrumTestJawkByte)
-        resultBysub = initializeResult(subs,techsvector)
-
-        #initialize for RQ2 trend line graph to compare mlp,mlp2,rnn,birnn
-        RQ2TrendData = initRQ2TrendData(subs,dnns)
-        
-
-        #read current libsvm('Multric','Trapt','Fluccs') to resultmatrix
-        # for i in range(0,len(libsvm_results)):   #Multric,Fluccs,Trapt
-        #   libsvmResultPath = ResultDir + '/libsvmresult/' + techsvector[i]+'.txt'
-        #   readlibsvmResult(resultBysub,libsvmResultPath,subs,techsvector)
-
-        
-        #read deep learning result and RQ2 line grpah trend compare mlp,mlp2,rnn,birnn
-        truevers = readDeepResult(DeepDataDir,subs,tech,dnns,epochnumber,vers,resultBysub,techsvector,RQ2TrendData)
-        print(truevers) 
-        #print(resultBysub)  
-        
-        # #Calculate overallresult
-        newResultbySub = CalculateOverall(resultBysub,truevers,techsvector,len(subs))
-       
-        
-        # #write to Latex for RQ1
-        #LatextechsName=['Ochiai','Me-Ochiai','\multric','\Fluccs','\mupt','\MLPVariant']
-        #LatextechsName=['\MLP','\MLP 2','\BRNN','\sevenfeature','\mutFirstThenSpec']
-        LatextechsName = ['\deepFL','\deepFLminusSpectrum','\deepFLminusTest','\deepFLminusMetrics','\deepFLminusIR']
-        writetoLatexRQ1(newResultbySub,LatextechsName,subs)
-        #'\MLP','\MLP 2','\BRNN'
-
-
-
-        #calculate overal for RQ2Trend and write to file
-        # CalculateOverall(RQ2TrendData, truevers, dnns, len(subs))
-        # print(RQ2TrendData)
-        # writeForRfile(RQ2TrendData,subs,dnns)
-
-
-
-        #compare two latex
-        #LatextechsName=['\TraptJhawkByteIR','\MLPVariant{}']
-        #LatextechsName=['\deepFL','\deepFLminusSpectrum','\deepFLminusTest','\deepFLminusMetrics','\deepFLminusIR']
-        #ut.writetoLatexRQ(newResultbySub,LatextechsName,subs)
-        
-
-        #For RQ1 compare group birnn and mixed birnn,
-        #RQ4 compare SpectrumTestJhawkByte and SpectrumTestJhawkByteIR,
-        #RQ4 compare SpectrumTestJhawkByte and SpectrumTestJhawkByteMutor12
-        # need to print each results to be an input as CompareTwoLatex.py    
-        # for m in range(0,len(newResultbySub[0])):    #multric,fluccs,trapt,mlp...   
-        #       for sub in range(6,7):   # chart,time...overall
-        #           for metric in range(0,4):   # top1 top2...mar
-                        
-        #                   sys.stdout.write(str(newResultbySub[sub][m][metric])+" ")
-        #           print('')
-        #for i in range(0,7):
-        #   print(resultBysub[6][5][0:5])
-main()
-'''
