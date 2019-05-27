@@ -16,7 +16,7 @@ do
 		do
 			echo $sub
 			echo $v
-			python main.py .. ../result $sub $v $model DeepFL softmax 60 1;
+			python main.py .. ../Results $sub $v $model DeepFL softmax 60 1;
 		done
 	done
 done
@@ -31,7 +31,7 @@ do
 		do
 			echo $sub
 			echo $v
-			python main.py .. ../result $sub $v dfl2 DeepFL epairwise 60 1;
+			python main.py .. ../Results $sub $v dfl2 DeepFL epairwise 60 1;
 		done
 done
 
@@ -45,7 +45,7 @@ do
 		do
 			echo $sub
 			echo $v
-			python main.py .. ../result $sub $v dfl2 CrossDeepFL softmax 60 1;
+			python main.py .. ../Results $sub $v dfl2 CrossDeepFL softmax 60 1;
 		done
 done
 
@@ -54,5 +54,5 @@ done
 for idx in {1..10}
 do
 	echo $idx
-	python main.py .. ../result 10fold $idx dfl2 CrossValidation softmax 60 1;
+	python main.py .. ../Results 10fold $idx dfl2 CrossValidation softmax 60 1;
 done
