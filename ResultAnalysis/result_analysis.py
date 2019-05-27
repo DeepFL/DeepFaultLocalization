@@ -190,7 +190,7 @@ def read_libsvm(subs,techs_vector,libsvm_models):
     result_matrix = initialize_result(subs,techs_vector)    
     #read libsvm
     for i in range(0,len(libsvm_models)):   
-        libsvm_result_path = 'libsvmresult/' + techs_vector[i] + '.txt'
+        libsvm_result_path = 'LIBSVMResult/' + techs_vector[i] + '.txt'
         read_libsvm_result(result_matrix,libsvm_result_path,subs,techs_vector)
     return result_matrix
 
