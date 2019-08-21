@@ -41,6 +41,9 @@ def main():
         dfl1.run(train_path,train_label_path, test_path,test_label_path, group_path ,susp_path, l, model,featureNum=feature,nodeNum=feature)
     elif model == "dfl2":
         dfl2.run(train_path,train_label_path, test_path,test_label_path, group_path ,susp_path, l, featureNum=feature,nodeNum=feature)
+    elif model == "new":
+        dfl2.run(train_path,train_label_path, test_path,test_label_path, group_path ,susp_path, l, featureNum=feature,nodeNum=feature)
+
         #mlp2.run(train_path,train_label_path, test_path,test_label_path, group_path ,susp_path, l, featureNum=feature,nodeNum=feature)
     # elif model == "fc":
     #     print(sub + '-' + v)
