@@ -181,12 +181,12 @@ def run(trainFile, trainLabelFile, testFile,testLabelFile, groupFile, suspFile,l
                 #                                                 y: batch_y, g: batch_g, keep_prob: dropout_rate,is_training:True})
 
                 _, c,regu_loss = sess.run([optimizer, cost,regu_losses], feed_dict={  spec : batch_x[:,:34],
-                                                                new_features: batch_x[:,34:68],
-                                                                mutation1 : batch_x[:,68:103],
-                                                                mutation2 : batch_x[:,103:138],
-                                                                mutation3 : batch_x[:,138:173],
-                                                                mutation4 : batch_x[:,173:208],
-                                                                complexity : batch_x[:,208:245],
+                                                                new_features: batch_x[:,34:67],
+                                                                mutation1 : batch_x[:,67:102],
+                                                                mutation2 : batch_x[:,102:137],
+                                                                mutation3 : batch_x[:,137:172],
+                                                                mutation4 : batch_x[:,172:207],
+                                                                complexity : batch_x[:,207:244],
                                                                 similarity : batch_x[:,-15:],
                                                                 y: batch_y, g: batch_g, keep_prob: dropout_rate,is_training:True})
                 # Compute average loss
@@ -211,12 +211,12 @@ def run(trainFile, trainLabelFile, testFile,testLabelFile, groupFile, suspFile,l
                 #                                                 y: datasets.test.labels, keep_prob: 1.0,is_training:False})
 
                 res,step_summary=sess.run([tf.nn.softmax(pred),summary_op],feed_dict={spec : batch_x[:,:34],
-                                                                new_features: batch_x[:,34:68],
-                                                                mutation1 : batch_x[:,68:103],
-                                                                mutation2 : batch_x[:,103:138],
-                                                                mutation3 : batch_x[:,138:173],
-                                                                mutation4 : batch_x[:,173:208],
-                                                                complexity : batch_x[:,208:245],
+                                                                new_features: batch_x[:,34:67],
+                                                                mutation1 : batch_x[:,67:102],
+                                                                mutation2 : batch_x[:,102:137],
+                                                                mutation3 : batch_x[:,137:172],
+                                                                mutation4 : batch_x[:,172:207],
+                                                                complexity : batch_x[:,207:244],
                                                                 similarity : batch_x[:,-15:],
                                                                 y: datasets.test.labels, keep_prob: 1.0,is_training:False})
                 train_writer.add_summary(step_summary)
