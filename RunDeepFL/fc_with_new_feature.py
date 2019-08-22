@@ -83,10 +83,10 @@ def new_model(spec, new_features,m1,m2,m3,m4,complexity,similarity, keep_prob,is
             spec_1 = single_fc_layer(spec,34,34*model_size_times, keep_prob,is_training)
         with tf.variable_scope('new',reuse=False):
             #spec = tf.layers.batch_normalization(spec, training=is_training)
-            new_1 = single_fc_layer(new_features,34,34*model_size_times, keep_prob,is_training)
+            new_1 = single_fc_layer(new_features,33,33*model_size_times, keep_prob,is_training)
         spec_concat = tf.concat([spec_1,new_1,mut_concat],1)
         with tf.variable_scope('fc1',reuse=False):
-            spec_concat = single_fc_layer(spec_concat,103*model_size_times,32*model_size_times, keep_prob,is_training)
+            spec_concat = single_fc_layer(spec_concat,102*model_size_times,32*model_size_times, keep_prob,is_training)
     with tf.variable_scope('fc',reuse=False):
         with tf.variable_scope('complex',reuse=False):
             #complexity = tf.layers.batch_normalization(complexity, training=is_training)
@@ -122,7 +122,7 @@ def run(trainFile, trainLabelFile, testFile,testLabelFile, groupFile, suspFile,l
     n_hidden_1 = nodeNum # 1st layer number of nodes                                                                       
     train_writer = tf.summary.FileWriter("./log", graph=tf.get_default_graph())
     # tf Graph input
-    x = tf.placeholder("float", [None, 226])
+    x = tf.placeholder("float", [None, 259])
     spec = tf.placeholder("float", [None, 34])
     new_features = tf.placeholder("float", [None, 33])
     mutation1 = tf.placeholder("float", [None, 35])
