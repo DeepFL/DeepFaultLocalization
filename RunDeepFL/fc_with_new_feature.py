@@ -124,7 +124,7 @@ def run(trainFile, trainLabelFile, testFile,testLabelFile, groupFile, suspFile,l
     # tf Graph input
     x = tf.placeholder("float", [None, 226])
     spec = tf.placeholder("float", [None, 34])
-    new_features = tf.placeholder("float", [None, 34])
+    new_features = tf.placeholder("float", [None, 33])
     mutation1 = tf.placeholder("float", [None, 35])
     mutation2 = tf.placeholder("float", [None, 35])
     mutation3 = tf.placeholder("float", [None, 35])
