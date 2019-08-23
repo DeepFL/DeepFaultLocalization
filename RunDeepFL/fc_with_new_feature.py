@@ -169,7 +169,7 @@ def run(trainFile, trainLabelFile, testFile,testLabelFile, groupFile, suspFile,l
             for i in range(total_batch):
                 batch_x, batch_y ,batch_g= datasets.train.next_batch(batch_size)
                 print("batch_x is")
-                print(batch_x[0,:34])
+                print(batch_x.shape)
                 print("batch_y is")
                 print(batch_y[0])
                 # Run optimization op (backprop) and cost op (to get loss value)
@@ -191,7 +191,7 @@ def run(trainFile, trainLabelFile, testFile,testLabelFile, groupFile, suspFile,l
                                                                 mutation4 : batch_x[:,139:174],
                                                                 complexity : batch_x[:,174:211],
                                                                 similarity : batch_x[:,211:226],
-                                                                new_features: batch_x[:-33,],
+                                                                new_features: batch_x[:,-33:],
                                                                 y: batch_y, g: batch_g, keep_prob: dropout_rate,is_training:True})
                 # Compute average loss
                 avg_cost += c / total_batch
@@ -221,7 +221,7 @@ def run(trainFile, trainLabelFile, testFile,testLabelFile, groupFile, suspFile,l
                                                                 mutation4 : batch_x[:,139:174],
                                                                 complexity : batch_x[:,174:211],
                                                                 similarity : batch_x[:,211:226],
-                                                                new_features: batch_x[:-33,],
+                                                                new_features: batch_x[:,-33:],
                                                                 y: datasets.test.labels, keep_prob: 1.0,is_training:False})
                 train_writer.add_summary(step_summary)
                 with open(suspFile+'-'+str(epoch+1),'w') as f:

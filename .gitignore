@@ -1,6 +1,7 @@
 /CrossDeepFL
 /result
 /CrossValidation
+/Results
 /DeepFL
 *.pyc
 /paperResult
