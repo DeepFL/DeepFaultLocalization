@@ -168,6 +168,10 @@ def run(trainFile, trainLabelFile, testFile,testLabelFile, groupFile, suspFile,l
             # Loop over all batches
             for i in range(total_batch):
                 batch_x, batch_y ,batch_g= datasets.train.next_batch(batch_size)
+                print("batch_x is")
+                print(batch_x[0,:34])
+                print("batch_y is")
+                print(batch_y[0])
                 # Run optimization op (backprop) and cost op (to get loss value)
                 
                 # _, c,regu_loss = sess.run([optimizer, cost,regu_losses], feed_dict={  spec : batch_x[:,:34],
@@ -181,13 +185,13 @@ def run(trainFile, trainLabelFile, testFile,testLabelFile, groupFile, suspFile,l
                 #                                                 y: batch_y, g: batch_g, keep_prob: dropout_rate,is_training:True})
 
                 _, c,regu_loss = sess.run([optimizer, cost,regu_losses], feed_dict={  spec : batch_x[:,:34],
-                                                                new_features: batch_x[:,34:67],
-                                                                mutation1 : batch_x[:,67:102],
-                                                                mutation2 : batch_x[:,102:137],
-                                                                mutation3 : batch_x[:,137:172],
-                                                                mutation4 : batch_x[:,172:207],
-                                                                complexity : batch_x[:,207:244],
-                                                                similarity : batch_x[:,-15:],
+                                                                mutation1 : batch_x[:,34:69],
+                                                                mutation2 : batch_x[:,69:104],
+                                                                mutation3 : batch_x[:,104:139],
+                                                                mutation4 : batch_x[:,139:174],
+                                                                complexity : batch_x[:,174:211],
+                                                                similarity : batch_x[:,211:226],
+                                                                new_features: batch_x[:-33,],
                                                                 y: batch_y, g: batch_g, keep_prob: dropout_rate,is_training:True})
                 # Compute average loss
                 avg_cost += c / total_batch
@@ -211,13 +215,13 @@ def run(trainFile, trainLabelFile, testFile,testLabelFile, groupFile, suspFile,l
                 #                                                 y: datasets.test.labels, keep_prob: 1.0,is_training:False})
 
                 res,step_summary=sess.run([tf.nn.softmax(pred),summary_op],feed_dict={spec : batch_x[:,:34],
-                                                                new_features: batch_x[:,34:67],
-                                                                mutation1 : batch_x[:,67:102],
-                                                                mutation2 : batch_x[:,102:137],
-                                                                mutation3 : batch_x[:,137:172],
-                                                                mutation4 : batch_x[:,172:207],
-                                                                complexity : batch_x[:,207:244],
-                                                                similarity : batch_x[:,-15:],
+                                                                mutation1 : batch_x[:,34:69],
+                                                                mutation2 : batch_x[:,69:104],
+                                                                mutation3 : batch_x[:,104:139],
+                                                                mutation4 : batch_x[:,139:174],
+                                                                complexity : batch_x[:,174:211],
+                                                                similarity : batch_x[:,211:226],
+                                                                new_features: batch_x[:-33,],
                                                                 y: datasets.test.labels, keep_prob: 1.0,is_training:False})
                 train_writer.add_summary(step_summary)
                 with open(suspFile+'-'+str(epoch+1),'w') as f:
