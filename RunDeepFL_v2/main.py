@@ -4,10 +4,10 @@ import multilayer_perceptron_two_hidden_layer as mlp2
 import fc_based_1 as dfl1
 import fc_based_2 as dfl2
 import fc_with_new_feature as new_model
+import attention
 import os
 import time
 import numpy as np
-import attention
 from config import *
 import tensorflow as tf
 '''
@@ -17,8 +17,9 @@ The main function to train and evaluate DeepFL
 '''
 # main run driver
 def main():
+    print("hello world")
+    print(tf.__version__)
     os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2' 
-    os.environ["CUDA_VISIBLE_DEVICES"]= str(sys.argv[10])
     train_path = os.path.join(dir,tech,sub,v,train_file)
     train_label_path = os.path.join(dir,tech,sub,v,train_label_file)
     if tech == "CrossDeepFL":
@@ -38,14 +39,14 @@ def main():
         mlp.run(train_path,train_label_path, test_path,test_label_path, group_path ,susp_path, l, featureNum=feature,nodeNum=feature)
     elif model == "mlp":
         mlp.run(train_path,train_label_path, test_path,test_label_path, group_path ,susp_path, l, featureNum=feature,nodeNum=feature)
-    elif model == "attention":
-        attention.run(train_path,train_label_path, test_path,test_label_path, group_path ,susp_path, l, featureNum=feature,nodeNum=feature)
     elif model == "mlp2":
         mlp2.run(train_path, train_label_path, test_path, test_label_path, group_path, susp_path, l, featureNum=feature,nodeNum=feature)
     elif model == "dfl1" or model == "dfl1-Spectrum" or model == "dfl1-Mutation" or model == "dfl1-Metrics" or model == "dfl1-Textual":
         dfl1.run(train_path,train_label_path, test_path,test_label_path, group_path ,susp_path, l, model,featureNum=feature,nodeNum=feature)
     elif model == "dfl2":
         dfl2.run(train_path,train_label_path, test_path,test_label_path, group_path ,susp_path, l, featureNum=feature,nodeNum=feature)
+    elif model == "attention":
+        attention.run(train_path,train_label_path, test_path,test_label_path, group_path ,susp_path, l,model, featureNum=feature,nodeNum=feature)
     elif model == "new":
         new_model.run(train_path,train_label_path, test_path,test_label_path, group_path ,susp_path, l, featureNum=feature,nodeNum=feature)
 
@@ -56,7 +57,7 @@ def main():
     #     #mlp2.run(train_path,train_label_path, test_path,test_label_path, group_path ,susp_path, l, featureNum=feature,nodeNum=feature)
     end_time = time.time()
         
-    #print("--- %s %s %s time: %s seconds ---" % (model, tech, losses[l], (end_time - start_time)))
+    print("--- %s %s %s time: %s seconds ---" % (model, tech, losses[l], (end_time - start_time)))
 #main function execution
 if __name__=='__main__':
     main()
