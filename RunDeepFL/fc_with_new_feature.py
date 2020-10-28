@@ -214,14 +214,14 @@ def run(trainFile, trainLabelFile, testFile,testLabelFile, groupFile, suspFile,l
                 #                                                 similarity : batch_x[:,-15:],
                 #                                                 y: datasets.test.labels, keep_prob: 1.0,is_training:False})
 
-                res,step_summary=sess.run([tf.nn.softmax(pred),summary_op],feed_dict={spec : batch_x[:,:34],
-                                                                mutation1 : batch_x[:,34:69],
-                                                                mutation2 : batch_x[:,69:104],
-                                                                mutation3 : batch_x[:,104:139],
-                                                                mutation4 : batch_x[:,139:174],
-                                                                complexity : batch_x[:,174:211],
-                                                                similarity : batch_x[:,211:226],
-                                                                new_features: batch_x[:,-33:],
+                res,step_summary=sess.run([tf.nn.softmax(pred),summary_op],feed_dict={spec : datasets.test.instances[:,:34],
+                                                                mutation1 : datasets.test.instances[:,34:69],
+                                                                mutation2 : datasets.test.instances[:,69:104],
+                                                                mutation3 : datasets.test.instances[:,104:139],
+                                                                mutation4 : datasets.test.instances[:,139:174],
+                                                                complexity : datasets.test.instances[:,174:211],
+                                                                similarity : datasets.test.instances[:,211:226],
+                                                                new_features: datasets.test.instances[:,-33:],
                                                                 y: datasets.test.labels, keep_prob: 1.0,is_training:False})
                 train_writer.add_summary(step_summary)
                 with open(suspFile+'-'+str(epoch+1),'w') as f:
