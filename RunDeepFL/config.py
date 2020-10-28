@@ -12,9 +12,9 @@ import input
 import time
 import sys
                                                                                                                                                                      
-techNames = ['DeepFL', 'DeepFL-Spectrum', 'DeepFL-Mutation', 'DeepFL-Metrics', 'DeepFL-Textual', 'CrossDeepFL','CrossValidation']
-featureDistr = [[34,35,35,35,35,37,15], [35,35,35,35,37,15], [34,37,15], [34,35,35,35,35,15], [34,35,35,35,35,37], [34,35,35,35,35,37,15],[10]]
-featuresize = [226, 192, 86, 189, 211, 226,10]
+techNames = ['DeepFLAllTool','DeepFL', 'DeepFL-Spectrum', 'DeepFL-Mutation', 'DeepFL-Metrics', 'DeepFL-Textual', 'CrossDeepFL','CrossValidation']
+featureDistr = [[], [34,35,35,35,35,37,15], [35,35,35,35,37,15], [34,37,15], [34,35,35,35,35,15], [34,35,35,35,35,37], [34,35,35,35,35,37,15],[10]]
+featuresize = [754, 226, 192, 86, 189, 211, 226,10]
 losses = ['wsoftmax', 'softmax', 'epairwise','epairwiseSoftmax', 'hpairwise','hpairwiseSoftmax'] 
 
 dir = sys.argv[1]      # The directory of dataset
@@ -53,3 +53,4 @@ group_file='traidata.txt.group'
 susp_file='rank'
 
 
+toolNumber = 16
