@@ -4,6 +4,7 @@ import multilayer_perceptron_two_hidden_layer as mlp2
 import fc_based_1 as dfl1
 import fc_based_2 as dfl2
 import fc_with_new_feature as new_model
+import fc_with_new_featureAllTool as newAllTool
 import os
 import time
 import numpy as np
@@ -48,6 +49,8 @@ def main():
         dfl2.run(train_path,train_label_path, test_path,test_label_path, group_path ,susp_path, l, featureNum=feature,nodeNum=feature)
     elif model == "new":
         new_model.run(train_path,train_label_path, test_path,test_label_path, group_path ,susp_path, l, featureNum=feature,nodeNum=feature)
+    elif model == "newAllTool":
+        newAllTool.run(train_path,train_label_path, test_path,test_label_path, group_path ,susp_path, l, featureNum=feature,nodeNum=feature)
 
         #mlp2.run(train_path,train_label_path, test_path,test_label_path, group_path ,susp_path, l, featureNum=feature,nodeNum=feature)
     # elif model == "fc":
