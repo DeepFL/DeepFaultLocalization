@@ -119,19 +119,11 @@ def new_model(spec, all_new_features,m1,m2,m3,m4,complexity,similarity, keep_pro
         with tf.variable_scope('new13',reuse=False):
             new_13 = single_fc_layer(all_new_features[13],33,33*model_size_times, keep_prob,is_training)
 
-        with tf.variable_scope('new14',reuse=False):
-            new_14 = single_fc_layer(all_new_features[14],33,33*model_size_times, keep_prob,is_training)
-
-        with tf.variable_scope('new15',reuse=False):
-            new_15 = single_fc_layer(all_new_features[15],33,33*model_size_times, keep_prob,is_training)
-
-        with tf.variable_scope('new16',reuse=False):
-            new_16 = single_fc_layer(all_new_features[16],33,33*model_size_times, keep_prob,is_training)
 
 
-        new_concat = tf.concat([new_1,new_2,new_3,new_4,new_5,new_6,new_7,new_8,new_9,new_10,new_11,new_12,new_13,new_14,new_15,new_16],1)
+        new_concat = tf.concat([new_1,new_2,new_3,new_4,new_5,new_6,new_7,new_8,new_9,new_10,new_11,new_12,new_13],1)
         with tf.variable_scope('new_concat',reuse=False):
-            new_concat = single_fc_layer(new_concat,33*16*model_size_times,33*model_size_times, keep_prob,is_training)
+            new_concat = single_fc_layer(new_concat,33*13*model_size_times,33*model_size_times, keep_prob,is_training)
 
 
 
@@ -178,7 +170,7 @@ def run(trainFile, trainLabelFile, testFile,testLabelFile, groupFile, suspFile,l
     n_hidden_1 = nodeNum # 1st layer number of nodes                                                                       
     train_writer = tf.summary.FileWriter("./log", graph=tf.get_default_graph())
     # tf Graph input
-    x = tf.placeholder("float", [None, 754])
+    x = tf.placeholder("float", [None, 655])
     spec = tf.placeholder("float", [None, 34])
 
     all_new_features = [] # include 16 groups 
@@ -266,9 +258,9 @@ def run(trainFile, trainLabelFile, testFile,testLabelFile, groupFile, suspFile,l
                                                                 all_new_features[11]:batch_x[:,556:589],
                                                                 all_new_features[12]:batch_x[:,589:622],
                                                                 all_new_features[13]:batch_x[:,622:655],
-                                                                all_new_features[14]:batch_x[:,655:688],
-                                                                all_new_features[15]:batch_x[:,688:721],
-                                                                all_new_features[16]:batch_x[:,721:754],
+                                                            #    all_new_features[14]:batch_x[:,655:688],
+                                                            #    all_new_features[15]:batch_x[:,688:721],
+                                                            #    all_new_features[16]:batch_x[:,721:754],
                                                                 y: batch_y, g: batch_g, keep_prob: dropout_rate,is_training:True})
                 # Compute average loss
                 avg_cost += c / total_batch
@@ -312,9 +304,9 @@ def run(trainFile, trainLabelFile, testFile,testLabelFile, groupFile, suspFile,l
                                                                 all_new_features[11] : datasets.test.instances[:,556:589],
                                                                 all_new_features[12] : datasets.test.instances[:,589:622],
                                                                 all_new_features[13] : datasets.test.instances[:,622:655],
-                                                                all_new_features[14] : datasets.test.instances[:,655:688],
-                                                                all_new_features[15] : datasets.test.instances[:,688:721],
-                                                                all_new_features[16] : datasets.test.instances[:,721:754],
+                                                            #    all_new_features[14] : datasets.test.instances[:,655:688],
+                                                            #    all_new_features[15] : datasets.test.instances[:,688:721],
+                                                            #    all_new_features[16] : datasets.test.instances[:,721:754],
                                                                 y: datasets.test.labels, keep_prob: 1.0,is_training:False})
                 train_writer.add_summary(step_summary)
                 with open(suspFile+'-'+str(epoch+1),'w') as f:
